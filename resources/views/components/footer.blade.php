@@ -13,45 +13,40 @@
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="widget">
-                                <div class="widget-title">Discover</div>
+                                <div class="widget-title">Ligas</div>
                                 <ul class="list">
-                                    <li><a href="#">Features</a></li>
-                                    <li><a href="#">Layouts</a></li>
-                                    <li><a href="#">Corporate</a></li>
-                                    <li><a href="#">Updates</a></li>
-                                    <li><a href="#">Pricing</a></li>
-                                    <li><a href="#">Customers</a></li>
+                                    <li><a href="#">Facebook</a></li>
+                                    <li><a href="#">Discord</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="widget">
-                                <div class="widget-title">Features</div>
+                                <div class="widget-title">Pilotos</div>
                                 <ul class="list">
-                                    <li><a href="#">Layouts</a></li>
-                                    <li><a href="#">Headers</a></li>
-                                    <li><a href="#">Widgets</a></li>
-                                    <li><a href="#">Footers</a></li>
+                                    <li><a href="#">Cartas</a></li>
+                                    <li><a href="#">Eventos</a></li>
+                                    <li><a href="#">Solicitar ATC</a></li>
+                                    <li><a href="#">Feedback</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="widget">
-                                <div class="widget-title">Pages</div>
+                                <div class="widget-title">Controladores</div>
                                 <ul class="list">
-                                    <li><a href="#">Portfolio</a></li>
-                                    <li><a href="#">Blog</a></li>
-                                    <li><a href="#">Shop</a></li>
+                                    <li><a href="#">Documentos</a></li>
+                                    <li><a href="#">Vatsys</a></li>
                                 </ul>
                             </div>
                         </div>
                         <div class="col-lg-3">
                             <div class="widget">
-                                <div class="widget-title">Support</div>
+                                <div class="widget-title">Legal</div>
                                 <ul class="list">
-                                    <li><a href="#">Help Desk</a></li>
-                                    <li><a href="#">Documentation</a></li>
-                                    <li><a href="#">Contact Us</a></li>
+                                    <li><a href="#">Aviso de Privacidad</a></li>
+                                    <li><a href="#">Privacy Policy</a></li>
+                                    <li><a href="#">Contacto</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -62,7 +57,7 @@
     </div>
     <div class="copyright-content">
         <div class="container">
-            <div class="copyright-text text-center">&copy; 2022 Virtual Air Traffic México - Responsive Multi-Purpose HTML5 Template. All Rights Reserved.<a href="https://www.inspiro-media.com" target="_blank" rel="noopener"> INSPIRO</a> </div>
+            <div class="copyright-text text-center">&copy; 2023 Virtual Air Traffic México</div>
         </div>
     </div>
 </footer>

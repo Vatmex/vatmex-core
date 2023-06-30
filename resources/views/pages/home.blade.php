@@ -31,10 +31,7 @@
                 <div class="container">
                     <div class="heading-text heading-section">
                         <h2>PRÓXIMOS EVENTOS</h2>
-                        <span class="lead">The most happiest time of the day!. Morbi sagittis, sem quis lacinia faucibus,
-                            orci ipsum gravida tortor, vel interdum mi sapien ut justo. Nulla varius consequat magna, id
-                            molestie ipsum volutpat quis. A true story, that never been told!. Fusce id mi diam, non ornare
-                            orci. Pellentesque ipsum erat, facilisis ut venenatis eu, sodales vel dolor. </span>
+                        <span class="lead">Descubre cuando y donde tomrán lugar los próximos eventos de la división. También veras cuando son los siguientes exámenes de controlador para que nos ayudes a hacer tráfico. </span>
                     </div>
                     <div id="blog" class="grid-layout post-3-columns m-b-30" data-item="post-item">
                         @foreach($events as $event)
@@ -64,10 +61,8 @@
             <section class="p-b-0 background-grey">
                 <div class="container">
                     <div class="heading-text heading-section">
-                        <h2>Recent Work</h2>
-                        <span class="lead">Lorem ipsum dolor sit amet, coper suscipit lobortis nisl ut aliquip ex ea commodo
-                            consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie
-                            consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto.</span>
+                        <h2>GALERÍA VATMEX</h2>
+                        <span class="lead">Si quieres ver tus imágenes aquí solo tienes que subirlas en la sección de screenshots de nuestro servidor de Discord.</span>
                     </div>
                 </div>
                 <div class="portfolio">
@@ -178,7 +173,7 @@
             <section class="content">
                 <div class="container">
                     <div class="heading-text heading-section text-center">
-                        <h2>MEET OUR TEAM</h2>
+                        <h2>EL EQUIPO</h2>
                         <p>Nuestro enfoque es brindar un servicio de tránsito aéreo con orden y fluidez dentro del espacio aéreo mexicano, estamos enfocados con la experiencia de vuelo de cada piloto es por eso que estamos comprometidos con la profesionalidad y amabilidad, nos entregamos a este compromiso esforzándonos en la capacitación de nuestros controladores e instructores.</p>
                     </div>
                     <div class="row team-members">
@@ -213,42 +208,6 @@
             <!-- COUNTERS -->
             <section class="text-light p-t-150 p-b-150 " data-bg-parallax="images/parallax/12.jpg">
                 <div class="bg-overlay"></div>
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-3">
-                            <div class="text-center">
-                                <div class="icon"><i class="fa fa-3x fa-code"></i></div>
-                                <div class="counter"> <span data-speed="3000" data-refresh-interval="50" data-to="12416" data-from="600" data-seperator="true"></span> </div>
-                                <div class="seperator seperator-small"></div>
-                                <p>LINES OF CODE</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="text-center">
-                                <div class="icon"><i class="fa fa-3x fa-coffee"></i></div>
-                                <div class="counter"> <span data-speed="4500" data-refresh-interval="23" data-to="365" data-from="100" data-seperator="true"></span> </div>
-                                <div class="seperator seperator-small"></div>
-                                <p>CUPS OF COFFEE</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="text-center">
-                                <div class="icon"><i class="fa fa-3x fa-rocket"></i></div>
-                                <div class="counter"> <span data-speed="3000" data-refresh-interval="12" data-to="114" data-from="50" data-seperator="true"></span> </div>
-                                <div class="seperator seperator-small"></div>
-                                <p>FINISHED PROJECTS</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-3">
-                            <div class="text-center">
-                                <div class="icon"><i class="fa fa-3x fa-smile-o"></i></div>
-                                <div class="counter"> <span data-speed="4550" data-refresh-interval="50" data-to="14825" data-from="48" data-seperator="true"></span> </div>
-                                <div class="seperator seperator-small"></div>
-                                <p>SATISFIED CLIENTS</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </section>
             <!-- end: COUNTERS -->
             <!-- Footer -->

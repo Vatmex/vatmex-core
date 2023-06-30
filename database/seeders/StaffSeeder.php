@@ -79,8 +79,8 @@ class StaffSeeder extends Seeder
         | Assign Default Staff
         |--------------------------------------------------------------------------
         */
-        $liveUser = User::where('cid', 1303345)->firstOrFail();
-        $vatmex3->user()->associate($liveUser);
-        $vatmex3->save();
+        #$liveUser = User::where('cid', 1303345)->firstOrFail();
+        #$vatmex3->user()->associate($liveUser);
+        #$vatmex3->save();
     }
 }
