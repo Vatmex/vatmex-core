@@ -445,7 +445,7 @@
                         <tr>
                             <td class="email-masthead">
                                 <a href="https://vatmex.com.mx" class="f-fallback email-masthead_name">
-                                    <img src="https://ops.vatmex.com.mx/images/logo.png" width="200px">
+                                    <img src="https://www.vatmex.com.mx/images/logo.png" width="200px">
                                 </a>
                             </td>
                         </tr>
