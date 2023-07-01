@@ -136,7 +136,7 @@ class ApplicationController extends Controller
             Mail::to($application->email)->send(new InstructorAssignedMail($application));
             Mail::to($instructorUser->email)->send(new StudentAssignedMail($application));
         } catch (\Exception $e) {
-            return redirect('/ops/training/applications/'.$id)->with('error', 'Solicitud asignada con éxito sin embargo hubo un error al mandar los correo de notificación. Por favor contact manualmente a los involucrados.');
+            return redirect()->route('dashboard.training.show', ['id' => $id])->with('error', 'Solicitud asignada con éxito sin embargo hubo un error al mandar los correo de notificación. Por favor contact manualmente a los involucrados.');
         }
 
         return redirect()->route('dashboard.training.show', ['id' => $id])->with('success', 'Esta solicitud CTA ha sido exitosamente asignada a '.$instructorUser->name.'!');

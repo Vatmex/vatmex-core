@@ -481,7 +481,7 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                                <p>En lo que comienza tu entrenamiento te recomendamos familiarizarte con los reglamos de la división y materiales de ATC que puedes encontrar en nuestro sitio web <a href="https://vatmex.com.mx">vatmex.com.mx</a>.</p>
+                                                <p>En lo que comienza tu entrenamiento te recomendamos familiarizarte con los reglamentos de la división y materiales de ATC que puedes encontrar en nuestro sitio web <a href="https://vatmex.com.mx">vatmex.com.mx</a>.</p>
                                                 <p>Gracias,
                                                     <br>Gustavo Valdez<br>Director de Operaciones CTA</p>
                                             </div>
@@ -496,7 +496,7 @@
                                     <tr>
                                         <td class="content-cell" align="center">
                                             <p class="f-fallback sub align-center">
-                                                © 2022 Virtual Air Traffic Mexico.
+                                                © 2023 Virtual Air Traffic Mexico.
                                                 <br>Para su uso exclusivo en simulación aérea y no deberá de usarse en la aviación real
                                             </p>
                                         </td>
