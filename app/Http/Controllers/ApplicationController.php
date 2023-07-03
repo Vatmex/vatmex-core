@@ -137,8 +137,8 @@ class ApplicationController extends Controller
             Mail::to($application->email)->send(new InstructorAssignedMail($application));
             Mail::to($instructorUser->email)->send(new StudentAssignedMail($application));
         } catch (\Exception $e) {
-            Log::debug($ex->getMessage());
-            
+            Log::debug($e->getMessage());
+
             return redirect()->route('dashboard.applications.show', ['id' => $id])->with('error', 'Solicitud asignada con éxito sin embargo hubo un error al mandar los correo de notificación. Por favor contact manualmente a los involucrados.');
         }
 
