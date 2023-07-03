@@ -437,7 +437,7 @@
     <![endif]-->
     </head>
     <body>
-        <span class="preheader">Tienes un nuevo estudiante esperano entrenamiento</span>
+        <span class="preheader">Aviso de Inactividad</span>
         <table class="email-wrapper" width="100%" cellpadding="0" cellspacing="0" role="presentation">
             <tr>
                 <td align="center">
@@ -460,7 +460,7 @@
                                                 <p>Primero que nada espero te encuentres muy bien. Te escribo este correo porque como sabes, el Reglamento CTA en su sección B establece los lineamientos que los controladores de la división deben observar para permanecer como miembros activos de la misma. Desafortunadamente, realizando revisión del Roster de controladores encuentro que tu última conexión fue hace mas de 90 días sin recibir solicitud de ausencia.</p><br>
                                                 <p>Por lo mismo, debo informarte que haz sido degradado a estado Inactivo en el roster, por lo que se revoca tu autorización para controlar en el espacio aéreo mexicano. Sin embargo te invito a que cuando estés listo a regresar nos envíes un correo a <a href="mailto:gustavo@vatmex.com.mx">gustavo@vatmex.com.mx</a> con tu solicitud para regresar a estado activo.</p><br>
                                                 <p>Si tienes cualquier duda o comentario no dudes en escribirme,<br><br>
-                                                    <br>Gustavo Valdez<br>Director de Operaciones CTA</p>
+                                                    <br>Enrique Amador<br>Director de Operaciones CTA</p>
                                             </div>
                                         </td>
                                     </tr>

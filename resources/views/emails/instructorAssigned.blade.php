@@ -483,7 +483,7 @@
                                                 </table>
                                                 <p>En lo que comienza tu entrenamiento te recomendamos familiarizarte con los reglamentos de la división y materiales de ATC que puedes encontrar en nuestro sitio web <a href="https://vatmex.com.mx">vatmex.com.mx</a>.</p>
                                                 <p>Gracias,
-                                                    <br>Gustavo Valdez<br>Director de Operaciones CTA</p>
+                                                    <br>Enrique Amador<br>Director de Operaciones CTA</p>
                                             </div>
                                         </td>
                                     </tr>

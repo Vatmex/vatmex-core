@@ -489,7 +489,7 @@
                                                 </table>
                                                 <p>Si tienes duda acerca a un miembro del staff que podra orientarte.</p>
                                                 <p>Gracias,
-                                                    <br>Gustavo Valdez<br>Director de Operaciones CTA</p>
+                                                    <br>Enrique Amador<br>Director de Operaciones CTA</p>
                                             </div>
                                         </td>
                                     </tr>
