@@ -24,7 +24,7 @@ class AboutTest extends DuskTestCase
     {
         $this->browse(function (Browser $browser) {
             $browser->visit('/about/staff')
-                    ->assertSee('Dirección');
+                ->assertSee('Dirección');
         });
     }
 }

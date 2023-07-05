@@ -12,11 +12,14 @@ class ATC extends Model
     protected $table = 'atcs';
 
     protected $casts = [
+        'inactive' => 'boolean',
         'delivery' => 'boolean',
         'ground' => 'boolean',
         'tower' => 'boolean',
         'approach' => 'boolean',
         'center' => 'boolean',
+        'oceanic' => 'boolean',
+        'management' => 'boolean',
     ];
 
     public function user()
