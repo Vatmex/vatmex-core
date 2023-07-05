@@ -15,10 +15,10 @@ return new class extends Migration
     {
         Schema::table('atcs', function (Blueprint $table) {
             $table->foreignId('instructor_id')
-                  ->nullable()
-                  ->constrained()
-                  ->onUpdate('cascade')
-                  ->onDelete('cascade');
+                ->nullable()
+                ->constrained()
+                ->onUpdate('cascade')
+                ->onDelete('cascade');
         });
     }
 

@@ -46,7 +46,7 @@ class StaffController extends Controller
 
         try {
             $staff->save();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return redirect('/ops/site/staff/new')->with('error', 'No se pudo crear la posición!');
         }
 
@@ -55,7 +55,7 @@ class StaffController extends Controller
 
             $staff->team()->associate($team);
             $staff->save();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             return redirect('/ops/site/staff/'.$staff->if)->with('success', 'Se creó lo posición pero no se pudo asignar el equipo de trabajo');
         }
 
