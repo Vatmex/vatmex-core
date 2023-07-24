@@ -88,7 +88,9 @@
 @section('page-js')
     <script>
         $(document).ready(function () {
-            $('#users-list-datatable').DataTable();
+            $('#users-list-datatable').DataTable({
+                "order": [0,"desc"]
+            });
         });
     </script>
 @endsection
