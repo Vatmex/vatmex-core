@@ -2,10 +2,10 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
 use App\Models\ATC;
-use Illuminate\Support\Facades\Http;
 use Carbon\Carbon;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Http;
 
 class UpdateATCHours extends Command
 {
@@ -33,13 +33,12 @@ class UpdateATCHours extends Command
         $controllers = ATC::all();
 
         foreach ($controllers as $controller) {
-            $controllerSessions = Http::get('https://api.vatsim.net/v2/members/' . $controller->user->cid . '/atc?limit=500&offset=0');
-            
+            $controllerSessions = Http::get('https://api.vatsim.net/v2/members/'.$controller->user->cid.'/atc?limit=500&offset=0');
+
             $currentMonthMinutes = 0;
             $lastMonthMinutes = 0;
 
-            foreach ($controllerSessions['items'] as $session)
-            {
+            foreach ($controllerSessions['items'] as $session) {
                 // Parse the dates with carbon
                 $startTime = Carbon::parse($session['connection_id']['start']);
                 $endTime = Carbon::parse($session['connection_id']['end']);
@@ -47,15 +46,15 @@ class UpdateATCHours extends Command
                 $sessionDuration = $endTime->diffInMinutes($startTime);
 
                 // Crunch the numbers for the current month.
-                if ($startTime->isCurrentMonth() && $startTime->isCurrentYear()) { 
+                if ($startTime->isCurrentMonth() && $startTime->isCurrentYear()) {
                     // If the callsign is not from Mexico, don't crunch.
                     if (str_starts_with($session['connection_id']['callsign'], 'MM')) {
                         $currentMonthMinutes += $sessionDuration;
                     }
                 }
-                
+
                 // Crunch the numbers for last month
-                if ($startTime->isLastMonth() && $startTime->isCurrentYear()) { 
+                if ($startTime->isLastMonth() && $startTime->isCurrentYear()) {
                     // If the callsign is not from Mexico, don't crunch.
                     if (str_starts_with($session['connection_id']['callsign'], 'MM')) {
                         $lastMonthMinutes += $sessionDuration;
@@ -67,7 +66,7 @@ class UpdateATCHours extends Command
             $controller->last_month_hours = round($lastMonthMinutes / 60);
             $controller->save();
 
-            $this->info($controller->user->name . ' tiene ' . $controller->current_month_hours . ' horas este mes y ' . $controller->last_month_hours . ' horas el mes pasado!');
+            $this->info($controller->user->name.' tiene '.$controller->current_month_hours.' horas este mes y '.$controller->last_month_hours.' horas el mes pasado!');
         }
 
         return Command::SUCCESS;
