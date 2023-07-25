@@ -26,8 +26,8 @@
                                         <th>iniciales</th>
                                         <th>estatus</th>
                                         <th>rango</th>
-                                        <th>horas mes</th>
-                                        <th>horas totales</th>
+                                        <th>horas este mes</th>
+                                        <th>horas mes anterior</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -38,8 +38,8 @@
                                             <td>{{ $atc->initials }}</td>
                                             <td>{!! ($atc->inactive) ? '<span class="badge badge-danger">inactivo</span>' : '<span class="badge badge-success">activo</span>';!!}</td>
                                             <td><x-rank :rank="$atc->rank"/></td>
-                                            <td>No Implementado</td>
-                                            <td>No Implementado</td>
+                                            <td>{{ $atc->current_month_hours }}</td>
+                                            <td>{{ $atc->last_month_hours }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
