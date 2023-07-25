@@ -103,6 +103,14 @@
                                     <td>CTA Desde:</td>
                                     <td class="users-view-email">{{ $atc->created_at->toDayDateTimeString() }}</td>
                                 </tr>
+                                <tr>
+                                    <td>Horas Mes en Curso:</td>
+                                    <td class="users-view-email">{{ $atc->current_month_hours }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Horas Mes Anterior:</td>
+                                    <td class="users-view-email">{{ $atc->last_month_hours }}</td>
+                                </tr>
                             </tbody>
                         </table>
                         <h5 class="mb-1"><i class="ft-link"></i>Posiciones Autorizadas</h5>
