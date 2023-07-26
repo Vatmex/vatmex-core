@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             StaffSeeder::class,
             DocumentsSeeder::class,
             FeedbackSeeder::class,
+            AuditorRoleSeeder::class,
         ]);
     }
 }
