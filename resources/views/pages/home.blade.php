@@ -31,7 +31,7 @@
                 <div class="container">
                     <div class="heading-text heading-section">
                         <h2>PRÓXIMOS EVENTOS</h2>
-                        <span class="lead">Descubre cuando y donde tomrán lugar los próximos eventos de la división. También veras cuando son los siguientes exámenes de controlador para que nos ayudes a hacer tráfico. </span>
+                        <span class="lead">Descubre cuando y donde tomarán lugar los próximos eventos de la división. También veras cuando son los siguientes exámenes de controlador para que nos ayudes a hacer tráfico. </span>
                     </div>
                     <div id="blog" class="grid-layout post-3-columns m-b-30" data-item="post-item">
                         @foreach($events as $event)
@@ -39,15 +39,15 @@
                             <div class="post-item border">
                                 <div class="post-item-wrap">
                                     <div class="post-image">
-                                        <a href="{{ url('events') }}/{{ $event->slug }}">
+                                        <a href="{{ route('events.show', ['slug' => $event->slug]) }}">
                                             <img alt="{{ $event->name }}" src="{{ url('/storage/'.$event->banner_path) }}">
                                         </a>
                                     </div>
                                     <div class="post-item-description">
                                         <span class="post-meta-date"><i class="fa fa-calendar-o"></i>{{ Carbon\Carbon::parse($event->start)->toDateString() }}</span>
-                                        <h2><a href="#">{{ $event->name }}</a></h2>
+                                        <h2><a href="{{ route('events.show', ['slug' => $event->slug]) }}">{{ $event->name }}</a></h2>
                                         <p>{{ Str::words($event->description, 25) }}</p>
-                                        <a href="{{ url('events') }}/{{ $event->slug }}" class="item-link">Mas Info <i class="icon-chevron-right"></i></a>
+                                        <a href="{{ route('events.show', ['slug' => $event->slug]) }}" class="item-link">Mas Info <i class="icon-chevron-right"></i></a>
                                     </div>
                                 </div>
                             </div>

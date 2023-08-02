@@ -15,7 +15,7 @@
                 <div class="row m-b-40">
                     <div class="sidebar sticky-sidebar col-lg-4">
                         <div class="project-description">
-                            <h3>{{ $event->description }}</h3>
+                            <p>{{ $event->description }}</p>
                         </div>
                         <div class="portfolio-attributes style2">
                             <div class="attribute"><strong>Inicio:</strong> {{ Carbon\Carbon::parse($event->start)->format('l d M Y, H:i') }} UTC</div>
