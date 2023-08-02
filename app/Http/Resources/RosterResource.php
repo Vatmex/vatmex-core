@@ -28,8 +28,8 @@ class RosterResource extends JsonResource
             'center' => $this->atc->center,
             'oceanic' => $this->atc->oceanic,
             'management' => $this->atc->management,
-            'current_month_hours' => 'N/A',
-            'last_month_hours' => 'N/A',
+            'current_month_hours' => $this->atc->current_month_hours,
+            'last_month_hours' => $this->atc->last_month_hours
         ];
     }
 }
