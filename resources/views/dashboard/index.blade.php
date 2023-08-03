@@ -9,7 +9,7 @@
                         <div class="media d-flex">
                             <div class="media-body text-left">
                                 <h3 class="info">{{ $currentMonthHours }}</h3>
-                                <h6>Horas de control {{ now()->format('F') }}</h6>
+                                <h6>Horas de control {{ ucfirst(now()->monthName) }}</h6>
                             </div>
                             <div>
                                 <i class="icon-clock info font-large-2 float-right"></i>
@@ -29,7 +29,7 @@
                         <div class="media d-flex">
                             <div class="media-body text-left">
                                 <h3 class="warning">{{ $lastMonthHours }}</h3>
-                                <h6>Horas de control {{ now()->subMonth()->format('F') }}</h6>
+                                <h6>Horas de control {{ ucfirst(now()->subMonth()->monthName) }}</h6>
                             </div>
                             <div>
                                 <i class="icon-calendar warning font-large-2 float-right"></i>
@@ -87,7 +87,7 @@
         <div class="col-12 col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h4 class="card-title">Aeropuertos con actividad</h4>
+                    <h4 class="card-title">Aeropuertos con Actividad</h4>
                     <div class="heading-elements">
                         <ul class="list-inline mb-0">
                             <li><a href="#">Ver todos</a></li>
@@ -138,7 +138,7 @@
                             <div class="col-md-6 col-12 text-center">
                                 <h6 class="success text-bold-600">{{ $controllerOfTheMonthPast->last_month_hours }} horas</h6>
                                 <h4 class="font-large-1 text-bold-400">{{ $controllerOfTheMonthPast->user->name }}</h4>
-                                <p class="blue-grey lighten-2 mb-0">{{ now()->subMonth()->format('F') }}</p>
+                                <p class="blue-grey lighten-2 mb-0">{{ ucfirst(now()->subMonth()->monthName) }}</p>
                             </div>
                         </div>
                     </div>

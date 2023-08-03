@@ -6,8 +6,10 @@
                     <div class="widget">
                         <div class="widget-title">Virtual Air Traffic México</div>
                         <p class="mb-5"> VATMEX es la división mexicana de <a href="#">VATSIM</a>. Nuestro propósito es brindar servicio de control de tránsito aéreo en México, al igual que proveer constante entrenamiento  y recursos a controladores y pilotos virtuales que deseen participar en la división.</p>
-                        @if (! Auth::user()->atc())
-                            <a href="{{ route('atcs.apply') }}" class="btn btn-inverted">¡Quiero ser ATC!</a>
+                        @if (Auth::user())
+                            @if (! Auth::user()->atc())
+                                <a href="{{ route('atcs.apply') }}" class="btn btn-inverted">¡Quiero ser ATC!</a>
+                            @endif
                         @endif
                     </div>
                 </div>

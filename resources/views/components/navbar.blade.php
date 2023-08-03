@@ -33,8 +33,10 @@
                             </li>
                             <li class="dropdown"><a href="#">Controladores</a>
                                 <ul class="dropdown-menu">
-                                    @if (! Auth::user()->atc())
-                                        <li><a href="{{ route('atcs.apply') }}">¡Quiero ser ATC!</a></li>
+                                    @if (Auth::user())
+                                        @if (! Auth::user()->atc())
+                                            <li><a href="{{ route('atcs.apply') }}">¡Quiero ser ATC!</a></li>
+                                        @endif
                                     @endif
                                     <li><a href="{{ route('atcs.documents') }}">Documentos</a></li>
                                 </ul>
