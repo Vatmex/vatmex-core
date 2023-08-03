@@ -4,6 +4,7 @@ use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ATCController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
@@ -78,9 +79,7 @@ Route::group(['prefix' => 'auth'], function () {
 |--------------------------------------------------------------------------
 */
 Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], function () {
-    Route::get('/', function () {
-        return view('dashboard.index');
-    })->name('dashboard.index');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 
     // Site Routes
     Route::group(['prefix' => 'site'], function () {
