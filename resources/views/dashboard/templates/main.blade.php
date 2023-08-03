@@ -1,3 +1,6 @@
+@php
+    Carbon\Carbon::setlocale(config('app.locale'));
+@endphp
 <!DOCTYPE html>
 <html class="loading" lang="en" data-textdirection="ltr">
     <head>
