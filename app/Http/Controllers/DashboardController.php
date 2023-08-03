@@ -63,12 +63,12 @@ class DashboardController extends Controller
         $currentMonthHours = 0;
         $lastMonthHours = 0;
         foreach ($atcs as $atc) {
-            $currentMonthHours += $atc->current_months_hours;
+            $currentMonthHours += $atc->current_month_hours;
             $lastMonthHours += $atc->last_month_hours;
         }
 
         // Get the controllers of the month
-        $controllerOfTheMonthCurrent = $atcs->sortByDesc('current_months_hours')->first();
+        $controllerOfTheMonthCurrent = $atcs->sortByDesc('current_month_hours')->first();
         $controllerOfTheMonthPast = $atcs->sortByDesc('last_month_hours')->first();
 
         return view('dashboard.index', compact('currentMonthHours', 'lastMonthHours', 'pilotsOnline', 'controllersOnline', 'controllerOfTheMonthCurrent', 'controllerOfTheMonthPast', 'airportStats'));

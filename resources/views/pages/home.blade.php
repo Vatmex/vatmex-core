@@ -19,7 +19,9 @@
                             <!-- Captions -->
                             <h1>VATSIM México</h1>
                             <p class="text-small">VATMEX es la división mexicana de VATSIM. Nuestro propósito es brindar servicio de control de tránsito aéreo en México, al igual que proveer constante entrenamiento  y recursos a controladores y pilotos virtuales que deseen participar en la división.</p>
-                            <div><a href="{{ route('atcs.apply') }}" class="btn btn-success scroll-to">¡Quiero ser ATC!</a></div>
+                            @if (! Auth::user()->atc())
+                                <div><a href="{{ route('atcs.apply') }}" class="btn btn-success scroll-to">¡Quiero ser ATC!</a></div>
+                            @endif
                             <!-- end: Captions -->
                         </div>
                     </div>
