@@ -10,6 +10,8 @@
                             @if (! Auth::user()->atc())
                                 <a href="{{ route('atcs.apply') }}" class="btn btn-inverted">¡Quiero ser ATC!</a>
                             @endif
+                        @else
+                            <div><a href="{{ route('atcs.apply') }}" class="btn btn-success scroll-to">¡Quiero ser ATC!</a></div>
                         @endif
                     </div>
                 </div>
