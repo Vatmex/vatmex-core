@@ -33,8 +33,9 @@
                             </li>
                             <li class="dropdown"><a href="#">Controladores</a>
                                 <ul class="dropdown-menu">
-                                    <!-- TODO: Show only if the user is not already a controller -->
-                                    <li><a href="{{ route('atcs.apply') }}">¡Quiero ser ATC!</a></li>
+                                    @if (! Auth::user()->atc())
+                                        <li><a href="{{ route('atcs.apply') }}">¡Quiero ser ATC!</a></li>
+                                    @endif
                                     <li><a href="{{ route('atcs.documents') }}">Documentos</a></li>
                                 </ul>
                             </li>
