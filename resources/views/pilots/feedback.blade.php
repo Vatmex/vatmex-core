@@ -16,7 +16,8 @@
             <div class="card">
                 <div class="card-body">
                     <h3 class="mb-5">Formulario de Feedback CTA<small>Operaciones</small></h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Perspiciatis, quaerat accusantium repellendus aliquid aspernatur fuga inventore pariatur omnis eum non asperiores consequatur, nemo maxime molestiae eius earum eligendi odio labore.</p>
+                    <p>
+                        En VATMEX, nos enfocamos en el profesionalismo de nuestros controladores para que la comunidad de aviación virtual obtenga el mayor realismo posible. Si durante tu vuelo tuviste una agradable experiencia de control y quieres compartir, deja tu comentario hacia nuestros controladores utilizando el siguiente formulario. De igual forma, aceptamos cualquier sugerencia que nos ayude a mejorar para seguir ofreciendo la mejor experiencia dentro del espacio aéreo virtual mexicano.</p>
                     <p>
                         <ul>
                             <li>Todos los campos son obligatorios</li>
