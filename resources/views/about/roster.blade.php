@@ -54,7 +54,12 @@
 @section('page-js')
     <script>
         $(document).ready(function() {
-            var table = $('#datatable').DataTable();
+            var table = $('#datatable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+                pageLength: 25,
+            });
         });
     </script>
 @endsection
