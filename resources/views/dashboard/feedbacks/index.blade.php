@@ -39,7 +39,7 @@
                                                 <td>{{ $feedback->cid }}</td>
                                                 <td>{{ $feedback->email }}</td>
                                                 <td><x-rating :rating="$feedback->rating"/></td>
-                                                <td>{{ $feedback->created_at->toDayDateTimeString() }}</td>
+                                                <td>{{ $feedback->created_at->isoFormat('LLLL') }}</td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -60,7 +60,11 @@
 @section('page-js')
     <script>
         $(document).ready(function () {
-            $('#users-list-datatable').DataTable();
+            $('#users-list-datatable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+            });
         });
     </script>
 @endsection

@@ -182,20 +182,18 @@
           // default select
           $('.single-input').selectivity({
             allowClear: true,
-            placeholder: 'Selecciona un instructor',
+            placeholder: 'Selecciona un usuario',
             query: queryFunction,
-            searchInputPlaceholder: 'Escribe para buscar un instructor'
+            searchInputPlaceholder: 'Escribe para buscar un usuario'
           });
         })(window, document, jQuery);
 
         $(document).ready(function () {
-            $('#users-list-datatable').DataTable();
+            $('#users-list-datatable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+            });
         });
-    </script>
-@endsection
-
-@section('page-js')
-    <script>
-
     </script>
 @endsection

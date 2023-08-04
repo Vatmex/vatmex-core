@@ -23,6 +23,8 @@
                                 @if (! Auth::user()->atc())
                                    <div><a href="{{ route('atcs.apply') }}" class="btn btn-success scroll-to">¡Quiero ser ATC!</a></div>
                                 @endif
+                            @else
+                                <div><a href="{{ route('atcs.apply') }}" class="btn btn-success scroll-to">¡Quiero ser ATC!</a></div>
                             @endif
                             <!-- end: Captions -->
                         </div>

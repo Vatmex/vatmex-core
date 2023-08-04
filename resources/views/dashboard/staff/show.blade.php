@@ -103,8 +103,7 @@
                                     </select>
                                 </div>
                                 <div class="form-group">
-                                    <input type="submit" class="btn btn-success btn-min-width mr-1 mb-1" value="Asignar Instructor"></input>
-                                    <button type="button" class="btn btn-primary btn-min-width mr-1 mb-1">Enviar E-Mail</button>
+                                    <input type="submit" class="btn btn-success btn-min-width mr-1 mb-1" value="Asignar usuario"></input>
                                 </div>
                             </form>
                         @endcan
@@ -186,9 +185,9 @@
           // default select
           $('.single-input').selectivity({
             allowClear: true,
-            placeholder: 'Selecciona un instructor',
+            placeholder: 'Selecciona un usuario',
             query: queryFunction,
-            searchInputPlaceholder: 'Escribe para buscar un instructor'
+            searchInputPlaceholder: 'Escribe para buscar un usuario'
           });
         })(window, document, jQuery);
     </script>

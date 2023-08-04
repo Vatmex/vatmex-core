@@ -60,7 +60,7 @@
                 <div class="navbar-header">
                     <ul class="nav navbar-nav flex-row">
                         <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu font-large-1"></i></a></li>
-                        <li class="nav-item"><a class="navbar-brand" href="{{ url('/ops/home') }}"><img class="brand-logo" alt="modern admin logo" src="/images/logo.png">
+                        <li class="nav-item"><a class="navbar-brand" href="{{ route('dashboard.index') }}"><img class="brand-logo" alt="modern admin logo" src="/images/logo.png">
                             </a></li>
                         <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="la la-ellipsis-v"></i></a></li>
                     </ul>
@@ -70,6 +70,7 @@
                         <ul class="nav navbar-nav mr-auto float-left">
                             <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="ft-menu"></i></a></li>
                             <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-expand" href="#"><i class="ficon ft-maximize"></i></a></li>
+                            <li class="nav-item d-none d-lg-block"><a class="nav-link" href="{{ route('home') }}"><i class="ficon ft-globe"></i></a></li>
                         </ul>
                         <ul class="nav navbar-nav float-right">
                             <li class="dropdown dropdown-user nav-item">
@@ -110,7 +111,7 @@
 
         <!-- BEGIN: Footer-->
         <footer class="footer footer-static footer-light navbar-border navbar-shadow">
-            <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">Copyright &copy; 2022 <a class="text-bold-800 grey darken-2" href="https://1.envato.market/modern_admin" target="_blank">Vatmex</a></span><span class="float-md-right d-none d-lg-block">Made with Honk</i><span id="scroll-top"></span></span></p>
+            <p class="clearfix blue-grey lighten-2 text-sm-center mb-0 px-2"><span class="float-md-left d-block d-md-inline-block">Copyright &copy; 2022 <a class="text-bold-800 grey darken-2" href="https://1.envato.market/modern_admin" target="_blank">Vatmex</a></span><span class="float-md-right d-none d-lg-block">Hecho con <a href="https://www.youtube.com/watch?v=OL_vF2Potfk">Honk</a> por el Ganso</i><span id="scroll-top"></span></span></p>
         </footer>
         <!-- END: Footer-->
 
