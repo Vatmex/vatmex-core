@@ -28,7 +28,7 @@
                                         <tr>
                                             <th>id</th>
                                             <th>nombre</th>
-                                            <th>miembros</th>
+                                            <th>posiciones</th>
                                             <th>creado</th>
                                         </tr>
                                     </thead>
@@ -59,7 +59,11 @@
 @section('page-js')
     <script>
         $(document).ready(function () {
-            $('#users-list-datatable').DataTable();
+            $('#users-list-datatable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+            });
         });
     </script>
 @endsection

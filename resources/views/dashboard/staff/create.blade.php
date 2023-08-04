@@ -13,7 +13,7 @@
                         <div class="card-body">
                             <x-dashboard.alerts/>
                             <div class="card-text">
-                                <p>Usa el sigiuente formulario para crear un nuevo equipo de trabajo. Si el email de staff queda vació se tomara el email del usuario asignado.  Si tienes dudas sobre el formulario comunicate con el administrador del la página.</p>
+                                <p>Usa el sigiuente formulario para crear una nueva posición de staff. Si el email de staff queda vació se tomara el email del usuario asignado.  Si tienes dudas sobre el formulario comunicate con el administrador del la página.</p>
                             </div>
                             <form action="{{ url('/ops/site/staff/new') }}" method="post" class="form form-horizontal">
                                 @csrf

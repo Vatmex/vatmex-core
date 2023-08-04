@@ -10,7 +10,7 @@
                         <h3>Lista de Documentos</h3>
                     </div>
                     <div class="col-12 col-sm-12 col-lg-3 d-flex align-items-center">
-                        <a href="{{ route('dashboard.documents.create') }}" class="btn btn-block btn-primary glow">Nueva Política</a>
+                        <a href="{{ route('dashboard.documents.create') }}" class="btn btn-block btn-primary glow">Nuevo Documento</a>
                     </div>
                 </div>
             </form>
@@ -63,7 +63,11 @@
 @section('page-js')
     <script>
         $(document).ready(function () {
-            $('#users-list-datatable').DataTable();
+            $('#users-list-datatable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+            });
         });
     </script>
 @endsection

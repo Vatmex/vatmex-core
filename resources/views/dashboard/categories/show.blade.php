@@ -23,7 +23,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel1">Borrar Posición</h4>
+                        <h4 class="modal-title" id="myModalLabel1">Borrar Categoría</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -60,7 +60,7 @@
                                 </tr>
                                 <tr>
                                     <td>Creado</td>
-                                    <td class="users-view-email">{{ $category->created_at->toDayDateTimeString() }}</td>
+                                    <td class="users-view-email">{{ $category->created_at->isoFormat('llll') }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -82,8 +82,8 @@
                                             <td><a href="{{ route('dashboard.documents.show', ['id' => $document->id]) }}">{{ $document->id }}</a></td>
                                             <td>{{ $document->name }}</td>
                                             <td>{{ $document->version }}</td>
-                                            <td>{{ $document->updated_at->toDayDateTimeString() }}</td>
-                                            <td>{{ $document->created_at->toDayDateTimeString() }}</td>
+                                            <td>{{ $document->updated_at->isoFormat('llll') }}</td>
+                                            <td>{{ $document->created_at->isoFormat('llll') }}</td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -100,7 +100,11 @@
 @section('page-js')
     <script>
         $(document).ready(function () {
-            $('#users-list-datatable').DataTable();
+            $('#users-list-datatable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+            });
         });
     </script>
 @endsection

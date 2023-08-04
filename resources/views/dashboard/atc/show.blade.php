@@ -101,7 +101,7 @@
                                 </tr>
                                 <tr>
                                     <td>CTA Desde:</td>
-                                    <td class="users-view-email">{{ $atc->created_at->toDayDateTimeString() }}</td>
+                                    <td class="users-view-email">{{ $atc->created_at->isoFormat('LLLL') }}</td>
                                 </tr>
                                 <tr>
                                     <td>Horas Mes en Curso:</td>
@@ -180,7 +180,11 @@
 @section('page-js')
     <script>
         $(document).ready(function () {
-            $('#users-list-datatable').DataTable();
+            $('#users-list-datatable').DataTable({
+                language: {
+                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
+                },
+            });
         });
     </script>
 @endsection
