@@ -29,6 +29,11 @@
                             <span>{{ $staff->position }}</span><br>
                             <span>{{ ($staff->user) ? $staff->email : 'Vacante' }}</span>
                             <p>{{ $staff->description }}</p>
+                            <div class="align-center">
+                                @if ($staff->user)
+                                    <a class="btn btn-xs btn-slide btn-light" href="mailto:{{ ($staff->email) ? $staff->email : $staff->user->email; }}" data-width="80"><i class="icon-mail"></i><span>Mail</span></a>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>

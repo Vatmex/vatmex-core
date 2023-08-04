@@ -198,10 +198,9 @@
                                         <span>{{ $staff->position }}</span>
                                         <p>{{ $staff->description }}</p>
                                         <div class="align-center">
-                                            <a class="btn btn-xs btn-slide btn-light" href="mailto:{{ ($staff->user) ? $staff->user->email : ''; }}" data-width="80">
-                                                <i class="icon-mail"></i>
-                                                <span>Mail</span>
-                                            </a>
+                                            @if ($staff->user)
+                                                <a class="btn btn-xs btn-slide btn-light" href="mailto:{{ ($staff->email) ? $staff->email : $staff->user->email; }}" data-width="80"><i class="icon-mail"></i><span>Mail</span></a>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
