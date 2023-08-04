@@ -457,7 +457,7 @@
                                         <td class="content-cell">
                                             <div class="f-fallback">
                                                 <h1>Hola, {{ $application->user->atc->instructor->user->name }}!</h1>
-                                                <p>Este mail es para informarte que se te ha asignado un nuevo estudiante para entrenamiento. Podras encontrar sus datos en este correo y ver mas información en el portal de entrenamiento.</p>
+                                                <p>Este correo es para informarte que se te ha asignado un nuevo estudiante para entrenamiento. Podrás encontrar sus datos en este correo y ver más información en el portal de entrenamiento.</p>
                                                 <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                                     <tr>
                                                         <td class="attributes_content">
@@ -487,7 +487,7 @@
                                                         </td>
                                                     </tr>
                                                 </table>
-                                                <p>Si tienes duda acerca a un miembro del staff que podra orientarte.</p>
+                                                <p>Si tienes dudas, contacta a un miembro del staff quien podrá orientarte.</p>
                                                 <p>Gracias,
                                                     <br>Enrique Amador<br>Director de Operaciones CTA</p>
                                             </div>
