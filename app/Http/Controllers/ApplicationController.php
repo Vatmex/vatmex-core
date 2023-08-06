@@ -133,7 +133,14 @@ class ApplicationController extends Controller
 
         try {
             Mail::to($application->email)->send(new InstructorAssignedMail($application));
-            Mail::to($instructorUser->email)->send(new StudentAssignedMail($application));
+
+            $instructorEmail = '';
+            if ($instructorUser->staff) {
+                $instructorEmail = $instructorUser->staff->email;
+            } else {
+                $instructorEmail = $instructorUser->email;
+            }
+            Mail::to($instructorEmail)->send(new StudentAssignedMail($application));
         } catch (\Exception $e) {
             Log::debug($e->getMessage());
 
