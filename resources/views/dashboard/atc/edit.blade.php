@@ -45,6 +45,20 @@
                         <form action="{{ route('dashboard.atcs.update', ['cid' => $atc->user->cid]) }}" method="post" class="form form-horizontal" enctype="multipart/form-data">
                             @csrf
                             <div class="form-body">
+                                <h4 class="form-section"><i class="ft-user"></i> Información General</h4>
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="name">Nombre</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <input type="text" id="name" class="form-control" placeholder="Nombre del Documento" name="name" value="{{ $atc->user->name }}">
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="initials">Iniciales</label>
+                                    <div class="col-md-9 mx-auto">
+                                        <input type="text" id="initials" class="form-control" placeholder="Nombre del Documento" name="initials" value="{{ $atc->initials }}">
+                                    </div>
+                                </div>
+
                                 <h4 class="form-section"><i class="ft-user"></i> Habilitaciones</h4>
                                 <div class="form-group row">
                                     <label class="col-md-3 label-control" for="delivery">Autorizaciones</label>
@@ -62,7 +76,6 @@
                                         <input type="checkbox" id="tower" name="tower" {{ ($atc->tower) ? 'checked' : ''; }} >
                                     </div>
                                 </div>
-
                                 <div class="form-group row">
                                     <label class="col-md-3 label-control" for="approach">Aproximación</label>
                                     <div class="col-md-1 mx-auto">
