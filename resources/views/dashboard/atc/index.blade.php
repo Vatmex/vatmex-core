@@ -33,8 +33,8 @@
                                 <tbody>
                                     @foreach($atcs as $atc)
                                         <tr>
-                                            <td><a href="{{ route('dashboard.atcs.show', ['cid' => $atc->user->cid]) }}">{{ $atc->user->cid }}</a></td>
-                                            <td>{{ $atc->user->name }}</td>
+                                            <td>{{ $atc->user->cid }}</td>
+                                            <td><a href="{{ route('dashboard.atcs.show', ['cid' => $atc->user->cid]) }}">{{ $atc->user->name }}</a></td>
                                             <td>{{ $atc->initials }}</td>
                                             <td>{!! ($atc->inactive) ? '<span class="badge badge-danger">inactivo</span>' : '<span class="badge badge-success">activo</span>';!!}</td>
                                             <td><x-rank :rank="$atc->rank"/></td>
@@ -62,7 +62,8 @@
                 },
                 pageLength: 25,
                 columnDefs: [
-                    { "type": "num", "targets": [0, 5, 6] }
+                    { "type": "num", "targets": [0, 5, 6] },
+                    { "type": "html", "targets": 0 }
                 ],
             });
         });
