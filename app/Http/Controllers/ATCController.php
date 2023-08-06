@@ -48,6 +48,7 @@ class ATCController extends Controller
         $atc->tower = $request->has('tower');
         $atc->approach = $request->has('approach');
         $atc->center = $request->has('center');
+        $atc->user->save();
         $atc->save();
 
         return redirect()->route('dashboard.atcs.show', ['cid' => $cid])->with('success', 'Se editaron las habilitaciones del CTA con éxito!');
