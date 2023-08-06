@@ -61,6 +61,9 @@
                     url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
                 },
                 pageLength: 25,
+                columnDefs: [
+                    { "type": "num", "targets": [0, 5, 6] }
+                ],
             });
         });
     </script>
