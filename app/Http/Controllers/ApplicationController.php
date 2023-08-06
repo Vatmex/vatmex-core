@@ -84,11 +84,9 @@ class ApplicationController extends Controller
         $application = Application::where('id', $id)->firstOrFail();
         $instructors = Instructor::all();
 
-        if (App::hasDebugModeEnabled()) {
-            // En debug siempre el ganso
+        if (App::environment() == 'local') {
             $request = Http::get('https://api.vatsim.net/api/ratings/1303345/');
         } else {
-            // TODO: Que pasa si el ID no existe o la API se cae?
             $request = Http::get('https://api.vatsim.net/api/ratings/'.$application->user->cid.'/');
         }
         $vatsim = $request->json();

@@ -28,7 +28,7 @@ class DashboardController extends Controller
         $controllersOnline = [];
         foreach ($vatsim['controllers'] as $controller) {
             if (str_starts_with($controller['callsign'], 'MM')) {
-                if (! substr($controller['callsign'], -3, 3) == 'OBS') { // Filter observers (Yes, it happens)
+                if (! (substr($controller['callsign'], -3, 3) == 'OBS')) { // Filter observers (Yes, it happens)
                     array_push($controllersOnline, $controller);
                 }
             }
