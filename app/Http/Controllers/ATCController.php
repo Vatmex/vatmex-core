@@ -7,6 +7,7 @@ use App\Models\ATC;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Validation\Rule;
 
 class ATCController extends Controller
 {
@@ -35,6 +36,13 @@ class ATCController extends Controller
     {
         $atc = User::where('cid', $cid)->firstOrFail()->atc;
 
+        $request->validate([
+            'name' => ['required', 'string'],
+            'initials' => ['required', 'string', 'min:2', 'max:2', Rule::unique('atcs')->ignore($atc->id, 'id')],
+        ]);
+
+        $atc->user->name = $request->get('name');
+        $atc->initials = $request->get('initials');
         $atc->delivery = $request->has('delivery');
         $atc->ground = $request->has('ground');
         $atc->tower = $request->has('tower');

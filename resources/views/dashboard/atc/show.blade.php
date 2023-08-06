@@ -88,6 +88,10 @@
                                     <td class="users-view-name">{{ $atc->user->cid }}</td>
                                 </tr>
                                 <tr>
+                                    <td>Iniciales:</td>
+                                    <td class="users-view-name">{{ $atc->initials }}</td>
+                                </tr>
+                                <tr>
                                     <td>Email:</td>
                                     <td class="users-view-name">{{ $atc->user->email }}</td>
                                 </tr>
@@ -103,6 +107,11 @@
                                     <td>CTA Desde:</td>
                                     <td class="users-view-email">{{ $atc->created_at->isoFormat('LLLL') }}</td>
                                 </tr>
+                            </tbody>
+                        </table>
+                        <h5 class="mb-1"><i class="ft-link"></i>Estadísticas</h5>
+                        <table class="table table-borderless">
+                            <tbody>
                                 <tr>
                                     <td>Horas Mes en Curso:</td>
                                     <td class="users-view-email">{{ $atc->current_month_hours }}</td>
