@@ -74,9 +74,9 @@
         padding: 12px 20px 12px 20px;
         transition: all 0.2s ease; }
       .vertical-compact-menu .main-menu .main-menu-content > ul.menu-content li.has-sub > a:not(.mm-next):after {
-        content: "\f112";
-        font-family: "LineAwesome";
-        font-size: 1rem;
+        content: "\f105";
+        font-family: 'Line Awesome Free';
+        font-weight: 900;
         display: inline-block;
         position: absolute;
         right: 20px;
@@ -318,7 +318,7 @@
     padding-left: 54px; }
   .vertical-overlay-menu .main-menu .navigation li.has-sub > a:not(.mm-next):after {
     content: "\f112";
-    font-family: "LineAwesome";
+    font-family: "Line Awesome Free";
     font-size: 1rem;
     display: inline-block;
     position: absolute;
