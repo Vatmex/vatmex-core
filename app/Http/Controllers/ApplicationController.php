@@ -126,6 +126,7 @@ class ApplicationController extends Controller
         $studentAtc->initials = '--'; // Todo: add initials on assigns
         $studentAtc->rank = $vatsim['rating'];
         $studentAtc->inactive = false;
+        $studentAtc->is_training = true;
         $studentUser->atc()->save($studentAtc);
         $instructorUser->instructor_profile->atcs()->save($studentUser->atc);
 
