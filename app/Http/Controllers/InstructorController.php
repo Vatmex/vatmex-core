@@ -45,6 +45,6 @@ class InstructorController extends Controller
         $instructor = Instructor::where('id', $id)->first();
         $instructor->delete();
 
-        return view('dashboard.instructors.index', compact('instructors'))->with('success', '¡Adios popó! Se borro el instructor con éxito!');;
+        return view('dashboard.instructors.index')->with('success', '¡Adios popó! Se borro el instructor con éxito!');;
     }
 }
