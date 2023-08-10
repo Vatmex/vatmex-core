@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
             DocumentsSeeder::class,
             FeedbackSeeder::class,
             AuditorRoleSeeder::class,
+            TrainingRolesSeeder::class,
         ]);
     }
 }
