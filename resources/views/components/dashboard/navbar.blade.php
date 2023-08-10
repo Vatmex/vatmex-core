@@ -4,7 +4,8 @@
             <li class="{{ (request()->segment(2) == '') ? 'active' : '' }} nav-item"><a href="{{ url('/ops') }}"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>
             <li class="{{ (request()->segment(2) == 'site') ? 'active' : '' }} nav-item"><a href="#"><i class="la la-desktop"></i><span class="menu-title" data-i18n="Site">Sitio</span></a>
                 <ul class="menu-content">
-                    <li><a class="menu-item" href="#"><i class="la la-user-friends"></i><span data-i18n="Documents Menu">Staff</span></a>
+                    <li><a class="menu-item" href="{{ route('dashboard.users.index') }}"><i data-i18n="Users" class="la la-user-friends"></i><span>Usuarios</span></a></li>
+                    <li><a class="menu-item" href="#"><i class="la la-user-tie"></i><span data-i18n="Documents Menu">Staff</span></a>
                         <ul class="menu-content">
                             <li><a class="menu-item" href="{{ route('dashboard.teams.index') }}"><i></i><span data-i18n="Teams">Equipos</span></a></li>
                             <li><a class="menu-item" href="{{ route('dashboard.staff.index') }}"><i></i><span data-i18n="Positions">Posiciones</span></a></li>

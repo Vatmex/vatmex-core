@@ -12,6 +12,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,8 +85,12 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
 
     // Site Routes
     Route::group(['prefix' => 'site'], function () {
+        Route::group(['prefix' => 'users'], function () {
+            Route::get('/', [UserController::class, 'index'])->name('dashboard.users.index')->middleware('can:view users');
+        });
+
         Route::group(['prefix' => 'teams'], function () {
-            Route::get('', [TeamController::class, 'index'])->name('dashboard.teams.index')->middleware('can:view staff');
+            Route::get('/', [TeamController::class, 'index'])->name('dashboard.teams.index')->middleware('can:view staff');
             Route::get('new', [TeamController::class, 'create'])->name('dashboard.teams.create')->middleware('can:create staff');
             Route::post('new', [TeamController::class, 'store'])->name('dashboard.teams.store')->middleware('can:create staff');
             Route::get('{id}', [TeamController::class, 'show'])->name('dashboard.teams.show')->middleware('can:view staff');
