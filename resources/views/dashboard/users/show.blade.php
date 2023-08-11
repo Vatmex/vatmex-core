@@ -62,6 +62,24 @@
                                 </tr>
                             </tbody>
                         </table>
+                        @can ('assign roles')
+                            <h5 class="mb-1"><i class="ft-link"></i>Asignar Rol</h5>
+                            <p>Usa el siguiente formulario para asignar un rol.</p>
+                            <form action="{{ route('dashboard.users.assign', ['cid' => $user->cid]) }}" method="post">
+                                @csrf
+                                <div class="form-group">
+                                    <select class="single-input selectivity-input" name="role" id="role">
+                                        <option hidden disabled selected value=" "> </option>
+                                        @foreach ($roles as $role)
+                                            <option value="">{{ $role->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <input type="submit" class="btn btn-success btn-min-width mr-1 mb-1" value="Asignar Rol"></input>
+                                </div>
+                            </form>
+                        @endcan
                         <h5 class="mb-1"><i class="ft-link"></i>Roles asignados</h5>
                         <div class="table-responsive">
                             <table id="users-list-datatable" class="table">
@@ -87,24 +105,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        @can ('assign roles')
-                            <h5 class="mb-1"><i class="ft-link"></i>Asignar Rol</h5>
-                            <p>Usa el siguiente formulario para asignar un rol.</p>
-                            <form action="{{ route('dashboard.users.assign', ['cid' => $user->cid]) }}" method="post">
-                                @csrf
-                                <div class="form-group">
-                                    <select class="single-input selectivity-input" name="role" id="role">
-                                        <option hidden disabled selected value=" "> </option>
-                                        @foreach ($roles as $role)
-                                            <option value="">{{ $role->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="form-group">
-                                    <input type="submit" class="btn btn-success btn-min-width mr-1 mb-1" value="Asignar Rol"></input>
-                                </div>
-                            </form>
-                        @endcan
                     </div>
                 </div>
             </div>

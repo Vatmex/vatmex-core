@@ -12,12 +12,20 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                <a href="{{ route('dashboard.instructors.edit', ['id' => $instructor->id]) }}" class="btn btn-block btn-primary glow">Editar Instructor</a>
-            </div>
-            <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Eliminar Instructor</button>
-            </div>
+            @can('edit instructors')
+                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
+                    <a href="{{ route('dashboard.instructors.edit', ['id' => $instructor->id]) }}" class="btn btn-block btn-primary glow">Editar Instructor</a>
+                </div>
+            @else
+                <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
+            @endcan
+            @can('delete instructors')
+                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
+                    <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Eliminar Instructor</button>
+                </div>
+            @else
+                <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
+            @endcan
             <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">

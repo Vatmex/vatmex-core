@@ -159,8 +159,8 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
     // Ops Routes
     Route::group(['prefix' => 'atc'], function () {
         Route::group(['prefix' => 'feedback'], function () {
-            Route::get('/', [FeedbackController::class, 'index'])->name('dashboard.feedbacks.index')->middleware('can:view applications');
-            Route::get('/{id}', [FeedbackController::class, 'show'])->name('dashboard.feedbacks.show')->middleware('can:view applications');
+            Route::get('/', [FeedbackController::class, 'index'])->name('dashboard.feedbacks.index')->middleware('can:view atcs');
+            Route::get('/{id}', [FeedbackController::class, 'show'])->name('dashboard.feedbacks.show')->middleware('can:view atcs');
         });
 
         Route::get('/', [ATCController::class, 'index'])->name('dashboard.atcs.index')->middleware('can:view atcs');
