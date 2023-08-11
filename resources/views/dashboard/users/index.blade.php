@@ -31,7 +31,7 @@
                                     @foreach($users as $user)
                                         <tr>
                                             <td>{{ $user->cid }}</td>
-                                            <td><a href="#">{{ $user->name }}</a></td>
+                                            <td><a href="{{ route('dashboard.users.show', ['cid' => $user->cid]) }}">{{ $user->name }}</a></td>
                                             <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
                                             <td>
                                                 @foreach ($user->roles as $role)

@@ -87,6 +87,7 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
     Route::group(['prefix' => 'site'], function () {
         Route::group(['prefix' => 'users'], function () {
             Route::get('/', [UserController::class, 'index'])->name('dashboard.users.index')->middleware('can:view users');
+            Route::get('/{cid}', [UserController::class, 'show'])->name('dashboard.users.show')->middleware('can:view users');
         });
 
         Route::group(['prefix' => 'teams'], function () {
