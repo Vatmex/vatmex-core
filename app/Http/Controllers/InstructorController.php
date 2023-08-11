@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\Instructor;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class InstructorController extends Controller
@@ -65,6 +65,6 @@ class InstructorController extends Controller
         $instructor->user->removeRole('instructor');
         $instructor->delete();
 
-        return redirect()->route('dashboard.instructors.index')->with('success', '¡Adios popó! Se borro el instructor con éxito!');;
+        return redirect()->route('dashboard.instructors.index')->with('success', '¡Adios popó! Se borro el instructor con éxito!');
     }
 }

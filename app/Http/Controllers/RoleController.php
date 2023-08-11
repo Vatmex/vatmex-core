@@ -11,8 +11,7 @@ class RoleController extends Controller
     public function assign(Request $request, int $cid)
     {
         // Don't allow assign of admin roles. That shit has to be assigned manually to be extra sure.
-        if ($request->get('role') == 'Super-Admin' || $request->get('role') == 'administrator')
-        {
+        if ($request->get('role') == 'Super-Admin' || $request->get('role') == 'administrator') {
             return redirect()->route('dashboard.users.show', ['cid' => $cid])->with('error', 'No se puede asignar roles de admin desde la interfaz web. Si consideras que es necesario, contacta al administrador');
         }
 
@@ -27,8 +26,7 @@ class RoleController extends Controller
     public function remove(int $cid, string $role)
     {
         // Don't allow removal of admin roles. That shit has to be removed manually to be extra sure.
-        if ($role == 'Super-Admin' || $role == 'administrator')
-        {
+        if ($role == 'Super-Admin' || $role == 'administrator') {
             return redirect()->route('dashboard.users.show', ['cid' => $cid])->with('error', 'No se puede remover roles de admin desde la interfaz web. Si consideras que es necesario, contacta al administrador');
         }
 

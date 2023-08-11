@@ -49,7 +49,7 @@ class ATCsSeeder extends Seeder
         $liveATC->center = true;
         $liveATC->oceanic = true;
         $liveATC->management = true;
-        $liveATC->instructor_id = 2;        
+        $liveATC->instructor_id = 2;
         $liveATC->is_training = true;
         $liveUser = User::where('cid', 1303345)->firstOrFail();
         $liveUser->atc()->save($liveATC);
