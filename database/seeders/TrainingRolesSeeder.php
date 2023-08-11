@@ -22,7 +22,7 @@ class TrainingRolesSeeder extends Seeder
         $editInstructorPermission = Permission::create(['name' => 'edit instructors']);
         $deleteInstructorPermission = Permission::create(['name' => 'delete instructors']);
 
-        $viewUsersPermission = Permission::create(['name' => 'view user']);
+        $viewUsersPermission = Permission::create(['name' => 'view users']);
         $assignRolesPermission = Permission::create(['name' => 'assign roles']);
         $removeRolesPermission = Permission::create(['name' => 'remove roles']);
 
@@ -48,6 +48,9 @@ class TrainingRolesSeeder extends Seeder
 
         $administratorRole->givePermissionTo($viewInstructorPermission);
         $administratorRole->givePermissionTo($viewUsersPermission);
+
+        $auditorRole->givePermissionTo($viewUsersPermission);
+        $auditorRole->givePermissionTo($viewInstructorPermission);
 
         $instructorRole->givePermissionTo($viewInstructorPermission);
     }
