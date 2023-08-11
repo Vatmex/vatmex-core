@@ -5,13 +5,20 @@
     <section class="users-view">
         <!-- users view media object start -->
         <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-6">
+            <div class="col-12 col-sm-12 col-lg-3">
                 <div class="media mb-2">
                     <div class="media-body pt-25">
                         <h4 class="media-heading"><span class="users-view-name">Visualizar Controlador</span></h4>
                     </div>
                 </div>
             </div>
+            @can('create instructors')
+                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
+                    <a href="{{ route('dashboard.instructors.store', ['cid' => $atc->user->cid]) }}" class="btn btn-block btn-success glow">Promover a Instructor</a>
+                </div>
+            @else
+                <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
+            @endcan
             <div class="col-12 col-sm-12 col-lg-3 align-items-center">
                 <a href="{{ route('dashboard.atcs.edit', ['cid' => $atc->user->cid]) }}" class="btn btn-block btn-primary glow">Editar Controlador</a>
             </div>
