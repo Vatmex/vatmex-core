@@ -25,7 +25,7 @@ class UserController extends Controller
         if (App::environment() == 'local') {
             $request = Http::get('https://api.vatsim.net/api/ratings/1303345/');
         } else {
-            $request = Http::get('https://api.vatsim.net/api/ratings/'.$application->user->cid.'/');
+            $request = Http::get('https://api.vatsim.net/api/ratings/'.$cid.'/');
         }
         $vatsim = $request->json();
 
