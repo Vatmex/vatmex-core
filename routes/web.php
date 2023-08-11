@@ -8,9 +8,12 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -83,8 +86,15 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
 
     // Site Routes
     Route::group(['prefix' => 'site'], function () {
+        Route::group(['prefix' => 'users'], function () {
+            Route::get('/', [UserController::class, 'index'])->name('dashboard.users.index')->middleware('can:view users');
+            Route::get('/{cid}', [UserController::class, 'show'])->name('dashboard.users.show')->middleware('can:view users');
+            Route::post('/{cid}/assign', [RoleController::class, 'assign'])->name('dashboard.users.assign')->middleware('can:assign roles');
+            Route::get('/{cid}/remove/{role}', [RoleController::class, 'remove'])->name('dashboard.users.remove')->middleware('can:remove roles');
+        });
+
         Route::group(['prefix' => 'teams'], function () {
-            Route::get('', [TeamController::class, 'index'])->name('dashboard.teams.index')->middleware('can:view staff');
+            Route::get('/', [TeamController::class, 'index'])->name('dashboard.teams.index')->middleware('can:view staff');
             Route::get('new', [TeamController::class, 'create'])->name('dashboard.teams.create')->middleware('can:create staff');
             Route::post('new', [TeamController::class, 'store'])->name('dashboard.teams.store')->middleware('can:create staff');
             Route::get('{id}', [TeamController::class, 'show'])->name('dashboard.teams.show')->middleware('can:view staff');
@@ -129,16 +139,28 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
     });
 
     // Training Routes
-    Route::group(['prefix' => 'atc'], function () {
+    Route::group(['prefix' => 'training'], function () {
         Route::group(['prefix' => 'applications'], function () {
             Route::get('/', [ApplicationController::class, 'index'])->name('dashboard.applications.index')->middleware('can:view applications');
             Route::get('/{id}', [ApplicationController::class, 'show'])->name('dashboard.applications.show')->middleware('can:view applications');
             Route::post('/{id}/assign', [ApplicationController::class, 'assign'])->name('dashboard.applications.assign')->middleware('can:assign applications');
         });
 
+        Route::group(['prefix' => 'instructors'], function () {
+            Route::get('/', [InstructorController::class, 'index'])->name('dashboard.instructors.index')->middleware('can:view instructors');
+            Route::get('/{id}', [InstructorController::class, 'show'])->name('dashboard.instructors.show')->middleware('can:view instructors');
+            Route::get('/{id}/edit', [InstructorController::class, 'edit'])->name('dashboard.instructors.edit')->middleware('can:edit instructors');
+            Route::post('/{id}/edit', [InstructorController::class, 'update'])->name('dashboard.instructors.update')->middleware('can:edit instructors');
+            Route::post('/{id}/delete', [InstructorController::class, 'destroy'])->name('dashboard.instructors.delete')->middleware('can:delete instructors');
+            Route::get('/{cid}/store', [InstructorController::class, 'store'])->name('dashboard.instructors.store')->middleware('can:create instructors');
+        });
+    });
+
+    // Ops Routes
+    Route::group(['prefix' => 'atc'], function () {
         Route::group(['prefix' => 'feedback'], function () {
-            Route::get('/', [FeedbackController::class, 'index'])->name('dashboard.feedbacks.index')->middleware('can:view applications');
-            Route::get('/{id}', [FeedbackController::class, 'show'])->name('dashboard.feedbacks.show')->middleware('can:view applications');
+            Route::get('/', [FeedbackController::class, 'index'])->name('dashboard.feedbacks.index')->middleware('can:view atcs');
+            Route::get('/{id}', [FeedbackController::class, 'show'])->name('dashboard.feedbacks.show')->middleware('can:view atcs');
         });
 
         Route::get('/', [ATCController::class, 'index'])->name('dashboard.atcs.index')->middleware('can:view atcs');

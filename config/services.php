@@ -37,11 +37,4 @@ return [
         'redirect' => env('VATSIM_REDIRECT_URI'),
         'test' => env('VATSIM_TEST'),
     ],
-
-    'sendinblue' => [
-        // api-key or partner-key
-        'key_identifier' => env('SENDINBLUE_KEY_IDENTIFIER', 'api-key'),
-        'key' => env('SENDINBLUE_KEY'),
-    ],
-
 ];

@@ -5,20 +5,35 @@
     <section class="users-view">
         <!-- users view media object start -->
         <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-6">
+            <div class="col-12 col-sm-12 col-lg-3">
                 <div class="media mb-2">
                     <div class="media-body pt-25">
                         <h4 class="media-heading"><span class="users-view-name">Visualizar Controlador</span></h4>
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                <a href="{{ route('dashboard.atcs.edit', ['cid' => $atc->user->cid]) }}" class="btn btn-block btn-primary glow">Editar Controlador</a>
-            </div>
-            @if ($atc->inactive)
+            @can('create instructors')
                 <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                    <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Reactivar Controlador  </button>
+                    <a href="{{ route('dashboard.instructors.store', ['cid' => $atc->user->cid]) }}" class="btn btn-block btn-success glow">Promover a Instructor</a>
                 </div>
+            @else
+                <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
+            @endcan
+            @can ('edit atcs')
+                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
+                    <a href="{{ route('dashboard.atcs.edit', ['cid' => $atc->user->cid]) }}" class="btn btn-block btn-primary glow">Editar Controlador</a>
+                </div>
+            @else
+                <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
+            @endcan
+            @if ($atc->inactive)
+                @can('edit atcs')
+                    <div class="col-12 col-sm-12 col-lg-3 align-items-center">
+                        <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Reactivar Controlador  </button>
+                    </div>
+                @else
+                    <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
+                @endcan
                 <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">
@@ -42,9 +57,13 @@
                     </div>
                 </div>
             @else
-                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                    <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Suspender Controlador  </button>
-                </div>
+                @can('edit atcs')
+                    <div class="col-12 col-sm-12 col-lg-3 align-items-center">
+                        <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Suspender Controlador  </button>
+                    </div>
+                @else
+                    <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
+                @endcan                
                 <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
                     <div class="modal-dialog" role="document">
                         <div class="modal-content">

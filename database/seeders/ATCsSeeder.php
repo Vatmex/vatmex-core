@@ -32,6 +32,8 @@ class ATCsSeeder extends Seeder
         $devATC->center = true;
         $devATC->oceanic = true;
         $devATC->management = true;
+        $devATC->instructor_id = 2;
+        $devATC->is_training = true;
         $devUser = User::where('cid', 10000001)->firstOrFail();
         $devUser->atc()->save($devATC);
 
@@ -47,6 +49,8 @@ class ATCsSeeder extends Seeder
         $liveATC->center = true;
         $liveATC->oceanic = true;
         $liveATC->management = true;
+        $liveATC->instructor_id = 2;
+        $liveATC->is_training = true;
         $liveUser = User::where('cid', 1303345)->firstOrFail();
         $liveUser->atc()->save($liveATC);
     }
