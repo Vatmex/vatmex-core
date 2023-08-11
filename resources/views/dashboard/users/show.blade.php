@@ -80,7 +80,7 @@
                                             @if ($role->name == 'Super-Admin')
                                                 <td><a href="https://www.youtube.com/watch?v=h0EUoEEj1tU" target="_blanks">Honk!</a></td>
                                             @else
-                                            <td><a href="#"></a></td>
+                                                <td><a href="{{ route('dashboard.users.remove', ['cid' => $user->cid, 'role' => $role->name]) }}">Remove</a></td>
                                             @endif
                                         </tr>
                                     @endforeach
@@ -90,10 +90,10 @@
                         @can ('assign roles')
                             <h5 class="mb-1"><i class="ft-link"></i>Asignar Rol</h5>
                             <p>Usa el siguiente formulario para asignar un rol.</p>
-                            <form action="#" method="post">
+                            <form action="{{ route('dashboard.users.assign', ['cid' => $user->cid]) }}" method="post">
                                 @csrf
                                 <div class="form-group">
-                                    <select class="single-input selectivity-input" name="instructor" id="instructor">
+                                    <select class="single-input selectivity-input" name="role" id="role">
                                         <option hidden disabled selected value=" "> </option>
                                         @foreach ($roles as $role)
                                             <option value="">{{ $role->name }}</option>
@@ -133,7 +133,7 @@
           }
 
           // Get all the cities from single-select-box
-          var cities = $('#instructor').find('option').map(function () {
+          var cities = $('#role').find('option').map(function () {
             return this.textContent;
           }).get();
 
@@ -185,7 +185,7 @@
             allowClear: true,
             placeholder: 'Selecciona un rol',
             query: queryFunction,
-            searchInputPlaceholder: 'Escribe para buscar un instructor'
+            searchInputPlaceholder: 'Escribe para buscar un rol'
           });
         })(window, document, jQuery);
 

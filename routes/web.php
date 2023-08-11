@@ -10,6 +10,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StaffController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
@@ -88,6 +89,8 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
         Route::group(['prefix' => 'users'], function () {
             Route::get('/', [UserController::class, 'index'])->name('dashboard.users.index')->middleware('can:view users');
             Route::get('/{cid}', [UserController::class, 'show'])->name('dashboard.users.show')->middleware('can:view users');
+            Route::post('/{cid}/assign', [RoleController::class, 'assign'])->name('dashboard.users.assign')->middleware('can:assign roles');
+            Route::get('/{cid}/remove/{role}', [RoleController::class, 'remove'])->name('dashboard.users.remove')->middleware('can:remove roles');
         });
 
         Route::group(['prefix' => 'teams'], function () {

@@ -22,21 +22,32 @@ class TrainingRolesSeeder extends Seeder
         $editInstructorPermission = Permission::create(['name' => 'edit instructors']);
         $deleteInstructorPermission = Permission::create(['name' => 'delete instructors']);
 
+        $viewUsersPermission = Permission::create(['name' => 'view user']);
+        $assignRolesPermission = Permission::create(['name' => 'assign roles']);
+        $removeRolesPermission = Permission::create(['name' => 'remove roles']);
+
         $administratorRole = Role::where('name', 'administrator')->first();
         $trainingCoordinator = Role::where('name', 'training-coordinator')->first();
         $instructorRole = Role::where('name', 'instructor')->first();
+        $auditorRole = Role::where('name', 'auditor')->first();
 
         $administratorRole->givePermissionTo($viewInstructorPermission);
         $administratorRole->givePermissionTo($createInstructorPermission);
         $administratorRole->givePermissionTo($assignInstructorPermission);
         $administratorRole->givePermissionTo($editInstructorPermission);
         $administratorRole->givePermissionTo($deleteInstructorPermission);
+        $administratorRole->givePermissionTo($viewUsersPermission);
+        $administratorRole->givePermissionTo($assignRolesPermission);
+        $administratorRole->givePermissionTo($removeRolesPermission);
 
         $trainingCoordinator->givePermissionTo($viewInstructorPermission);
         $trainingCoordinator->givePermissionTo($createInstructorPermission);
         $trainingCoordinator->givePermissionTo($assignInstructorPermission);
         $trainingCoordinator->givePermissionTo($editInstructorPermission);
         $trainingCoordinator->givePermissionTo($deleteInstructorPermission);
+
+        $administratorRole->givePermissionTo($viewInstructorPermission);
+        $administratorRole->givePermissionTo($viewUsersPermission);
 
         $instructorRole->givePermissionTo($viewInstructorPermission);
     }
