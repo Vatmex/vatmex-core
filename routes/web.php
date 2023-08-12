@@ -12,6 +12,7 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -153,6 +154,11 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
             Route::post('/{id}/edit', [InstructorController::class, 'update'])->name('dashboard.instructors.update')->middleware('can:edit instructors');
             Route::post('/{id}/delete', [InstructorController::class, 'destroy'])->name('dashboard.instructors.delete')->middleware('can:delete instructors');
             Route::get('/{cid}/store', [InstructorController::class, 'store'])->name('dashboard.instructors.store')->middleware('can:create instructors');
+        });
+
+        Route::group(['prefix' => 'students'], function () {
+            Route::get('/', [StudentController::class, 'index'])->name('dashboard.students.index')->middleware('can:view students');
+            Route::get('/{cid}', [StudentController::class, 'show'])->name('dashboard.students.show')->middleware('can:view students');
         });
     });
 
