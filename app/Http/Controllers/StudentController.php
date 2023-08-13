@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ATC;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -16,16 +17,17 @@ class StudentController extends Controller
 
     public function show(int $cid)
     {
-        return 'show';
+        $student = User::where('cid', $cid)->first()->atc;
+
+        return view('dashboard.students.show', compact('student'));
     }
 
-    public function edit(int $cid)
+    public function remove(int $cid)
     {
-        return 'edit';
-    }
-    
-    public function store(Request $request, int $cid)
-    {
-        return 'store';
+        $student = User::where('cid', $cid)->first()->atc;
+        $student->is_training = false;
+        $student->save();
+
+        return redirect()->route('dashboard.students.index')->with('success', 'El entrenamienot de '.$student->user->name.' fue detenido con éxito!');
     }
 }
