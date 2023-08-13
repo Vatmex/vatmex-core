@@ -159,6 +159,7 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
         Route::group(['prefix' => 'students'], function () {
             Route::get('/', [StudentController::class, 'index'])->name('dashboard.students.index')->middleware('can:view students');
             Route::get('/{cid}', [StudentController::class, 'show'])->name('dashboard.students.show')->middleware('can:view students');
+            Route::post('/{cid}/assign', [StudentController::class, 'assign'])->name('dashboard.students.assign')->middleware('can:assign students');
             Route::post('/{cid}/remove', [StudentController::class, 'remove'])->name('dashboard.students.remove')->middleware('can:remove students');
         });
     });

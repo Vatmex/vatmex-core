@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ATC;
+use App\Models\Instructor;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,22 @@ class StudentController extends Controller
     {
         $student = User::where('cid', $cid)->first()->atc;
 
+        if (!$student->is_training) {
+            return redirect()->route('dashboard.students.index')->with('error', 'El controlador no es un estudiante activo');
+        }
+
         return view('dashboard.students.show', compact('student'));
+    }
+
+    public function assign(Request $request, int $cid)
+    {
+        $student = User::where('cid', $cid)->first()->atc;
+        $instructor = User::where('cid', explode(' ', $request->instructor)[0])->first()->instructor_profile;
+
+        $student->is_training = true;
+        $instructor->atcs()->save($student);
+
+        return redirect()->route('dashboard.students.show', ['cid' => $student->user->cid])->with('success', 'Instructor asingado con éxito!');
     }
 
     public function remove(int $cid)

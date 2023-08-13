@@ -18,6 +18,7 @@ class StudentPermissionsSeeder extends Seeder
     {
         $viewStudentsPermission = Permission::create(['name' => 'view students']);
         $editStudentsPermission = Permission::create(['name' => 'edit students']);
+        $assignStudentsPermission = Permission::create(['name' => 'assign students']);
         $deleteStudentsPermission = Permission::create(['name' => 'remove students']);
 
         $administratorRole = Role::where('name', 'administrator')->first();
@@ -27,10 +28,12 @@ class StudentPermissionsSeeder extends Seeder
 
         $administratorRole->givePermissionTo($viewStudentsPermission);
         $administratorRole->givePermissionTo($editStudentsPermission);
+        $administratorRole->givePermissionTo($assignStudentsPermission);
         $administratorRole->givePermissionTo($deleteStudentsPermission);
 
         $trainingCoordinator->givePermissionTo($viewStudentsPermission);
         $trainingCoordinator->givePermissionTo($editStudentsPermission);
+        $trainingCoordinator->givePermissionTo($assignStudentsPermission);
         $trainingCoordinator->givePermissionTo($deleteStudentsPermission);
 
         $instructorRole->givePermissionTo($viewStudentsPermission);

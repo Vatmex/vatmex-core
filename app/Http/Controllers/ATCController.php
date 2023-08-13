@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\ATCSuspensionMail;
 use App\Models\ATC;
+use App\Models\Instructor;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -21,8 +22,9 @@ class ATCController extends Controller
     public function show(int $cid)
     {
         $atc = User::where('cid', $cid)->firstOrFail()->atc;
+        $instructors = Instructor::all();
 
-        return view('dashboard.atc.show', compact('atc'));
+        return view('dashboard.atc.show', compact('atc', 'instructors'));
     }
 
     public function edit(int $cid)
