@@ -72,24 +72,27 @@
                             <table id="users-list-datatable" class="table">
                                 <thead>
                                     <tr>
-                                        <th>cid</th>
-                                        <th>nombre</th>
-                                        <th>rating</th>
-                                        <th>ultima sesión</th>
-                                        <th>desasignar</th>
+                                        <th>id</th>
+                                        <th>fecha</th>
+                                        <th>autor</th>
+                                        <th>visibilidad</th>
+                                        <th>acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>a</td>
-                                        <td>a</td>
-                                        <td>a</td>
-                                        <td>a</td>
-                                        <td>a</td>
-                                    </tr>
+                                    @foreach ($student->notes as $note)
+                                        <tr>
+                                            <td>{{ $note->id }}</td>
+                                            <td>{{ $note->created_at->isoFormat('LLLL') }}</td>
+                                            <td>{{ \App\Models\User::where('cid', $note->created_by)->first()->name }}</td>
+                                            <td>{{ ($note->visible_to_student) ? 'alumno' : 'instructores' }}</td>
+                                            <td><a href="{{ route('dashboard.trainingNotes.show', ['id' => $note->id]) }}">ver</a></td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
+                        <br>
                         <h5 class="mb-1"><i class="ft-link"></i>Sesiones Entrenamiento</h5>
                         <div class="table-responsive">
                             <table id="users-list-2-datatable" class="table">
@@ -127,13 +130,33 @@
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
                 },
+                order: [[0, 'desc']],
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        text: 'Nueva Nota',
+                        action: function ( e, dt, node, config ) {
+                            window.location.href = "{{ route('dashboard.trainingNotes.create', ['cid' => $student->user->cid]) }}";
+                        }
+                    }
+                ]
             });
         });
+
         $(document).ready(function () {
             $('#users-list-2-datatable').DataTable({
                 language: {
                     url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json',
                 },
+                dom: 'Bfrtip',
+                buttons: [
+                    {
+                        text: 'Nueva Sesión',
+                        action: function ( e, dt, node, config ) {
+                            alert( 'Button activated' );
+                        }
+                    }
+                ]
             });
         });
     </script>
