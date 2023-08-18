@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\ATC;
-use App\Models\Instructor;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,7 +19,7 @@ class StudentController extends Controller
     {
         $student = User::where('cid', $cid)->first()->atc;
 
-        if (!$student->is_training) {
+        if (! $student->is_training) {
             return redirect()->route('dashboard.students.index')->with('error', 'El controlador no es un estudiante activo');
         }
 

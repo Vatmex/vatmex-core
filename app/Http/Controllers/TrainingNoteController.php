@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
 use App\Models\TrainingNote;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class TrainingNoteController extends Controller
@@ -65,12 +65,13 @@ class TrainingNoteController extends Controller
     {
         $note = TrainingNote::where('id', $id)->first();
         $studentCid = $note->student->user->cid;
-        
+
         if ($note->created_by != \Auth::user()->cid) {
             return redirect()->route('dashboard.trainingNotes.show', ['id' => $id])->with('error', 'No puedes eliminar notas creadas por otros!');
         }
 
         $note->delete();
+
         return redirect()->route('dashboard.students.show', ['cid' => $studentCid])->with('success', 'Nota eliminada con éxito!');
 
     }
