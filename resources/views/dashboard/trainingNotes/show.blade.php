@@ -12,12 +12,14 @@
                     </div>
                 </div>
             </div>
-            <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                <a href="{{ route('dashboard.trainingNotes.edit', ['id' => $note->id]) }}" class="btn btn-block btn-primary glow">Editar Nota</a>
-            </div>
-            <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Borrar Nota</button>
-            </div>
+            @if (\Auth::user()->cid == $note->created_by)
+                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
+                    <a href="{{ route('dashboard.trainingNotes.edit', ['id' => $note->id]) }}" class="btn btn-block btn-primary glow">Editar Nota</a>
+                </div>
+                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
+                    <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Borrar Nota</button>
+                </div>
+            @endif
         </div>
         <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -68,7 +70,7 @@
                                 </tr>
                                 <tr>
                                     <td>Mensaje:</td>
-                                    <td class="users-view-email">{{ $note->message }}</td>
+                                    <td class="users-view-email">{!! $note->message !!}</td>
                                 </tr>
                             </tbody>
                         </table>

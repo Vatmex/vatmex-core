@@ -39,4 +39,39 @@ class TrainingNoteController extends Controller
 
         return redirect()->route('dashboard.students.show', ['cid' => $student->user->cid])->with('success', 'Se agregó la nota con éxito!');
     }
+
+    public function edit(int $id)
+    {
+        $note = TrainingNote::where('id', $id)->first();
+
+        return view('dashboard.trainingNotes.edit', compact('note'));
+    }
+
+    public function update(Request $request, int $id)
+    {
+        $note = TrainingNote::where('id', $id)->first();
+
+        if ($note->created_by != \Auth::user()->cid) {
+            return redirect()->route('dashboard.trainingNotes.show', ['id' => $id])->with('error', 'No puedes editar notas creadas por otros!');
+        }
+
+        $note->message = $request->input('message');
+        $note->save();
+
+        return redirect()->route('dashboard.trainingNotes.show', ['id' => $id])->with('success', 'Nota editada con éxito!');
+    }
+
+    public function destroy(int $id)
+    {
+        $note = TrainingNote::where('id', $id)->first();
+        $studentCid = $note->student->user->cid;
+        
+        if ($note->created_by != \Auth::user()->cid) {
+            return redirect()->route('dashboard.trainingNotes.show', ['id' => $id])->with('error', 'No puedes eliminar notas creadas por otros!');
+        }
+
+        $note->delete();
+        return redirect()->route('dashboard.students.show', ['cid' => $studentCid])->with('success', 'Nota eliminada con éxito!');
+
+    }
 }

@@ -166,6 +166,7 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
             Route::group(['prefix' => 'notes'], function () {
                 Route::get('/{id}', [TrainingNoteController::class, 'show'])->name('dashboard.trainingNotes.show')->middleware('can:view students');
                 Route::get('/{id}/edit', [TrainingNoteController::class, 'edit'])->name('dashboard.trainingNotes.edit')->middleware('can:edit students');
+                Route::post('/{id}/edit', [TrainingNoteController::class, 'update'])->name('dashboard.trainingNotes.update')->middleware('can:edit students');
                 Route::post('/{id}/delete', [TrainingNoteController::class, 'destroy'])->name('dashboard.trainingNotes.delete')->middleware('can:edit students');
                 Route::get('/{cid}/create', [TrainingNoteController::class, 'create'])->name('dashboard.trainingNotes.create')->middleware('can:edit students');
                 Route::post('/{cid}/store', [TrainingNoteController::class, 'store'])->name('dashboard.trainingNotes.store')->middleware('can:edit students');

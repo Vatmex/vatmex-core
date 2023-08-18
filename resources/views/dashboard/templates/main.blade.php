@@ -135,6 +135,7 @@
         <script src="/dashboard/app-assets/vendors/js/extensions/daygrid.min.js"></script>
         <script src="/dashboard/app-assets/vendors/js/extensions/timegrid.min.js"></script>
         <script src="/dashboard/app-assets/vendors/js/extensions/interactions.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/editors/tinymce/tinymce.min.js"></script>
         <script src="/dashboard/app-assets/data/jvector/visitor-data.js"></script>
         <!-- END: Page Vendor JS-->
 
