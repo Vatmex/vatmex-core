@@ -29,7 +29,7 @@
                     </ul>
                 </li>
             @endcanany
-            @canany(['view applications', 'view instructors'])
+            @canany(['view applications', 'view instructors', 'view students'])
                 <li class="{{ (request()->segment(2) == 'training') ? 'active' : '' }} nav-item"><a href="#"><i class="la la-school"></i><span class="menu-title" data-i18n="Trainig">Entrenamiento</span></a>
                     <ul class="menu-content">
                         @can('view applications')
@@ -37,6 +37,9 @@
                         @endcan
                         @can('view instructors')
                             <li><a class="menu-item" href="{{ route('dashboard.instructors.index') }}"><i data-i18n="Requests" class="la la-chalkboard-teacher"></i><span>Instructores</span></a></li>
+                        @endcan
+                        @can('view students')
+                            <li><a class="menu-item" href="{{ route('dashboard.students.index') }}"><i data-i18n="Requests" class="la la-book-reader"></i><span>Estudiantes</span></a></li>
                         @endcan
                     </ul>
                 </li>
