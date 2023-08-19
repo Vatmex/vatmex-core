@@ -36,4 +36,9 @@ class ATC extends Model
     {
         return $this->hasMany(Feedback::class, 'atc_id');
     }
+
+    public function notes()
+    {
+        return $this->hasMany(TrainingNote::class, 'atc_id');
+    }
 }

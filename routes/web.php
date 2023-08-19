@@ -12,7 +12,9 @@ use App\Http\Controllers\InstructorController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StaffController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeamController;
+use App\Http\Controllers\TrainingNoteController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -153,6 +155,22 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
             Route::post('/{id}/edit', [InstructorController::class, 'update'])->name('dashboard.instructors.update')->middleware('can:edit instructors');
             Route::post('/{id}/delete', [InstructorController::class, 'destroy'])->name('dashboard.instructors.delete')->middleware('can:delete instructors');
             Route::get('/{cid}/store', [InstructorController::class, 'store'])->name('dashboard.instructors.store')->middleware('can:create instructors');
+        });
+
+        Route::group(['prefix' => 'students'], function () {
+            Route::get('/', [StudentController::class, 'index'])->name('dashboard.students.index')->middleware('can:view students');
+            Route::get('/{cid}', [StudentController::class, 'show'])->name('dashboard.students.show')->middleware('can:view students');
+            Route::post('/{cid}/assign', [StudentController::class, 'assign'])->name('dashboard.students.assign')->middleware('can:assign students');
+            Route::post('/{cid}/remove', [StudentController::class, 'remove'])->name('dashboard.students.remove')->middleware('can:remove students');
+
+            Route::group(['prefix' => 'notes'], function () {
+                Route::get('/{id}', [TrainingNoteController::class, 'show'])->name('dashboard.trainingNotes.show')->middleware('can:view students');
+                Route::get('/{id}/edit', [TrainingNoteController::class, 'edit'])->name('dashboard.trainingNotes.edit')->middleware('can:edit students');
+                Route::post('/{id}/edit', [TrainingNoteController::class, 'update'])->name('dashboard.trainingNotes.update')->middleware('can:edit students');
+                Route::post('/{id}/delete', [TrainingNoteController::class, 'destroy'])->name('dashboard.trainingNotes.delete')->middleware('can:edit students');
+                Route::get('/{cid}/create', [TrainingNoteController::class, 'create'])->name('dashboard.trainingNotes.create')->middleware('can:edit students');
+                Route::post('/{cid}/store', [TrainingNoteController::class, 'store'])->name('dashboard.trainingNotes.store')->middleware('can:edit students');
+            });
         });
     });
 
