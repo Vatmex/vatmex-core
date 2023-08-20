@@ -12,6 +12,7 @@
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
+        "mews/purifier": "^3.4",
         "socialiteproviders/vatsim": "^5.0",
         "spatie/laravel-permission": "^5.5",
         "symfony/http-kernel": "^6.2"
