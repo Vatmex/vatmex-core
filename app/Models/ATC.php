@@ -41,4 +41,9 @@ class ATC extends Model
     {
         return $this->hasMany(TrainingNote::class, 'atc_id');
     }
+
+    public function sessions()
+    {
+        return $this->hasMany(TrainingSession::class, 'atc_id');
+    }
 }

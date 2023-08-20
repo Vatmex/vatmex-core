@@ -6,12 +6,13 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Mews\Purifier\Casts\CleanHtml;
 
-class TrainingNote extends Model
+class TrainingSession extends Model
 {
     use HasFactory;
 
     protected $casts = [
-        'message' => CleanHtml::class,
+        'description' => CleanHtml::class,
+        'cancelation_motive' => CleanHtml::class,
     ];
 
     public function student()

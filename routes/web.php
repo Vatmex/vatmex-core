@@ -15,6 +15,7 @@ use App\Http\Controllers\StaffController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeamController;
 use App\Http\Controllers\TrainingNoteController;
+use App\Http\Controllers\TrainingSessionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -170,6 +171,16 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
                 Route::post('/{id}/delete', [TrainingNoteController::class, 'destroy'])->name('dashboard.trainingNotes.delete')->middleware('can:edit students');
                 Route::get('/{cid}/create', [TrainingNoteController::class, 'create'])->name('dashboard.trainingNotes.create')->middleware('can:edit students');
                 Route::post('/{cid}/store', [TrainingNoteController::class, 'store'])->name('dashboard.trainingNotes.store')->middleware('can:edit students');
+            });
+
+            Route::group(['prefix' => 'sessions'], function () {
+                Route::get('/{id}', [TrainingSessionController::class, 'show'])->name('dashboard.trainingSessions.show')->middleware('can:view students');
+                Route::get('/{id}/edit', [TrainingSessionController::class, 'edit'])->name('dashboard.trainingSessions.edit')->middleware('can:edit students');
+                Route::post('/{id}/edit', [TrainingSessionController::class, 'update'])->name('dashboard.trainingSessions.update')->middleware('can:edit students');
+                Route::get('/{id}/cancel', [TrainingSessionController::class, 'cancel'])->name('dashboard.trainingSessions.cancel')->middleware('can:edit students');
+                Route::post('/{id}/cancel', [TrainingSessionController::class, 'remove'])->name('dashboard.trainingSessions.remove')->middleware('can:edit students');
+                Route::get('/{cid}/create', [TrainingSessionController::class, 'create'])->name('dashboard.trainingSessions.create')->middleware('can:edit students');
+                Route::post('/{cid}/store', [TrainingSessionController::class, 'store'])->name('dashboard.trainingSessions.store')->middleware('can:edit students');
             });
         });
     });
