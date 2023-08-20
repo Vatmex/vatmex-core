@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TrainingSessionCanceledEmail;
+use App\Mail\TrainingSessionScheduledEmail;
+use App\Mail\TrainingSessionUpdatedEmail;
 use App\Models\TrainingSession;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 
 class TrainingSessionController extends Controller
 {
@@ -33,13 +38,32 @@ class TrainingSessionController extends Controller
 
         $student = User::where('cid', $cid)->first()->atc;
 
-        $trainingSession = new TrainingSession;
-        $trainingSession->title = $request->input('title');
-        $trainingSession->created_by = \Auth::user()->cid;
-        $trainingSession->scheduled_time = Carbon::createFromFormat('Y-m-d\TH:i', $request->input('scheduled_time'), 'America/Mexico_City')->setTimezone('UTC');
-        $trainingSession->description = $request->input('description');
+        $session = new TrainingSession;
+        $session->title = $request->input('title');
+        $session->created_by = \Auth::user()->cid;
+        $session->scheduled_time = Carbon::createFromFormat('Y-m-d\TH:i', $request->input('scheduled_time'), 'America/Mexico_City')->setTimezone('UTC');
+        $session->description = $request->input('description');
 
-        $student->notes()->save($trainingSession);
+        $student->notes()->save($session);
+
+        try {
+            $studentEmail = $session->student->user->email;
+
+            $instructor = User::where('cid', $session->created_by)->first();
+            $instructorEmail = '';
+            if ($instructor->staff) {
+                $instructorEmail = $instructor->staff->email;
+            } else {
+                $instructorEmail = $instructor->email;
+            }
+
+            Mail::to($studentEmail)->send(new TrainingSessionScheduledEmail($session));
+            Mail::to($instructorEmail)->send(new TrainingSessionScheduledEmail($session));
+        } catch (\Exception $e) {
+            Log::debug($e->getMessage());
+
+            return redirect()->route('dashboard.students.show', ['cid' => $session->student->user->cid])->with('error', 'Sesión de entrenamiento cancelada con éxito sin embargo hubo un error al mandar los correo de notificación. Por favor contact manualmente a los involucrados.');
+        }
 
         return redirect()->route('dashboard.students.show', ['cid' => $student->user->cid])->with('success', 'Sesión de entrenamiento agendada con éxito');
     }
@@ -59,14 +83,33 @@ class TrainingSessionController extends Controller
             'description' => ['nullable', 'string'],
         ]);
 
-        $trainingSession = TrainingSession::where('id', $id)->first();
-        $trainingSession->title = $request->input('title');
-        $trainingSession->scheduled_time = Carbon::createFromFormat('Y-m-d\TH:i', $request->input('scheduled_time'), 'America/Mexico_City')->setTimezone('UTC');
-        $trainingSession->description = $request->input('description');
+        $session = TrainingSession::where('id', $id)->first();
+        $session->title = $request->input('title');
+        $session->scheduled_time = Carbon::createFromFormat('Y-m-d\TH:i', $request->input('scheduled_time'), 'America/Mexico_City')->setTimezone('UTC');
+        $session->description = $request->input('description');
 
-        $trainingSession->save();
+        $session->save();
 
-        return redirect()->route('dashboard.students.show', ['cid' => $trainingSession->student->user->cid])->with('success', 'Sesión de entrenamiento actualizada con éxito');
+        try {
+            $studentEmail = $session->student->user->email;
+
+            $instructor = User::where('cid', $session->created_by)->first();
+            $instructorEmail = '';
+            if ($instructor->staff) {
+                $instructorEmail = $instructor->staff->email;
+            } else {
+                $instructorEmail = $instructor->email;
+            }
+
+            Mail::to($studentEmail)->send(new TrainingSessionUpdatedEmail($session));
+            Mail::to($instructorEmail)->send(new TrainingSessionUpdatedEmail($session));
+        } catch (\Exception $e) {
+            Log::debug($e->getMessage());
+
+            return redirect()->route('dashboard.students.show', ['cid' => $session->student->user->cid])->with('error', 'Sesión de entrenamiento cancelada con éxito sin embargo hubo un error al mandar los correo de notificación. Por favor contact manualmente a los involucrados.');
+        }
+
+        return redirect()->route('dashboard.students.show', ['cid' => $session->student->user->cid])->with('success', 'Sesión de entrenamiento actualizada con éxito');
     }
 
     public function cancel(int $id)
@@ -85,6 +128,25 @@ class TrainingSessionController extends Controller
         $session->cancelation_motive = $request->input('cancelation_motive');
 
         $session->save();
+
+        try {
+            $studentEmail = $session->student->user->email;
+
+            $instructor = User::where('cid', $session->created_by)->first();
+            $instructorEmail = '';
+            if ($instructor->staff) {
+                $instructorEmail = $instructor->staff->email;
+            } else {
+                $instructorEmail = $instructor->email;
+            }
+
+            Mail::to($studentEmail)->send(new TrainingSessionCanceledEmail($session));
+            Mail::to($instructorEmail)->send(new TrainingSessionCanceledEmail($session));
+        } catch (\Exception $e) {
+            Log::debug($e->getMessage());
+
+            return redirect()->route('dashboard.students.show', ['cid' => $session->student->user->cid])->with('error', 'Sesión de entrenamiento cancelada con éxito sin embargo hubo un error al mandar los correo de notificación. Por favor contact manualmente a los involucrados.');
+        }
 
         return redirect()->route('dashboard.students.show', ['cid' => $session->student->user->cid])->with('success', 'Sesión de entrenamiento cancelada con éxito');
     }
