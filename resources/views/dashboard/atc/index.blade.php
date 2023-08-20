@@ -36,7 +36,7 @@
                                             <td>{{ $atc->user->cid }}</td>
                                             <td><a href="{{ route('dashboard.atcs.show', ['cid' => $atc->user->cid]) }}">{{ $atc->user->name }}</a></td>
                                             <td>{{ $atc->initials }}</td>
-                                            <td>{!! ($atc->inactive) ? '<span class="badge badge-danger">inactivo</span>' : '<span class="badge badge-success">activo</span>';!!}</td>
+                                            <td>{!! ($atc->inactive) ? '<span class="badge badge-danger">inactivo</span>' : '<span class="badge badge-success">activo</span>'; !!}</td>
                                             <td><x-rank :rank="$atc->rank"/></td>
                                             <td>{{ $atc->current_month_hours }}</td>
                                             <td>{{ $atc->last_month_hours }}</td>
