@@ -34,7 +34,7 @@
                             <li class="dropdown"><a href="#">Controladores</a>
                                 <ul class="dropdown-menu">
                                     @if (Auth::user())
-                                        @if (! Auth::user()->atc())
+                                        @if (! Auth::user()->atc)
                                             <li><a href="{{ route('atcs.apply') }}">¡Quiero ser ATC!</a></li>
                                         @endif
                                     @else
@@ -61,7 +61,6 @@
                     </nav>
                 </div>
             </div>
-            <!--end: Navigation-->
         </div>
     </div>
 </header>
