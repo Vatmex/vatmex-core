@@ -14,7 +14,7 @@
             </div>
             @can('edit instructors')
                 <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                    <a href="{{ route('dashboard.instructors.edit', ['id' => $instructor->id]) }}" class="btn btn-block btn-primary glow">Editar Instructor</a>
+                    <a href="{{ route('dashboard.instructors.edit', ['cid' => $instructor->user->cid]) }}" class="btn btn-block btn-primary glow">Editar Instructor</a>
                 </div>
             @else
                 <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
@@ -40,7 +40,7 @@
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                            <form action="{{ route('dashboard.instructors.delete', ['id' => $instructor->id])}}" method="post">
+                            <form action="{{ route('dashboard.instructors.delete', ['cid' => $instructor->user->cid])}}" method="post">
                                 @csrf
                                 <button type="submit" class="btn btn-outline-danger">Eliminar Instructor</button>
                             </form>

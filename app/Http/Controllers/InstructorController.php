@@ -15,9 +15,9 @@ class InstructorController extends Controller
         return view('dashboard.instructors.index', compact('instructors'));
     }
 
-    public function show($id)
+    public function show(int $cid)
     {
-        $instructor = Instructor::where('id', $id)->first();
+        $instructor = User::where('cid', $cid)->first()->instructor_profile;
 
         return view('dashboard.instructors.show', compact('instructor'));
     }
@@ -44,16 +44,16 @@ class InstructorController extends Controller
         return redirect()->route('dashboard.instructors.show', ['id' => $instructor->id])->with('success', 'Instructor creado con éxito');
     }
 
-    public function edit(int $id)
+    public function edit(int $cid)
     {
-        $instructor = Instructor::where('id', $id)->first();
+        $instructor = User::where('cid', $cid)->first()->instructor_profile;
 
         return view('dashboard.instructors.edit', compact('instructor'));
     }
 
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $cid)
     {
-        $instructor = Instructor::where('id', $id)->first();
+        $instructor = User::where('cid', $cid)->first()->instructor_profile;
 
         $instructor->tower = $request->has('tower');
         $instructor->approach = $request->has('approach');
@@ -68,7 +68,7 @@ class InstructorController extends Controller
                 'center' => $request->has('center'),
             ])->log('Updated instructor ratings for '.$instructor->user->name.' - '.$instructor->user->cid);
 
-        return redirect()->route('dashboard.instructors.show', ['id' => $id])->with('success', 'Se editaron las habilitaciones del CTA con éxito!');
+        return redirect()->route('dashboard.instructors.show', ['cid' => $cid])->with('success', 'Se editaron las habilitaciones del CTA con éxito!');
     }
 
     public function destroy(int $id)

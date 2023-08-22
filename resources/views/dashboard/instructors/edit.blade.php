@@ -44,7 +44,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <form action="{{ route('dashboard.instructors.update', ['id' => $instructor->id]) }}" method="post" class="form form-horizontal" enctype="multipart/form-data">
+                        <form action="{{ route('dashboard.instructors.update', ['cid' => $instructor->user->cid]) }}" method="post" class="form form-horizontal" enctype="multipart/form-data">
                             @csrf
                                 <h4 class="form-section"><i class="ft-user"></i> Habilitaciones</h4>
                                 <div class="form-group row">

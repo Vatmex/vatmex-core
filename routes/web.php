@@ -152,11 +152,11 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
 
         Route::group(['prefix' => 'instructors'], function () {
             Route::get('/', [InstructorController::class, 'index'])->name('dashboard.instructors.index')->middleware('can:view instructors');
-            Route::get('/{id}', [InstructorController::class, 'show'])->name('dashboard.instructors.show')->middleware('can:view instructors');
-            Route::get('/{id}/edit', [InstructorController::class, 'edit'])->name('dashboard.instructors.edit')->middleware('can:edit instructors');
-            Route::post('/{id}/edit', [InstructorController::class, 'update'])->name('dashboard.instructors.update')->middleware('can:edit instructors');
-            Route::post('/{id}/delete', [InstructorController::class, 'destroy'])->name('dashboard.instructors.delete')->middleware('can:delete instructors');
+            Route::get('/{cid}', [InstructorController::class, 'show'])->name('dashboard.instructors.show')->middleware('can:view instructors');
             Route::get('/{cid}/store', [InstructorController::class, 'store'])->name('dashboard.instructors.store')->middleware('can:create instructors');
+            Route::get('/{cid}/edit', [InstructorController::class, 'edit'])->name('dashboard.instructors.edit')->middleware('can:edit instructors');
+            Route::post('/{cid}/edit', [InstructorController::class, 'update'])->name('dashboard.instructors.update')->middleware('can:edit instructors');
+            Route::post('/{cid}/delete', [InstructorController::class, 'destroy'])->name('dashboard.instructors.delete')->middleware('can:delete instructors');
         });
 
         Route::group(['prefix' => 'students'], function () {

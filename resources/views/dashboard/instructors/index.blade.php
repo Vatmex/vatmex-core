@@ -30,7 +30,7 @@
                                     @foreach($instructors as $instructor)
                                         <tr>
                                             <td>{{ $instructor->user->cid }}</td>
-                                            <td><a href="{{ route('dashboard.instructors.show', ['id' => $instructor->id]) }}">{{ $instructor->user->name }}</a></td>
+                                            <td><a href="{{ route('dashboard.instructors.show', ['cid' => $instructor->user->cid]) }}">{{ $instructor->user->name }}</a></td>
                                             <td>{{ $instructor->atcs->where('is_training', true)->count() }}</td>
                                         </tr>
                                     @endforeach
