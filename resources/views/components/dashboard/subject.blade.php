@@ -12,6 +12,10 @@
             <a href="{{ route('dashboard.categories.show', ['id' => $subject->id]) }}">{{ $subject->name }}</a>
             @break
 
+        @case("App\Models\Document")
+            <a href="{{ route('dashboard.documents.show', ['id' => $subject->id]) }}">{{ $subject->name }}</a>
+            @break
+
         @case("App\Models\Event")
             <a href="{{ route('dashboard.events.edit', ['slug' => $subject->slug]) }}">{{ $subject->name }}</a>
             @break

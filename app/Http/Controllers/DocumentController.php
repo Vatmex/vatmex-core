@@ -15,6 +15,22 @@ class DocumentController extends Controller
         return view('dashboard.documents.index', compact('documents'));
     }
 
+    public function show(int $id)
+    {
+        if (\Auth::user()->hasPermissionTo('view trashed')) {
+            $document = Document::withTrashed()->where('id', $id)->firstOrFail();
+
+            if($document->trashed()) {
+                \Session::flash('error','Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+            }
+        }
+        else {
+            $document = Document::where('id', $id)->firstOrFail();
+        }
+
+        return view('dashboard.documents.show', compact('document'));
+    }
+
     public function create()
     {
         $categories = Category::all();
@@ -60,13 +76,6 @@ class DocumentController extends Controller
             ])->log('Created resource '.$document->name);
 
         return redirect()->route('dashboard.documents.show', ['id' => $document->id]);
-    }
-
-    public function show(int $id)
-    {
-        $document = Document::where('id', $id)->firstOrFail();
-
-        return view('dashboard.documents.show', compact('document'));
     }
 
     public function edit(int $id)
