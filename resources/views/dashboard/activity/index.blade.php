@@ -45,7 +45,7 @@
                                                 </a>
                                             </td style="vertical-align: middle;">
                                             <td style="vertical-align: middle;">{{ $activity->description }}</td>
-                                            <td style="vertical-align: middle;">TODO</td>
+                                            <td style="vertical-align: middle;"><x-dashboard.subject :subject="$activity->subject"/></td>
                                         </tr>
                                     @endforeach
                                 </tbody>

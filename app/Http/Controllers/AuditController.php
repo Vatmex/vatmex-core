@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Activitylog\Models\Activity;
 
-class ActivityLogController extends Controller
+class AuditController extends Controller
 {
-    public function index()
+    public function activityIndex()
     {
         $activities = Activity::all();
 

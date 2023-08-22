@@ -62,6 +62,18 @@
                     </ul>
                 </li>
             @endcan
+            @canany(['view logs', 'view records'])
+                <li class="{{ (request()->segment(2) == 'events') ? 'active' : '' }} nav-item"><a href="#"><i class="la la-glasses"></i><span class="menu-title" data-i18n="Events">Auditoría</span></a>
+                    <ul class="menu-content">
+                        @can('view logs')
+                            <li><a class="menu-item" href="{{ route('dashboard.audit.logs') }}"><i class="la la-stream"></i><span>Log de Eventos</span></a></li>
+                        @endcan
+                        @can('view records')
+                            <li><a class="menu-item" href="{{ url('/ops/events') }}"><i class="la la-archive"></i><span>Expedientes</span></a></li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
         </ul>
     </div>
 </div>
