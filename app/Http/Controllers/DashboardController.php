@@ -12,50 +12,54 @@ class DashboardController extends Controller
     public function index()
     {
         $vatsim = Http::get('https://data.vatsim.net/v3/vatsim-data.json')->json();
-
-        // Get all the pilots departing or arriving to/from Mexico airports and save them to an array
+        
         $pilots = [];
-        foreach ($vatsim['pilots'] as $pilot) {
-            if (isset($pilot['flight_plan']['departure']) && $pilot['flight_plan']['arrival']) {
-                if (str_starts_with($pilot['flight_plan']['departure'], 'MM') || str_starts_with($pilot['flight_plan']['arrival'], 'MM')) {
-                    array_push($pilots, $pilot);
-                }
-            }
-        }
-        $pilotsOnline = count($pilots);
-
-        // Get an array of all the mexico controllers online
+        $pilotsOnline = 0;
         $controllersOnline = [];
-        foreach ($vatsim['controllers'] as $controller) {
-            if (str_starts_with($controller['callsign'], 'MM')) {
-                if (! (substr($controller['callsign'], -3, 3) == 'OBS')) { // Filter observers (Yes, it happens)
-                    array_push($controllersOnline, $controller);
-                }
-            }
-        }
-
-        // Then go through all airports and count the flights for the aiport
-        // TODO: Add controller status
         $airportStats = [];
-        foreach ($this->airportList as $airport) {
-            $departures = 0;
-            $arrivals = 0;
-            foreach ($pilots as $pilot) {
-                if ($pilot['flight_plan']['departure'] == $airport) {
-                    $departures++;
-                } elseif ($pilot['flight_plan']['arrival'] == $airport) {
-                    $arrivals++;
+
+        if ($vatsim) {
+            // Get all the pilots departing or arriving to/from Mexico airports and save them to an array
+            foreach ($vatsim['pilots'] as $pilot) {
+                if (isset($pilot['flight_plan']['departure']) && $pilot['flight_plan']['arrival']) {
+                    if (str_starts_with($pilot['flight_plan']['departure'], 'MM') || str_starts_with($pilot['flight_plan']['arrival'], 'MM')) {
+                        array_push($pilots, $pilot);
+                    }
+                }
+            }
+            $pilotsOnline = count($pilots);
+
+            // Get an array of all the mexico controllers online
+            foreach ($vatsim['controllers'] as $controller) {
+                if (str_starts_with($controller['callsign'], 'MM')) {
+                    if (! (substr($controller['callsign'], -3, 3) == 'OBS')) { // Filter observers (Yes, it happens)
+                        array_push($controllersOnline, $controller);
+                    }
                 }
             }
 
-            $data = ['icao' => $airport, 'flights' => $departures + $arrivals, 'departures' => $departures, 'arrivals' => $arrivals];
-            array_push($airportStats, $data);
-        }
+            // Then go through all airports and count the flights for the aiport
+            // TODO: Add controller status
+            foreach ($this->airportList as $airport) {
+                $departures = 0;
+                $arrivals = 0;
+                foreach ($pilots as $pilot) {
+                    if ($pilot['flight_plan']['departure'] == $airport) {
+                        $departures++;
+                    } elseif ($pilot['flight_plan']['arrival'] == $airport) {
+                        $arrivals++;
+                    }
+                }
 
-        // Sort the airports by most traffic.
-        usort($airportStats, function ($a, $b) {
-            return $b['flights'] <=> $a['flights'];
-        });
+                $data = ['icao' => $airport, 'flights' => $departures + $arrivals, 'departures' => $departures, 'arrivals' => $arrivals];
+                array_push($airportStats, $data);
+            }
+
+            // Sort the airports by most traffic.
+            usort($airportStats, function ($a, $b) {
+                return $b['flights'] <=> $a['flights'];
+            });
+        }
 
         // Get all ATCs and sum the hours for this and past month
         $atcs = ATC::all();
