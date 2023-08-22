@@ -18,10 +18,18 @@ class AuditPermissionsSeeder extends Seeder
     {
         $viewLogsPermission = Permission::create(['name' => 'view logs']);
         $viewRecordsPermission = Permission::create(['name' => 'view records']);
+        $viewTrashedPermission = Permission::create(['name' => 'view trashed']);
 
         $administratorRole = Role::where('name', 'administrator')->firstOrFail();
         $administratorRole->givePermissionTo($viewLogsPermission);
         $administratorRole->givePermissionTo($viewRecordsPermission);
+        $administratorRole->givePermissionTo($viewTrashedPermission);
         $administratorRole->save();
+
+        $superAdminRole = Role::where('name', 'Super-Admin')->firstOrFail();
+        $superAdminRole->givePermissionTo($viewLogsPermission);
+        $superAdminRole->givePermissionTo($viewRecordsPermission);
+        $superAdminRole->givePermissionTo($viewTrashedPermission);
+        $superAdminRole->save();
     }
 }
