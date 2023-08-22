@@ -37,6 +37,10 @@ class InstructorController extends Controller
         $user->assignRole('instructor');
         $user->save();
 
+        activity()
+            ->performedOn($instructor)
+            ->log('Promoted '.$user->name.' - '.$user->cid.' to instructor');
+
         return redirect()->route('dashboard.instructors.show', ['id' => $instructor->id])->with('success', 'Instructor creado con éxito');
     }
 
@@ -56,6 +60,14 @@ class InstructorController extends Controller
         $instructor->center = $request->has('center');
         $instructor->save();
 
+        activity()
+            ->performedOn($instructor)
+            ->withProperties([
+                'tower' => $request->has('tower'),
+                'approach' => $request->has('approach'),
+                'center' => $request->has('center'),
+            ])->log('Updated instructor ratings for '.$instructor->user->name.' - '.$instructor->user->cid);
+
         return redirect()->route('dashboard.instructors.show', ['id' => $id])->with('success', 'Se editaron las habilitaciones del CTA con éxito!');
     }
 
@@ -64,6 +76,10 @@ class InstructorController extends Controller
         $instructor = Instructor::where('id', $id)->first();
         $instructor->user->removeRole('instructor');
         $instructor->delete();
+
+        activity()
+            ->performedOn($instructor)
+            ->log('Demoted '.$instructor->user->name.' - '.$instructor->user->cid.' from instructor');
 
         return redirect()->route('dashboard.instructors.index')->with('success', '¡Adios popó! Se borro el instructor con éxito!');
     }

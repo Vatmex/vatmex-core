@@ -55,6 +55,15 @@ class StaffController extends Controller
 
             $staff->team()->associate($team);
             $staff->save();
+
+            activity()
+                ->performedOn($staff)
+                ->withProperties([
+                    'position' => $request->input('position'),
+                    'shortcode' => $request->input('shortcode'),
+                    'description' => $request->input('description'),
+                    'email' => $request->input('email'),
+                ])->log('Created staff position '.$staff->position);
         } catch (Exception $e) {
             return redirect('/ops/site/staff/'.$staff->if)->with('success', 'Se creó lo posición pero no se pudo asignar el equipo de trabajo');
         }
@@ -84,6 +93,15 @@ class StaffController extends Controller
             $staff->email = $request->input('email');
             $staff->description = $request->input('description');
             $staff->save();
+
+            activity()
+                ->performedOn($staff)
+                ->withProperties([
+                    'position' => $request->input('position'),
+                    'shortcode' => $request->input('shortcode'),
+                    'description' => $request->input('description'),
+                    'email' => $request->input('email'),
+                ])->log('Updated staff position '.$staff->position);
         } catch (Exception $e) {
             return redirect('/ops/site/staff/'.$staff->id.'/edit');
         }
@@ -118,6 +136,10 @@ class StaffController extends Controller
         $staff->user()->associate($user);
         $staff->save();
 
+        activity()
+            ->performedOn($user)
+            ->log('Assigned staff position '.$staff->position.' to '.$user->name.' - '.$user->cid);
+
         return redirect('/ops/site/staff/'.$staff->id)->with('success', 'Se asigó '.$user->name.' con exito a la posición '.$staff->position);
     }
 
@@ -129,6 +151,10 @@ class StaffController extends Controller
         $user->staff->user()->dissociate();
         $user->staff->save();
 
+        activity()
+            ->performedOn($user)
+            ->log('Removed staff position '.$user->staff->position.' from '.$user->name.' - '.$user->cid);
+
         return redirect('/ops/site/staff/'.$staffID)->with('success', 'Se desviculó el usuario de esta posición!');
     }
 
@@ -138,6 +164,10 @@ class StaffController extends Controller
 
         if ($staff) {
             $staff->delete();
+
+            activity()
+                ->performedOn($staff)
+                ->log('Deleted staff position '.$staff->position);
 
             return redirect('/ops/site/staff')->with('success', 'Se elimino la posición!');
         }

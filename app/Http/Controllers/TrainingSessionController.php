@@ -44,7 +44,15 @@ class TrainingSessionController extends Controller
         $session->scheduled_time = Carbon::createFromFormat('Y-m-d\TH:i', $request->input('scheduled_time'), 'America/Mexico_City')->setTimezone('UTC');
         $session->description = $request->input('description');
 
-        $student->notes()->save($session);
+        $student->sessions()->save($session);
+
+        activity()
+            ->performedOn($session)
+            ->withProperties([
+                'title' => $request->input('title'),
+                'scheduled_time' => Carbon::createFromFormat('Y-m-d\TH:i', $request->input('scheduled_time'), 'America/Mexico_City')->setTimezone('UTC'),
+                'description' => $request->input('description'),
+            ])->log('Created training session on '.$student->user->name.' - '.$student->user->cid);
 
         try {
             $studentEmail = $session->student->user->email;
@@ -90,6 +98,14 @@ class TrainingSessionController extends Controller
 
         $session->save();
 
+        activity()
+            ->performedOn($session)
+            ->withProperties([
+                'title' => $request->input('title'),
+                'scheduled_time' => Carbon::createFromFormat('Y-m-d\TH:i', $request->input('scheduled_time'), 'America/Mexico_City')->setTimezone('UTC'),
+                'description' => $request->input('description'),
+            ])->log('Updated training session on '.$session->student->user->name.' - '.$session->student->user->cid);
+
         try {
             $studentEmail = $session->student->user->email;
 
@@ -128,6 +144,10 @@ class TrainingSessionController extends Controller
         $session->cancelation_motive = $request->input('cancelation_motive');
 
         $session->save();
+
+        activity()
+            ->performedOn($session)
+            ->log('Canceled training session on '.$session->student->user->name.' - '.$session->student->user->cid);
 
         try {
             $studentEmail = $session->student->user->email;

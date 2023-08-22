@@ -53,6 +53,18 @@ class ATCController extends Controller
         $atc->user->save();
         $atc->save();
 
+        activity()
+            ->performedOn($atc)
+            ->withProperties([
+                'name' => $request->get('name'),
+                'initials' => $request->get('initials'),
+                'delivery' => $request->has('delivery'),
+                'ground' => $request->has('ground'),
+                'tower' => $request->has('tower'),
+                'approach' => $request->has('approach'),
+                'center'=> $request->has('center'),
+            ])->log('Updated ATC profile for '.$atc->user->name.' - '.$atc->user->cid);
+
         return redirect()->route('dashboard.atcs.show', ['cid' => $cid])->with('success', 'Se editaron las habilitaciones del CTA con éxito!');
     }
 
@@ -63,6 +75,10 @@ class ATCController extends Controller
         $atc->inactive = false;
         $atc->save();
 
+        activity()
+            ->performedOn($atc)
+            ->log('Set ATC Status to active for '.$atc->user->name.' - '.$atc->user->cid);
+
         return redirect()->route('dashboard.atcs.show', ['cid' => $cid])->with('success', 'Se activo al CTA con éxito!');
     }
 
@@ -72,6 +88,10 @@ class ATCController extends Controller
 
         $atc->inactive = true;
         $atc->save();
+
+        activity()
+            ->performedOn($atc)
+            ->log('Set ATC Status to inactive for '.$atc->user->name.' - '.$atc->user->cid);
 
         try {
             Mail::to($atc->user->email)->send(new ATCSuspensionMail($atc));

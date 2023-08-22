@@ -37,6 +37,13 @@ class TrainingNoteController extends Controller
 
         $student->notes()->save($trainingNote);
 
+        activity()
+            ->performedOn($trainingNote)
+            ->withProperties([
+                'message' => $request->input('description'),
+                'visible_to_student' => $request->has('visible'),
+            ])->log('Created training note on '.$student->user->name.' - '.$student->user->cid);
+
         return redirect()->route('dashboard.students.show', ['cid' => $student->user->cid])->with('success', 'Se agregó la nota con éxito!');
     }
 
@@ -58,6 +65,12 @@ class TrainingNoteController extends Controller
         $note->message = $request->input('message');
         $note->save();
 
+        activity()
+            ->performedOn($note)
+            ->withProperties([
+                'message' => $request->input('description'),
+            ])->log('Update training note on '.$note->student->user->name.' - '.$note->student->user->cid);
+
         return redirect()->route('dashboard.trainingNotes.show', ['id' => $id])->with('success', 'Nota editada con éxito!');
     }
 
@@ -71,6 +84,10 @@ class TrainingNoteController extends Controller
         }
 
         $note->delete();
+
+        activity()
+            ->performedOn($note)
+            ->log('Deleted training note on '.$note->student->user->name.' - '.$note->student->user->cid);
 
         return redirect()->route('dashboard.students.show', ['cid' => $studentCid])->with('success', 'Nota eliminada con éxito!');
 

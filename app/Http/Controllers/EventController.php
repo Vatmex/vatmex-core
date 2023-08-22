@@ -66,6 +66,20 @@ class EventController extends Controller
             'slug' => $request->input('slug'),
         ]);
 
+        activity()
+            ->performedOn($event)
+            ->withProperties([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'start' => $request->input('start'),
+                'end' => $request->input('end'),
+                'departure_airfields' => $request->input('departure_airfields'),
+                'arrival_airfields' => $request->input('arrival_airfields'),
+                'banner_path' => $bannerPath,
+                'hidden' => $request->has('hidden'),
+                'slug' => $request->input('slug'),
+            ])->log('Created event '.$event->name);
+
         return redirect('/ops/events/'.$event->slug)->with('success', 'El evento ha sido creado con éxito!');
     }
 
@@ -114,6 +128,20 @@ class EventController extends Controller
 
         $event->save();
 
+        activity()
+            ->performedOn($event)
+            ->withProperties([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'start' => $request->input('start'),
+                'end' => $request->input('end'),
+                'departure_airfields' => $request->input('departure_airfields'),
+                'arrival_airfields' => $request->input('arrival_airfields'),
+                'banner_path' => $bannerPath,
+                'hidden' => $request->has('hidden'),
+                'slug' => $request->input('slug'),
+            ])->log('Updated event '.$event->name);
+
         return redirect('/ops/events/'.$event->slug)->with('success', 'El evento fue actualizado con éxito!');
     }
 
@@ -123,6 +151,10 @@ class EventController extends Controller
 
         if ($event) {
             $event->delete();
+
+            activity()
+                ->performedOn($event)
+                ->log('Deleted event '.$event->name);
 
             return redirect('ops/events')->with('success', 'Se elimino el evento '.$event->name);
         }

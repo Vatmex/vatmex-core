@@ -49,6 +49,16 @@ class DocumentController extends Controller
         $document->category()->associate($category);
         $document->save();
 
+        activity()
+            ->performedOn($document)
+            ->withProperties([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'version' => $request->input('version'),
+                'category' => $category->name,
+                'document_path' => $documentPath,
+            ])->log('Created resource '.$document->name);
+
         return redirect()->route('dashboard.documents.show', ['id' => $document->id]);
     }
 
@@ -101,6 +111,16 @@ class DocumentController extends Controller
 
         $document->save();
 
+        activity()
+            ->performedOn($document)
+            ->withProperties([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+                'version' => $request->input('version'),
+                'category' => $category->name,
+                'document_path' => $documentPath,
+            ])->log('Updated resource '.$document->name);
+
         return redirect()->route('dashboard.documents.show', ['id' => $document->id]);
     }
 
@@ -110,6 +130,10 @@ class DocumentController extends Controller
 
         if ($document) {
             $document->delete();
+
+            activity()
+                ->performedOn($document)
+                ->log('Deleted resource '.$document->name);
 
             return redirect()->route('dashboard.documents.index')->with('success', 'Se elimino el documento!');
         }

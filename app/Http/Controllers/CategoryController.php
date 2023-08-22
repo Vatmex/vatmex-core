@@ -38,6 +38,12 @@ class CategoryController extends Controller
             'description' => $request->input('description'),
         ]);
 
+        activity()
+            ->performedOn($category)->withProperties([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+            ])->log('Created resource category '.$category->name);
+
         return redirect()->route('dashboard.categories.show', ['id' => $category->id])->with('success', 'Categoría creada con éxito!');
     }
 
@@ -65,6 +71,13 @@ class CategoryController extends Controller
         $category->description = $request->input('description');
         $category->save();
 
+        activity()
+            ->performedOn($category)
+            ->withProperties([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+            ])->log('Updated resource category '.$category->name);
+
         return redirect()->route('dashboard.categories.show', ['id' => $id])->with('success', 'Se actualizo la categoría con éxito!');
     }
 
@@ -74,6 +87,10 @@ class CategoryController extends Controller
 
         if ($category) {
             $category->delete();
+
+            activity()
+                ->performedOn($category)
+                ->log('Deleted resource category '.$category->name);
 
             return redirect()->route('dashboard.categories.index')->with('success', 'Se elimino la categoria!');
         }

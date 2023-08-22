@@ -20,6 +20,10 @@ class RoleController extends Controller
 
         $user->assignRole($role);
 
+        activity()
+            ->performedOn($user)
+            ->log('Assigned website role '.$role->name.' to '.$user->name.' - '.$user->cid);
+
         return redirect()->route('dashboard.users.show', ['cid' => $cid])->with('success', 'Rol asignado con éxito!');
     }
 
@@ -34,6 +38,10 @@ class RoleController extends Controller
         $user = User::where('cid', $cid)->first();
 
         $user->removeRole($role);
+
+        activity()
+            ->performedOn($user)
+            ->log('Removed website role '.$role->name.' to '.$user->name.' - '.$user->cid);
 
         return redirect()->route('dashboard.users.show', ['cid' => $cid])->with('success', 'Rol removido con éxito!');
     }
