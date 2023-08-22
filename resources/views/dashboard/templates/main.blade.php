@@ -99,6 +99,14 @@
             <div class="content-overlay"></div>
             <div class="content-wrapper">
                 <div class="content-header row">
+                    <div class="content-header-left col-md-12 col-12 mb-2">
+                        <h3 class="content-header-title mb-0">@yield('title')</h3>
+                        <div class="row breadcrumbs-top">
+                            <div class="breadcrumb-wrapper col-12">
+                                @yield('breadcrumbs')
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="content-body">
                     @yield('content')
@@ -122,21 +130,25 @@
         <!-- BEGIN Vendor JS-->
 
         <!-- BEGIN: Page Vendor JS-->
-        <script src="/dashboard/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+        <script src="/dashboard/app-assets/data/jvector/visitor-data.js"></script>
+        <script src="/dashboard/app-assets/js/core/libraries/jquery_ui/jquery-ui.min.js"></script>
+        <script src="/dashboard/app-assets/js/scripts/ui/jquery-ui/date-pickers.js"></script>
         <script src="/dashboard/app-assets/vendors/js/charts/chart.min.js"></script>
-        <script src="/dashboard/app-assets/vendors/js/charts/raphael-min.js"></script>
-        <script src="/dashboard/app-assets/vendors/js/charts/morris.min.js"></script>
         <script src="/dashboard/app-assets/vendors/js/charts/jvector/jquery-jvectormap-2.0.3.min.js"></script>
         <script src="/dashboard/app-assets/vendors/js/charts/jvector/jquery-jvectormap-world-mill.js"></script>
-        <script src="/dashboard/app-assets/vendors/js/forms/select/selectivity-full.min.js"></script>
-        <script src="/dashboard/app-assets/vendors/js/ui/headroom.min.js"></script>
-        <script src="/dashboard/app-assets/vendors/js/extensions/moment.min.js"></script>
-        <script src="/dashboard/app-assets/vendors/js/extensions/fullcalendar.min.js"></script>
-        <script src="/dashboard/app-assets/vendors/js/extensions/daygrid.min.js"></script>
-        <script src="/dashboard/app-assets/vendors/js/extensions/timegrid.min.js"></script>
-        <script src="/dashboard/app-assets/vendors/js/extensions/interactions.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/charts/morris.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/charts/raphael-min.js"></script>
         <script src="/dashboard/app-assets/vendors/js/editors/tinymce/tinymce.min.js"></script>
-        <script src="/dashboard/app-assets/data/jvector/visitor-data.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/extensions/daygrid.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/extensions/fullcalendar.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/extensions/interactions.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/extensions/moment.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/extensions/timegrid.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/forms/select/select2.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/forms/select/selectivity-full.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/tables/datatable/dataTables.bootstrap4.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/tables/datatable/datatables.min.js"></script>
+        <script src="/dashboard/app-assets/vendors/js/ui/headroom.min.js"></script>
         <!-- END: Page Vendor JS-->
 
         <!-- BEGIN: Theme JS-->

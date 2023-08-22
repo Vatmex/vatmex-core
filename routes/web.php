@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ATCController;
 use App\Http\Controllers\AuthController;
@@ -138,6 +139,10 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
             Route::get('/{id}/edit', [DocumentController::class, 'edit'])->name('dashboard.documents.edit')->middleware('can:edit documents');
             Route::post('/{id}/edit', [DocumentController::class, 'update'])->name('dashboard.documents.update')->middleware('can:edit documents');
             Route::post('/{id}/delete', [DocumentController::class, 'destroy'])->name('dashboard.documents.delete')->middleware('can:delete documents');
+        });
+
+        Route::group(['prefix' => 'audit'], function () {
+            Route::get('/', [ActivityLogController::class, 'index'])->name('dashboard.activity.index')->middleware('can:view logs');
         });
     });
 
