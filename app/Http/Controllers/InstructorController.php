@@ -52,7 +52,7 @@ class InstructorController extends Controller
             ->performedOn($instructor)
             ->log('Promoted '.$user->name.' - '.$user->cid.' to instructor');
 
-        return redirect()->route('dashboard.instructors.show', ['id' => $instructor->id])->with('success', 'Instructor creado con éxito');
+        return redirect()->route('dashboard.instructors.show', ['cid' => $user->cid])->with('success', 'Instructor creado con éxito');
     }
 
     public function edit(int $cid)
