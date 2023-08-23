@@ -157,6 +157,7 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
             Route::get('/{cid}/edit', [InstructorController::class, 'edit'])->name('dashboard.instructors.edit')->middleware('can:edit instructors');
             Route::post('/{cid}/edit', [InstructorController::class, 'update'])->name('dashboard.instructors.update')->middleware('can:edit instructors');
             Route::post('/{cid}/delete', [InstructorController::class, 'destroy'])->name('dashboard.instructors.delete')->middleware('can:delete instructors');
+            Route::get('/{id}/audit', [InstructorController::class, 'audit'])->name('dashboard.instructors.audit')->middleware('can:view trashed');
         });
 
         Route::group(['prefix' => 'students'], function () {

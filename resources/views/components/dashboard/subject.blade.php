@@ -21,7 +21,7 @@
             @break
 
         @case("App\Models\Instructor")
-            <a href="{{ route('dashboard.instructors.show', ['id' => $subject->id]) }}">{{ $subject->user->name }}</a>
+            <a href="{{ route('dashboard.instructors.audit', ['id' => $subject->id]) }}">{{ $subject->user->name }}</a>
             @break
 
         @case("App\Models\Staff")

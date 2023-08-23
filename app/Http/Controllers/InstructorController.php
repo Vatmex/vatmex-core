@@ -22,6 +22,17 @@ class InstructorController extends Controller
         return view('dashboard.instructors.show', compact('instructor'));
     }
 
+    public function audit(int $id)
+    {
+        $instructor = Instructor::withTrashed()->where('id', $id)->first();
+
+        if($instructor->trashed()) {
+            \Session::flash('error','Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+        }
+
+        return view('dashboard.instructors.show', compact('instructor'));
+    }
+
     public function store(int $cid)
     {
         $user = User::where('cid', $cid)->first();
@@ -71,9 +82,9 @@ class InstructorController extends Controller
         return redirect()->route('dashboard.instructors.show', ['cid' => $cid])->with('success', 'Se editaron las habilitaciones del CTA con éxito!');
     }
 
-    public function destroy(int $id)
+    public function destroy(int $cid)
     {
-        $instructor = Instructor::where('id', $id)->first();
+        $instructor = User::where('cid', $cid)->first()->instructor_profile;
         $instructor->user->removeRole('instructor');
         $instructor->delete();
 
