@@ -83,9 +83,18 @@ class EventController extends Controller
         return redirect('/ops/events/'.$event->slug)->with('success', 'El evento ha sido creado con éxito!');
     }
 
-    public function edit($slug)
+    public function edit(string $slug)
     {
-        $event = Event::where('slug', $slug)->firstOrFail();
+        if (\Auth::user()->hasPermissionTo('view trashed')) {
+            $event = Event::withTrashed()->where('slug', $slug)->firstOrFail();
+
+            if($event->trashed()) {
+                \Session::flash('error','Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+            }
+        }
+        else {
+            $event = Event::where('slug', $slug)->firstOrFail();
+        }
 
         return view('dashboard.events.edit', compact('event'));
     }
