@@ -10,8 +10,17 @@ class TrainingNoteController extends Controller
 {
     public function show(int $id)
     {
-        $note = TrainingNote::where('id', $id)->first();
+        if (\Auth::user()->hasPermissionTo('view trashed')) {
+            $note = TrainingNote::withTrashed()->where('id', $id)->firstOrFail();
 
+            if($note->trashed()) {
+                \Session::flash('error','Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+            }
+        }
+        else {
+            $note = TrainingNote::where('id', $id)->firstOrFail();
+        }
+        
         return view('dashboard.trainingNotes.show', compact('note'));
     }
 

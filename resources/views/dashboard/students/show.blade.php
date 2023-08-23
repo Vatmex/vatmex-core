@@ -63,7 +63,7 @@
                                 </tr>
                                 <tr>
                                     <td>Instructor:</td>
-                                    <td class="users-view-name"><a href="{{ route('dashboard.instructors.show', ['id' => $student->instructor->id]) }}">{{ $student->instructor->user->name }}</a></td>
+                                    <td class="users-view-name"><a href="{{ route('dashboard.instructors.show', ['cid' => $student->instructor->user->cid]) }}">{{ $student->instructor->user->name }}</a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -84,7 +84,7 @@
                                         <tr>
                                             <td>{{ $note->id }}</td>
                                             <td>{{ $note->created_at->isoFormat('LLLL') }}</td>
-                                            <td><a href="{{ route('dashboard.instructors.show', ['id' => \App\Models\User::where('cid', $note->created_by)->first()->instructor_profile->id]) }}">{{ \App\Models\User::where('cid', $note->created_by)->first()->name }}</td>
+                                            <td><a href="{{ route('dashboard.instructors.show', ['cid' => \App\Models\User::where('cid', $note->created_by)->first()->cid]) }}">{{ \App\Models\User::where('cid', $note->created_by)->first()->name }}</td>
                                             <td>{{ ($note->visible_to_student) ? 'alumno' : 'instructores' }}</td>
                                             <td><a href="{{ route('dashboard.trainingNotes.show', ['id' => $note->id]) }}">ver</a>  @if(\Auth::user()->cid == $note->created_by) | <a href="{{ route('dashboard.trainingNotes.edit', ['id' => $note->id]) }}">editar</a> @endif</td>
                                         </tr>

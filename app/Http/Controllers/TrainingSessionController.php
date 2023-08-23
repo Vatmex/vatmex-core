@@ -16,14 +16,14 @@ class TrainingSessionController extends Controller
 {
     public function show(int $id)
     {
-        $session = TrainingSession::where('id', $id)->first();
+        $session = TrainingSession::where('id', $id)->firstOrFail();
 
         return view('dashboard.trainingSessions.show', compact('session'));
     }
 
     public function create(int $cid)
     {
-        $student = User::where('cid', $cid)->first()->atc;
+        $student = User::where('cid', $cid)->firstOrFail()->atc;
 
         return view('dashboard.trainingSessions.create', compact('student'));
     }

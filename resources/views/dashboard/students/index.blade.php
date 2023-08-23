@@ -35,7 +35,7 @@
                                             <td>{{ $student->user->cid }}</td>
                                             <td><a href="{{ route('dashboard.students.show', ['cid' => $student->user->cid]) }}">{{ $student->user->name }}</a></td>
                                             <td><x-rank :rank="$student->rank" /></td>
-                                            <td><a href="{{ route('dashboard.instructors.show', ['id' => $student->instructor->id]) }}">{{ $student->instructor->user->name }}</a></td>
+                                            <td><a href="{{ route('dashboard.instructors.show', ['cid' => $student->instructor->user->cid]) }}">{{ $student->instructor->user->name }}</a></td>
                                             <td>TODO</td>
                                             <td>TODO</td>
                                         </tr>
