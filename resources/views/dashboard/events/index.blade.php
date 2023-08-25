@@ -1,15 +1,20 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Calendario de Eventos');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Eventos</li>
+    </ol>
+@endsection
+
 @section('content')
     <!-- Full calendar basic example section start -->
     <section id="basic-examples">
         <div class="row">
             <div class="col-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Calendario de Eventos</h4>
-                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                    </div>
                     <div class="card-content collapse show">
                         <div class="card-body">
                             <x-dashboard.alerts/>

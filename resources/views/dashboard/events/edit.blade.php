@@ -1,14 +1,21 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Editar Evento');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.events.index') }}">Evento</a></li>
+        <li class="breadcrumb-item"><a href="#">{{ $event->name }}</a></li>
+        <li class="breadcrumb-item active">Editar</li>
+    </ol>
+@endsection
+
 @section('content')
     <section id="horizontal-form-layouts">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title" id="horz-layout-basic">Editar Evento</h4>
-                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                    </div>
                     <div class="card-content collpase show">
                         <div class="card-body">
                             <x-dashboard.alerts/>

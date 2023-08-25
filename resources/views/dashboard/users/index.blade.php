@@ -1,17 +1,16 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Lista de Usuarios');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Usuarios</li>
+    </ol>
+@endsection
+
 @section('content')
-    <!-- users list start -->
-    <section class="users-list-wrapper">
-        <div class="users-list-filter px-1">
-            <form>
-                <div class="row py-2 mb-2">
-                    <div class="col-12 col-sm-12 col-lg-12">
-                        <h3>Lista de Usuarios</h3>
-                    </div>
-                </div>
-            </form>
-        </div>
+    <section class="users-view">
         <div class="users-list-table">
             <div class="card">
                 <div class="card-content">

@@ -1,16 +1,28 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Editar Equipo de Trabajo');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.teams.index')}}">Equipos</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.teams.show', ['id' => $team->id]) }}">{{ $team->name }}</a></li>
+        <li class="breadcrumb-item active">Editar</li>
+    </ol>
+@endsection
+
+@section('controls')
+    <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
+    <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+        <a href="{{ url('ops/site/teams/' . $team->id . '/edit') }}" class="btn btn-block btn-primary glow">Editar Equipo</a>
+    </div>
+    <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+        <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Borrar Equipo</button>
+    </div>
+@endsection
+
 @section('content')
     <section class="users-view">
-        <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-9">
-                <div class="media mb-2">
-                    <div class="media-body pt-25">
-                        <h4 class="media-heading"><span class="users-view-name">Editar Equipo de Trabajo </span></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card">
             <div class="card-content">
                 <div class="card-body">

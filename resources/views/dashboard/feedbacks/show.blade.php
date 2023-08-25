@@ -1,19 +1,17 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Visualizar Feedback');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.feedbacks.index') }}">Feedback</a></li>
+        <li class="breadcrumb-item active">Visualizar</li>
+    </ol>
+@endsection
+
 @section('content')
-    <!-- users view start -->
     <section class="users-view">
-        <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-12">
-                <div class="media mb-2">
-                    <div class="media-body pt-25">
-                        <h4 class="media-heading"><span class="users-view-name">Visualizar Feedback</span></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- users view media object ends -->
-        <!-- users view card details start -->
         <div class="card">
             <div class="card-content">
                 <div class="card-body">

@@ -1,20 +1,24 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Lista de Equipos de Trabajo');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Equipos</li>
+    </ol>
+@endsection
+
+@section('controls')
+    <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
+    <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
+    <div class="col-12 col-sm-12 col-lg-2 d-flex align-items-center">
+        <a href="{{ url('ops/site/teams/new') }}" class="btn btn-block btn-primary glow">Nuevo Equipo</a>
+    </div>
+@endsection
+
 @section('content')
-    <!-- users list start -->
     <section class="users-list-wrapper">
-        <div class="users-list-filter px-1">
-            <form>
-                <div class="row py-2 mb-2">
-                    <div class="col-12 col-sm-12 col-lg-9">
-                        <h3>Lista de Equipos de Trabajo</h3>
-                    </div>
-                    <div class="col-12 col-sm-12 col-lg-3 d-flex align-items-center">
-                        <a href="{{ url('ops/site/teams/new') }}" class="btn btn-block btn-primary glow">Nuevo Equipo</a>
-                    </div>
-                </div>
-            </form>
-        </div>
         <div class="users-list-table">
             <div class="card">
                 <div class="card-content">

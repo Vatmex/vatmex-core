@@ -1,23 +1,20 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Solicitudes de Entrenamiento');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Solicitudes</li>
+    </ol>
+@endsection
+
 @section('content')
-    <!-- users list start -->
     <section class="users-list-wrapper">
-        <div class="users-list-filter px-1">
-            <form>
-                <div class="row py-2 mb-2">
-                    <div class="col-12 col-sm-12 col-lg-9">
-                        <h3>Solicitudes de Entrenamiento CTA</h3>
-                    </div>
-                </div>
-            </form>
-        </div>
         <div class="users-list-table">
             <div class="card">
                 <div class="card-content">
                     <div class="card-body">
-                        <!-- datatable start -->
-                        @if(!$applications->isEmpty())
                         <div class="table-responsive">
                             <table id="users-list-datatable" class="table">
                                 <thead>
@@ -44,9 +41,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        @else
-                            <h4 style="text-align: center;">No hay aplicaciones CTA en este momento</h4>
-                        @endif
                     </div>
                 </div>
             </div>

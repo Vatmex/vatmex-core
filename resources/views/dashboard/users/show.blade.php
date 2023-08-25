@@ -1,5 +1,15 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Detalle de Usuario');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.users.index') }}">Usuarios</a></li>
+        <li class="breadcrumb-item active">{{ $user->name }}</li>
+    </ol>
+@endsection
+
 @section('content')
     <!-- users view start -->
     <section class="users-view">
