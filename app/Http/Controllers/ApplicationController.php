@@ -170,7 +170,7 @@ class ApplicationController extends Controller
             return redirect('/');
         }
 
-        $application = $user->application();
+        $application = $user->application;
         $application->delete();
 
         activity()
