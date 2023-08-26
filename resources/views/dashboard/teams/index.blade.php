@@ -13,7 +13,7 @@
     <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
     <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
     <div class="col-12 col-sm-12 col-lg-2 d-flex align-items-center">
-        <a href="{{ url('ops/site/teams/new') }}" class="btn btn-block btn-primary glow">Nuevo Equipo</a>
+        <a href="{{ route('dashboard.teams.create') }}" class="btn btn-block btn-primary glow">Nuevo Equipo</a>
     </div>
 @endsection
 
@@ -39,7 +39,7 @@
                                     <tbody>
                                         @foreach($teams as $team)
                                             <tr>
-                                                <td><a href="{{ url('ops/site/teams') }}/{{ $team->id }}">{{ $team->id }}</a></td>
+                                                <td><a href="{{ route('dashboard.teams.show', ['id' => $team->id]) }}">{{ $team->id }}</a></td>
                                                 <td>{{ $team->name }}</td>
                                                 <td>{{ $team->staff->count() }}</td>
                                                 <td>{{ $team->created_at->toDateTimeString() }}</td>

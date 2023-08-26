@@ -14,7 +14,7 @@
 @section('controls')
     <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
     <div class="col-12 col-sm-12 col-lg-2 align-items-center">
-        <a href="{{ url('ops/site/teams/' . $team->id . '/edit') }}" class="btn btn-block btn-primary glow">Editar Equipo</a>
+        <a href="{{ route('dashboard.teams.update', ['id' => $team->id]) }}" class="btn btn-block btn-primary glow">Editar Equipo</a>
     </div>
     <div class="col-12 col-sm-12 col-lg-2 align-items-center">
         <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Borrar Equipo</button>
@@ -28,7 +28,7 @@
                 <div class="card-body">
                     <div class="col-12">
                         <x-dashboard.alerts/>
-                        <form action="{{ url('/ops/site/teams') }}/{{ $team->id }}/edit" method="post" class="form form-horizontal">
+                        <form action="{{ route('dashboard.teams.store', ['id' => $team->id]) }}" method="post" class="form form-horizontal">
                             @csrf
                             <div class="form-body">
                                 <h4 class="form-section"><i class="ft-user"></i> Información General</h4>

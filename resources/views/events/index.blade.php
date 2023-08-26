@@ -4,8 +4,8 @@
 
 @section('breadcrumbs')
 	<ul>
-        <li><a href="{{ url('/') }}">Inicio</a></li>
-        <li class="active"><a href="{{ url('/events') }}">Eventos</a></li>
+        <li><a href="{{ route('home') }}">Inicio</a></li>
+        <li class="active"><a href="{{ route('events.index') }}">Eventos</a></li>
     </ul>
 @endsection
 
@@ -39,7 +39,7 @@
                 @foreach($events as $event)
                 {
                     title: '{{ $event->name }}',
-                    url: '{{ url('/events') }}/{{ $event->slug }}',
+                    url: '{{ route('events.show', ['slug' => $event->slug]) }}',
                     start: '{{ $event->start }}'
                 },
                 @endforeach

@@ -21,7 +21,7 @@
                             <div class="card-text">
                                 <p>Usa el sigiuente formulario para crear un nuevo equipo de trabajo.  Si tienes dudas sobre el formulario comunicate con el administrador del la página.</p>
                             </div>
-                            <form action="{{ url('/ops/site/teams/new') }}" method="post" class="form form-horizontal">
+                            <form action="{{ route('dashboard.teams.store') }}" method="post" class="form form-horizontal">
                                 @csrf
                                 <div class="form-body">
                                     <h4 class="form-section"><i class="ft-user"></i> Información General</h4>

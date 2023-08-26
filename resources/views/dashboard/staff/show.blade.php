@@ -13,7 +13,7 @@
 @section('controls')
     <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
     <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center">
-        <a href="{{ url('ops/site/staff') }}/{{ $staff->id }}/edit" class="btn btn-block btn-primary glow">Editar Posición</a>
+        <a href="{{ route('dashboard.staff.edit', ['id' => $staff->id]) }}" class="btn btn-block btn-primary glow">Editar Posición</a>
     </div>
     <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center">
         <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Borrar Posición  </button>
@@ -36,7 +36,7 @@
                         <p style="text-align: center;">¿Estas seguro de que deseas borrar esta posición?</p>
                     </div>
                     <div class="modal-footer">
-                        <form action="{{ url('ops/site/staff/' . $staff->id . '/delete') }}" method="post">
+                        <form action="{{ route('dashboard.staff.delete', ['id' => $staff->id])) }}" method="post">
                             @csrf
                             <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-outline-danger">Borrar Posición</button>
@@ -86,7 +86,7 @@
                                 <tr>
                                     <td>Asignación</td>
                                     @if ($staff->user)
-                                        <td><a href="{{ url('/ops/site/staff/' . $staff->user->id . '/unlink') }}">Desasignar</a></td>
+                                        <td><a href="{{ route('dashboard.staff.unlink', ['id' => $staff->user->id]) }}">Desasignar</a></td>
                                     @else
                                         <td>Vacante</td>
                                     @endif
@@ -96,7 +96,7 @@
                         @can ('edit staff')
                             <h5 class="mb-1"><i class="ft-link"></i>Asignar Posición</h5>
                             <p>Usa el siguiente formulario para asignar un usuario a la posición. Si ya hay un usuario asignado o el usuario asignado ya tiene un posición seran remplazadas</p>
-                            <form action="{{ url('/ops/site/staff/' . $staff->id . '/link') }}" method="post">
+                            <form action="{{ route('dashboard.staff.link', ['id' => $staff->id]) }}" method="post">
                                 @csrf
                                 <div class="form-group">
                                     <select class="single-input selectivity-input" name="user" id="user">

@@ -21,7 +21,7 @@
                             <div class="card-text">
                                 <p>Usa el sigiuente formulario para crear un nuevo evento. Utiliza la casilla de visibilidad si deseas ir creando un evento que aun no se muestre en la página. Si tienes dudas sobre el formulario comunicate con el administrador del la página.</p>
                             </div>
-                            <form action="{{ url('/ops/events/new') }}" method="post" class="form form-horizontal" enctype="multipart/form-data">
+                            <form action="{{ route('dashboard.events.store') }}" method="post" class="form form-horizontal" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-body">

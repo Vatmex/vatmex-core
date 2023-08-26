@@ -40,7 +40,7 @@
                     @foreach($events as $event)
                     {
                         title: '{{ $event->name }}',
-                        url: '{{ url('/ops/events') }}/{{ $event->slug }}',
+                        url: '{{ route('dashboard.events.edit', ['slug' => $event->slug]) }}',
                         start: '{{ $event->start }}'
                     },
                     @endforeach

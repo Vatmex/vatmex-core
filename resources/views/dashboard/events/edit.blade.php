@@ -22,7 +22,7 @@
                             <div class="card-text">
                                 <p>Usa el sigiuente formulario para actualizar la información del evento. Si dejas el baner vació se conservara el banner anterior del evento. Adicionalmente puedes eliminar el evento.</p>
                             </div>
-                            <form action="{{ url('/ops/events/') }}/{{ $event->slug }}" method="post" class="form form-horizontal" enctype="multipart/form-data">
+                            <form action="{{ route('dashboard.events.update', ['slug' => $event->slug]) }}" method="post" class="form form-horizontal" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-body">
@@ -137,7 +137,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                    <form action="{{ url('/ops/events/') }}/{{ $event->id }}/delete" method="post">
+                    <form action="{{ route('dashboard.events.delete', ['id' => $event->id]) }}" method="post">
                         @csrf
                         <button type="submit" class="btn btn-outline-primary">Borrar Evento</button>
                     </form>

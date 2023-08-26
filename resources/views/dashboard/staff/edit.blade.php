@@ -18,7 +18,7 @@
                 <div class="card-body">
                     <div class="col-12">
                         <x-dashboard.alerts/>
-                        <form action="{{ url('/ops/site/staff/' . $staff->id . '/edit') }}" method="post" class="form form-horizontal">
+                        <form action="{{ route('dashboard.staff.update', ['id' => $staff->id ]) }}" method="post" class="form form-horizontal">
                             @csrf
                             <div class="form-body">
                                 <h4 class="form-section"><i class="ft-user"></i> Información General</h4>

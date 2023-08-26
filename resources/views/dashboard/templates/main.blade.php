@@ -82,7 +82,7 @@
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ url('/auth/logout') }}"><i class="ft-power"></i> Logout</a>
+                                    <a class="dropdown-item" href="{{ route('auth.logout') }}"><i class="ft-power"></i> Logout</a>
                                 </div>
                             </li>
                         </ul>

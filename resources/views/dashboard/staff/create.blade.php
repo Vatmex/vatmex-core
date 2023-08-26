@@ -1,6 +1,6 @@
 @extends('dashboard.templates.main')
 
-@section('title', 'Crear Nueva Posición Staff');
+@section('title', 'Crear Posición Staff');
 
 @section('breadcrumbs')
     <ol class="breadcrumb">
@@ -21,7 +21,7 @@
                             <div class="card-text">
                                 <p>Usa el sigiuente formulario para crear una nueva posición de staff. Si el email de staff queda vació se tomara el email del usuario asignado.  Si tienes dudas sobre el formulario comunicate con el administrador del la página.</p>
                             </div>
-                            <form action="{{ url('/ops/site/staff/new') }}" method="post" class="form form-horizontal">
+                            <form action="{{ route('dashboard.staff.store') }}" method="post" class="form form-horizontal">
                                 @csrf
                                 <div class="form-body">
                                     <h4 class="form-section"><i class="ft-user"></i> Información General</h4>

@@ -13,7 +13,7 @@
     <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
     <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
     <div class="col-12 col-sm-12 col-lg-2 d-flex align-items-center">
-        <a href="{{ url('ops/site/staff/new') }}" class="btn btn-block btn-primary glow">Nueva Posición</a>
+        <a href="{{ route('dashboard.staff.create') }}" class="btn btn-block btn-primary glow">Nueva Posición</a>
     </div>
 @endsection
 
@@ -40,7 +40,7 @@
                                     <tbody>
                                         @foreach($staffs as $staff)
                                             <tr>
-                                                <td><a href="{{ url('ops/site/staff') }}/{{ $staff->id }}">{{ $staff->id }}</a></td>
+                                                <td><a href="{{ route('dashboard.staff.show', ['id' => $staff->id]) }}">{{ $staff->id }}</a></td>
                                                 <td>{{ $staff->position }}</td>
                                                 <td>{{ ($staff->user) ? $staff->user->name : 'Vacante' }}</td>
                                                 <td>{{ ($staff->team) ? $staff->team->name : 'Sin Equipo' }}</td>
