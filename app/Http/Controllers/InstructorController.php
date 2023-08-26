@@ -37,6 +37,10 @@ class InstructorController extends Controller
     {
         $user = User::where('cid', $cid)->first();
 
+        if ($user->instructor_profile) {
+            return redirect()->route('dashboard.instructors.show', ['cid' => $user->cid])->with('error', 'Ya existe un perfil de instructor para este usuario');
+        }
+
         $instructor = new Instructor;
         $instructor->tower = true;
         $instructor->approach = false;

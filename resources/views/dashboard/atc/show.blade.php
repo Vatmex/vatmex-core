@@ -12,9 +12,13 @@
 
 @section('controls')
     @can('create instructors')
-        <div class="col-12 col-sm-12 col-lg-2 align-items-center">
-            <a href="{{ route('dashboard.instructors.store', ['cid' => $atc->user->cid]) }}" class="btn btn-block btn-success glow">Promover a Instructor</a>
-        </div>
+        @if (!$atc->user->instructor_profile)
+            <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+                <a href="{{ route('dashboard.instructors.store', ['cid' => $atc->user->cid]) }}" class="btn btn-block btn-success glow">Promover a Instructor</a>
+            </div>
+        @else
+            <div class="col-12 col-sm-12 col-lg-2 align-items-center"></div>
+        @endif
     @else
         <div class="col-12 col-sm-12 col-lg-2 align-items-center"></div>
     @endcan
