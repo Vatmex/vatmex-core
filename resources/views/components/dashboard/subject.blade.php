@@ -28,6 +28,10 @@
             <a href="{{ route('dashboard.staff.show', ['id' => $subject->id]) }}">{{ $subject->position }}</a>
             @break
 
+        @case("App\Models\Team")
+            <a href="{{ route('dashboard.teams.show', ['id' => $subject->id]) }}">{{ $subject->name }}</a>
+            @break
+
         @case("App\Models\TrainingNote")
             <a href="{{ route('dashboard.trainingNotes.show', ['id' => $subject->id]) }}">{{ $subject->student->user->name }}</a>
             @break
