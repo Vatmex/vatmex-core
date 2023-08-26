@@ -88,11 +88,10 @@ class ApplicationController extends Controller
         if (\Auth::user()->hasPermissionTo('view trashed')) {
             $application = Application::withTrashed()->where('id', $id)->firstOrFail();
 
-            if($application->trashed()) {
-                \Session::flash('error','Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+            if ($application->trashed()) {
+                \Session::flash('error', 'Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
             }
-        }
-        else {
+        } else {
             $application = Application::where('id', $id)->firstOrFail();
         }
 

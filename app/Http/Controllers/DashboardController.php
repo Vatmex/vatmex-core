@@ -12,7 +12,7 @@ class DashboardController extends Controller
     public function index()
     {
         $vatsim = Http::get('https://data.vatsim.net/v3/vatsim-data.json')->json();
-        
+
         $pilots = [];
         $pilotsOnline = 0;
         $controllersOnline = [];

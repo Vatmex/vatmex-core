@@ -20,11 +20,10 @@ class DocumentController extends Controller
         if (\Auth::user()->hasPermissionTo('view trashed')) {
             $document = Document::withTrashed()->where('id', $id)->firstOrFail();
 
-            if($document->trashed()) {
-                \Session::flash('error','Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+            if ($document->trashed()) {
+                \Session::flash('error', 'Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
             }
-        }
-        else {
+        } else {
             $document = Document::where('id', $id)->firstOrFail();
         }
 

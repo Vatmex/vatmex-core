@@ -19,13 +19,13 @@ class CategoryController extends Controller
         if (\Auth::user()->hasPermissionTo('view trashed')) {
             $category = Category::withTrashed()->where('id', $id)->firstOrFail();
 
-            if($category->trashed()) {
-                \Session::flash('error','Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+            if ($category->trashed()) {
+                \Session::flash('error', 'Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
             }
-        }
-        else {
+        } else {
             $category = Category::where('id', $id)->firstOrFail();
         }
+
         return view('dashboard.categories.show', compact('category'));
     }
 

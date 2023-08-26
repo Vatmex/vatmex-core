@@ -21,14 +21,13 @@ class StaffController extends Controller
         if (\Auth::user()->hasPermissionTo('view trashed')) {
             $staff = Staff::withTrashed()->where('id', $id)->firstOrFail();
 
-            if($staff->trashed()) {
-                \Session::flash('error','Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+            if ($staff->trashed()) {
+                \Session::flash('error', 'Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
             }
-        }
-        else {
+        } else {
             $staff = Staff::where('id', $id)->firstOrFail();
         }
-        
+
         $users = User::all();
 
         return view('dashboard.staff.show', compact('staff', 'users'));
@@ -69,7 +68,7 @@ class StaffController extends Controller
                 'description' => $request->input('description'),
                 'email' => $request->input('email'),
             ])->log('Created staff position '.$staff->position);
-        
+
         return redirect()->route('dashboard.staff.show', ['id' => $staff->id])->with('success', 'Se creó la posición '.$staff->position.' con éxito!');
     }
 
@@ -88,7 +87,7 @@ class StaffController extends Controller
         ]);
 
         $staff = Staff::where('id', $id)->firstOrFail();
-    
+
         $staff->position = $request->input('position');
         $staff->shortcode = $request->input('shortcode');
         $staff->email = $request->input('email');

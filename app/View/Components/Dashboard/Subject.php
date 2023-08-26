@@ -8,6 +8,7 @@ use Illuminate\View\Component;
 class Subject extends Component
 {
     public $subject;
+
     /**
      * Create a new component instance.
      *

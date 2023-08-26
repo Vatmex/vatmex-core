@@ -26,8 +26,8 @@ class InstructorController extends Controller
     {
         $instructor = Instructor::withTrashed()->where('id', $id)->first();
 
-        if($instructor->trashed()) {
-            \Session::flash('error','Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+        if ($instructor->trashed()) {
+            \Session::flash('error', 'Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
         }
 
         return view('dashboard.instructors.show', compact('instructor'));

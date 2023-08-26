@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuditController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ATCController;
+use App\Http\Controllers\AuditController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
