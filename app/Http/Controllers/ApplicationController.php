@@ -85,7 +85,17 @@ class ApplicationController extends Controller
 
     public function show($id)
     {
-        $application = Application::where('id', $id)->firstOrFail();
+        if (\Auth::user()->hasPermissionTo('view trashed')) {
+            $application = Application::withTrashed()->where('id', $id)->firstOrFail();
+
+            if($application->trashed()) {
+                \Session::flash('error','Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+            }
+        }
+        else {
+            $application = Application::where('id', $id)->firstOrFail();
+        }
+
         $instructors = Instructor::all();
 
         if (App::environment() == 'local') {
