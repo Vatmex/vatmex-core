@@ -16,7 +16,15 @@ class CategoryController extends Controller
 
     public function show(int $id)
     {
-        $category = Category::where('id', $id)->firstOrFail();
+        if (\Auth::user()->hasPermissionTo('view trashed')) {
+            $category = Category::withTrashed()->where('id', $id)->firstOrFail();
+
+            if ($category->trashed()) {
+                \Session::flash('error', 'Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+            }
+        } else {
+            $category = Category::where('id', $id)->firstOrFail();
+        }
 
         return view('dashboard.categories.show', compact('category'));
     }
@@ -37,6 +45,12 @@ class CategoryController extends Controller
             'name' => $request->input('name'),
             'description' => $request->input('description'),
         ]);
+
+        activity()
+            ->performedOn($category)->withProperties([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+            ])->log('Created resource category '.$category->name);
 
         return redirect()->route('dashboard.categories.show', ['id' => $category->id])->with('success', 'Categoría creada con éxito!');
     }
@@ -65,6 +79,13 @@ class CategoryController extends Controller
         $category->description = $request->input('description');
         $category->save();
 
+        activity()
+            ->performedOn($category)
+            ->withProperties([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+            ])->log('Updated resource category '.$category->name);
+
         return redirect()->route('dashboard.categories.show', ['id' => $id])->with('success', 'Se actualizo la categoría con éxito!');
     }
 
@@ -74,6 +95,10 @@ class CategoryController extends Controller
 
         if ($category) {
             $category->delete();
+
+            activity()
+                ->performedOn($category)
+                ->log('Deleted resource category '.$category->name);
 
             return redirect()->route('dashboard.categories.index')->with('success', 'Se elimino la categoria!');
         }

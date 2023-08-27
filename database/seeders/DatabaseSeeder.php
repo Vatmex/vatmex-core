@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             AuditorRoleSeeder::class,
             TrainingRolesSeeder::class,
             StudentPermissionsSeeder::class,
+            AuditPermissionsSeeder::class,
+            RolesPermissionSeeder::class,
         ]);
     }
 }

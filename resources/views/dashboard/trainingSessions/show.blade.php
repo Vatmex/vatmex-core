@@ -1,28 +1,33 @@
 @extends('dashboard.templates.main')
 
-@section('content')
-    <!-- users view start -->
-    <section class="users-view">
-        <!-- users view media object start -->
-        <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-6">
-                <div class="media mb-2">
-                    <div class="media-body pt-25">
-                        <h4 class="media-heading"><span class="users-view-name">Visualizar Sessión de Entrenamiento</span></h4>
-                    </div>
-                </div>
-            </div>
-            @if (\Auth::user()->cid == $session->created_by && $session->canceled != true)
-                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                    <a href="{{ route('dashboard.trainingSessions.edit', ['id' => $session->id]) }}" class="btn btn-block btn-primary glow">Editar Sesión</a>
-                </div>
-                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                    <a href="{{ route('dashboard.trainingSessions.cancel', ['id' => $session->id]) }}" class="btn btn-block btn-danger glow">Cancelar Sesión</a>
-                </div>
-            @endif
+@section('title', 'Visualizar Sesión de Entrenamiento')
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.students.index') }}">Estudiantes</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.students.show', ['cid' => $session->student->user->cid]) }}">{{ $session->student->user->name }}</a></li>
+        <li class="breadcrumb-item active">Sesión</li>
+    </ol>
+@endsection
+
+@section('controls')
+    <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
+    @if (\Auth::user()->cid == $session->created_by && $session->canceled != true)
+        <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+            <a href="{{ route('dashboard.trainingSessions.edit', ['id' => $session->id]) }}" class="btn btn-block btn-primary glow">Editar Sesión</a>
         </div>
-        <!-- users view media object ends -->
-        <!-- users view card details start -->
+        <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+            <a href="{{ route('dashboard.trainingSessions.cancel', ['id' => $session->id]) }}" class="btn btn-block btn-danger glow">Cancelar Sesión</a>
+        </div>
+    @else
+        <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
+        <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
+    @endif
+@endsection
+
+@section('content')
+    <section class="users-view">
         <div class="card">
             <div class="card-content">
                 <div class="card-body">

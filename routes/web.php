@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\ATCController;
+use App\Http\Controllers\AuditController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
@@ -96,6 +97,13 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
             Route::get('/{cid}/remove/{role}', [RoleController::class, 'remove'])->name('dashboard.users.remove')->middleware('can:remove roles');
         });
 
+        Route::group(['prefix' => 'roles'], function () {
+            Route::get('/', [RoleController::class, 'index'])->name('dashboard.roles.index')->middleware('can:view roles');
+            Route::get('/{id}', [RoleController::class, 'show'])->name('dashboard.roles.show')->middleware('can:view roles');
+            Route::get('/{id}/edit', [RoleController::class, 'edit'])->name('dashboard.roles.edit')->middleware('can:edit roles');
+            Route::post('/{id}/edit', [RoleController::class, 'update'])->name('dashboard.roles.update')->middleware('can:edit roles');
+        });
+
         Route::group(['prefix' => 'teams'], function () {
             Route::get('/', [TeamController::class, 'index'])->name('dashboard.teams.index')->middleware('can:view staff');
             Route::get('new', [TeamController::class, 'create'])->name('dashboard.teams.create')->middleware('can:create staff');
@@ -151,11 +159,12 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
 
         Route::group(['prefix' => 'instructors'], function () {
             Route::get('/', [InstructorController::class, 'index'])->name('dashboard.instructors.index')->middleware('can:view instructors');
-            Route::get('/{id}', [InstructorController::class, 'show'])->name('dashboard.instructors.show')->middleware('can:view instructors');
-            Route::get('/{id}/edit', [InstructorController::class, 'edit'])->name('dashboard.instructors.edit')->middleware('can:edit instructors');
-            Route::post('/{id}/edit', [InstructorController::class, 'update'])->name('dashboard.instructors.update')->middleware('can:edit instructors');
-            Route::post('/{id}/delete', [InstructorController::class, 'destroy'])->name('dashboard.instructors.delete')->middleware('can:delete instructors');
+            Route::get('/{cid}', [InstructorController::class, 'show'])->name('dashboard.instructors.show')->middleware('can:view instructors');
             Route::get('/{cid}/store', [InstructorController::class, 'store'])->name('dashboard.instructors.store')->middleware('can:create instructors');
+            Route::get('/{cid}/edit', [InstructorController::class, 'edit'])->name('dashboard.instructors.edit')->middleware('can:edit instructors');
+            Route::post('/{cid}/edit', [InstructorController::class, 'update'])->name('dashboard.instructors.update')->middleware('can:edit instructors');
+            Route::post('/{cid}/delete', [InstructorController::class, 'destroy'])->name('dashboard.instructors.delete')->middleware('can:delete instructors');
+            Route::get('/{id}/audit', [InstructorController::class, 'audit'])->name('dashboard.instructors.audit')->middleware('can:view trashed');
         });
 
         Route::group(['prefix' => 'students'], function () {
@@ -202,11 +211,16 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
 
     // Event Routes
     Route::group(['prefix' => 'events'], function () {
-        Route::get('/', [EventController::class, 'dashboardIndex'])->middleware('can:view events');
-        Route::get('/new', [EventController::class, 'create'])->middleware('can:create events');
-        Route::post('/new', [EventController::class, 'store'])->middleware('can:create events');
-        Route::get('/{slug}', [EventController::class, 'edit'])->middleware('can:edit events');
-        Route::post('/{slug}', [EventController::class, 'update'])->middleware('can:edit events');
-        Route::post('/{id}/delete', [EventController::class, 'destroy'])->middleware('can:delete events');
+        Route::get('/', [EventController::class, 'dashboardIndex'])->name('dashboard.events.index')->middleware('can:view events');
+        Route::get('/new', [EventController::class, 'create'])->name('dashboard.events.create')->middleware('can:create events');
+        Route::post('/new', [EventController::class, 'store'])->name('dashboard.events.store')->middleware('can:create events');
+        Route::get('/{slug}', [EventController::class, 'edit'])->name('dashboard.events.edit')->middleware('can:edit events');
+        Route::post('/{slug}', [EventController::class, 'update'])->name('dashboard.events.update')->middleware('can:edit events');
+        Route::post('/{id}/delete', [EventController::class, 'destroy'])->name('dashboard.events.delete')->middleware('can:delete events');
+    });
+
+    Route::group(['prefix' => 'audit'], function () {
+        Route::get('/logs', [AuditController::class, 'activityIndex'])->name('dashboard.audit.logs')->middleware('can:view logs');
+        Route::get('/user', [AuditController::class, 'userIndex'])->name('dashboard.audit.users')->middleware('can:view records');
     });
 });

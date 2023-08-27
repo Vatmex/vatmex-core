@@ -2,13 +2,16 @@
     <div class="main-menu-content">
         <ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
             @can('access dashboard')
-                <li class="{{ (request()->segment(2) == '') ? 'active' : '' }} nav-item"><a href="{{ url('/ops') }}"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>    
+                <li class="{{ (request()->segment(2) == '') ? 'active' : '' }} nav-item"><a href="{{ route('dashboard.index') }}"><i class="la la-home"></i><span class="menu-title" data-i18n="Dashboard">Dashboard</span></a></li>    
             @endcan
             @canany(['view users', 'view staff', 'view documents'])
                 <li class="{{ (request()->segment(2) == 'site') ? 'active' : '' }} nav-item"><a href="#"><i class="la la-desktop"></i><span class="menu-title" data-i18n="Site">Sitio</span></a>
                     <ul class="menu-content">
                         @can('view users')
                             <li><a class="menu-item" href="{{ route('dashboard.users.index') }}"><i data-i18n="Users" class="la la-user-friends"></i><span>Usuarios</span></a></li>
+                        @endcan
+                        @can('view roles')
+                            <li><a class="menu-item" href="{{ route('dashboard.roles.index') }}"><i data-i18n="Roles" class="la la-user-tag"></i><span>Roles</span></a></li>
                         @endcan
                         @can('view staff')
                             <li><a class="menu-item" href="#"><i class="la la-user-tie"></i><span data-i18n="Documents Menu">Staff</span></a>
@@ -56,12 +59,24 @@
                 <li class="{{ (request()->segment(2) == 'events') ? 'active' : '' }} nav-item"><a href="#"><i class="la la-globe"></i><span class="menu-title" data-i18n="Events">Eventos</span></a>
                     <ul class="menu-content">
                         @can('create events')
-                            <li><a class="menu-item" href="{{ url('/ops/events/new') }}"><i class="la la-calendar-plus"></i><span>Crear Evento</span></a></li>
+                            <li><a class="menu-item" href="{{ route('dashboard.events.create') }}"><i class="la la-calendar-plus"></i><span>Crear Evento</span></a></li>
                         @endcan
-                        <li><a class="menu-item" href="{{ url('/ops/events') }}"><i class="la la-calendar"></i><span>Calendario</span></a></li>
+                        <li><a class="menu-item" href="{{ route('dashboard.events.index') }}"><i class="la la-calendar"></i><span>Calendario</span></a></li>
                     </ul>
                 </li>
             @endcan
+            @canany(['view logs', 'view records'])
+                <li class="{{ (request()->segment(2) == 'audit') ? 'active' : '' }} nav-item"><a href="#"><i class="la la-glasses"></i><span class="menu-title" data-i18n="Events">Auditoría</span></a>
+                    <ul class="menu-content">
+                        @can('view logs')
+                            <li><a class="menu-item" href="{{ route('dashboard.audit.logs') }}"><i class="la la-stream"></i><span>Log de Eventos</span></a></li>
+                        @endcan
+                        @can('view records')
+                            <li><a class="menu-item" href="#"><i class="la la-archive"></i><span>Expedientes</span></a></li>
+                        @endcan
+                    </ul>
+                </li>
+            @endcanany
         </ul>
     </div>
 </div>

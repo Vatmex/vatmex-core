@@ -1,50 +1,54 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Detalle Instructor');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.instructors.index')}}">Instructores</a></li>
+        <li class="breadcrumb-item active">{{ $instructor->user->name }}</li>
+    </ol>
+@endsection
+
+@section('controls')
+    <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
+    @can('edit instructors')
+        <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+            <a href="{{ route('dashboard.instructors.edit', ['cid' => $instructor->user->cid]) }}" class="btn btn-block btn-primary glow">Editar Instructor</a>
+        </div>
+    @else
+        <div class="col-12 col-sm-12 col-lg-2 align-items-center"></div>
+    @endcan
+    @can('delete instructors')
+        <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+            <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Eliminar Instructor</button>
+        </div>
+    @else
+        <div class="col-12 col-sm-12 col-lg-2 align-items-center"></div>
+    @endcan
+@endsection
+
 @section('content')
     <!-- users view start -->
     <section class="users-view">
-        <!-- users view media object start -->
-        <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-6">
-                <div class="media mb-2">
-                    <div class="media-body pt-25">
-                        <h4 class="media-heading"><span class="users-view-name">Visualizar Instructor</span></h4>
+        <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myModalLabel1">Eliminar Instructor</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
                     </div>
-                </div>
-            </div>
-            @can('edit instructors')
-                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                    <a href="{{ route('dashboard.instructors.edit', ['id' => $instructor->id]) }}" class="btn btn-block btn-primary glow">Editar Instructor</a>
-                </div>
-            @else
-                <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
-            @endcan
-            @can('delete instructors')
-                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                    <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Eliminar Instructor</button>
-                </div>
-            @else
-                <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
-            @endcan
-            <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel1">Eliminar Instructor</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <p style="text-align: center;">¿Estas seguro de que deseas eliminar el perfil de instructor de {{ $instructor->user->name }}?</p>
-                        </div>
-                        <div class="modal-footer">
+                    <div class="modal-body">
+                        <p style="text-align: center;">¿Estas seguro de que deseas eliminar el perfil de instructor de {{ $instructor->user->name }}?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <form action="{{ route('dashboard.instructors.delete', ['cid' => $instructor->user->cid])}}" method="post">
+                            @csrf
                             <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                            <form action="{{ route('dashboard.instructors.delete', ['id' => $instructor->id])}}" method="post">
-                                @csrf
-                                <button type="submit" class="btn btn-outline-danger">Eliminar Instructor</button>
-                            </form>
-                        </div>
+                            <button type="submit" class="btn btn-outline-danger">Eliminar Instructor</button>
+                        </form>
                     </div>
                 </div>
             </div>

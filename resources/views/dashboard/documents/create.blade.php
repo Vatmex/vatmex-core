@@ -1,12 +1,22 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Crear Recurso');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.documents.index') }}">Recursos</a></li>
+        <li class="breadcrumb-item active">Nuevo</li>
+    </ol>
+@endsection
+
 @section('content')
     <section id="horizontal-form-layouts">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title" id="horz-layout-basic">Crear Nuevo Documento</h4>
+                        <h4 class="card-title" id="horz-layout-basic">Crear Recurso</h4>
                         <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
                     </div>
                     <div class="card-content collpase show">
@@ -64,7 +74,7 @@
 
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="la la-check-square-o"></i> Crear Documento
+                                        <i class="la la-check-square-o"></i> Crear Recurso
                                     </button>
                                 </div>
                             </form>

@@ -18,7 +18,16 @@ class StaffController extends Controller
 
     public function show($id)
     {
-        $staff = Staff::where('id', $id)->firstOrFail();
+        if (\Auth::user()->hasPermissionTo('view trashed')) {
+            $staff = Staff::withTrashed()->where('id', $id)->firstOrFail();
+
+            if ($staff->trashed()) {
+                \Session::flash('error', 'Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+            }
+        } else {
+            $staff = Staff::where('id', $id)->firstOrFail();
+        }
+
         $users = User::all();
 
         return view('dashboard.staff.show', compact('staff', 'users'));
@@ -44,22 +53,23 @@ class StaffController extends Controller
         $staff->description = $request->input('description');
         $staff->email = $request->input('email');
 
-        try {
-            $staff->save();
-        } catch (Exception $e) {
-            return redirect('/ops/site/staff/new')->with('error', 'No se pudo crear la posición!');
-        }
+        $staff->save();
 
-        try {
-            $team = Team::where('name', $request->input('team'))->first();
+        $team = Team::where('name', $request->input('team'))->first();
 
-            $staff->team()->associate($team);
-            $staff->save();
-        } catch (Exception $e) {
-            return redirect('/ops/site/staff/'.$staff->if)->with('success', 'Se creó lo posición pero no se pudo asignar el equipo de trabajo');
-        }
+        $staff->team()->associate($team);
+        $staff->save();
 
-        return redirect('/ops/site/staff/'.$staff->id)->with('success', 'Se creó la posición '.$staff->position.' con éxito!');
+        activity()
+            ->performedOn($staff)
+            ->withProperties([
+                'position' => $request->input('position'),
+                'shortcode' => $request->input('shortcode'),
+                'description' => $request->input('description'),
+                'email' => $request->input('email'),
+            ])->log('Created staff position '.$staff->position);
+
+        return redirect()->route('dashboard.staff.show', ['id' => $staff->id])->with('success', 'Se creó la posición '.$staff->position.' con éxito!');
     }
 
     public function edit(int $id)
@@ -78,30 +88,35 @@ class StaffController extends Controller
 
         $staff = Staff::where('id', $id)->firstOrFail();
 
-        try {
-            $staff->position = $request->input('position');
-            $staff->shortcode = $request->input('shortcode');
-            $staff->email = $request->input('email');
-            $staff->description = $request->input('description');
-            $staff->save();
-        } catch (Exception $e) {
-            return redirect('/ops/site/staff/'.$staff->id.'/edit');
-        }
+        $staff->position = $request->input('position');
+        $staff->shortcode = $request->input('shortcode');
+        $staff->email = $request->input('email');
+        $staff->description = $request->input('description');
+        $staff->save();
 
-        return redirect('/ops/site/staff/'.$staff->id)->with('success', 'La posición '.$staff->position.' ha sido actualizada con éxito');
+        activity()
+            ->performedOn($staff)
+            ->withProperties([
+                'position' => $request->input('position'),
+                'shortcode' => $request->input('shortcode'),
+                'description' => $request->input('description'),
+                'email' => $request->input('email'),
+            ])->log('Updated staff position '.$staff->position);
+
+        return redirect()->route('dashboard.staff.show', ['id' => $staff->id])->with('success', 'La posición '.$staff->position.' ha sido actualizada con éxito');
     }
 
     public function link(Request $request, int $id)
     {
         if ($request->input('user') == null) {
-            return redirect('/ops/site/staff/'.$id)->with('error', 'El formulario de usuario no puede estar vació!');
+            return redirect()->route('dashboard.staff.show', ['id' => $id])->with('error', 'El formulario de usuario no puede estar vació!');
         }
 
         $staff = Staff::where('id', $id)->firstOrFail();
         $user = User::where('cid', explode(' ', $request->input('user'))[0])->first();
 
         if (! $user) {
-            return redirect('/ops/site/staff/'.$id)->with('error', 'No se encontro el usuario a asignar!');
+            return redirect()->route('dashboard.staff.show', ['id' => $id])->with('error', 'No se encontro el usuario a asignar!');
         }
 
         // Si la posición ya tenia un usuario borrarlo
@@ -118,7 +133,11 @@ class StaffController extends Controller
         $staff->user()->associate($user);
         $staff->save();
 
-        return redirect('/ops/site/staff/'.$staff->id)->with('success', 'Se asigó '.$user->name.' con exito a la posición '.$staff->position);
+        activity()
+            ->performedOn($user)
+            ->log('Assigned staff position '.$staff->position.' to '.$user->name.' - '.$user->cid);
+
+        return redirect()->route('dashboard.staff.show', ['id' => $staff->id])->with('success', 'Se asigó '.$user->name.' con exito a la posición '.$staff->position);
     }
 
     public function unlink(Request $request, int $id)
@@ -129,19 +148,22 @@ class StaffController extends Controller
         $user->staff->user()->dissociate();
         $user->staff->save();
 
-        return redirect('/ops/site/staff/'.$staffID)->with('success', 'Se desviculó el usuario de esta posición!');
+        activity()
+            ->performedOn($user)
+            ->log('Removed staff position '.$user->staff->position.' from '.$user->name.' - '.$user->cid);
+
+        return redirect()->route('dashboard.staff.show', ['id' => $staffID])->with('success', 'Se desviculó el usuario de esta posición!');
     }
 
     public function destroy(int $id)
     {
         $staff = Staff::where('id', $id)->firstOrFail();
+        $staff->delete();
 
-        if ($staff) {
-            $staff->delete();
+        activity()
+            ->performedOn($staff)
+            ->log('Deleted staff position '.$staff->position);
 
-            return redirect('/ops/site/staff')->with('success', 'Se elimino la posición!');
-        }
-
-        return redirect('/ops/site/staff')->with('error', 'No se pudo borrar la posición!');
+        return redirect()->route('dashboard.staff.index')->with('success', 'Se borro la posición con éxito!');
     }
 }

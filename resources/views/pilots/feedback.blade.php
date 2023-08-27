@@ -75,8 +75,8 @@
                             </div>
                         </div>
                         <div class="form-group mb-1 mt-5">
-                            <input type="checkbox" name="reminders" id="reminders" class="form-check-input" value="1" required>
-                            <label class="custom-control-label" for="terms_conditions">He leído y aceptado la <a href="#">Política de Privacidad</a>.</label>
+                            <input type="checkbox" name="privacy" id="privacy" class="form-check-input" value="1" required>
+                            <label class="custom-control-label" for="privacy">He leído y aceptado la <a href="#">Política de Privacidad</a>.</label>
                         </div>
                         <button type="submit" class="btn m-t-30 mt-3">Enviar Solicitud</button>
                     </form>

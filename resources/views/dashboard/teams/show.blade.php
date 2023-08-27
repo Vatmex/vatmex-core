@@ -1,24 +1,27 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Detalle Equipo de Trabajo');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.teams.index')}}">Equipos</a></li>
+        <li class="breadcrumb-item active">{{ $team->name }}</li>
+    </ol>
+@endsection
+
+@section('controls')
+    <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
+    <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+        <a href="{{ route('dashboard.teams.edit', ['id' => $team->id]) }}" class="btn btn-block btn-primary glow">Editar Equipo</a>
+    </div>
+    <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+        <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Borrar Equipo</button>
+    </div>
+@endsection
+
 @section('content')
-    <!-- users view start -->
     <section class="users-view">
-        <!-- users view media object start -->
-        <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-6">
-                <div class="media mb-2">
-                    <div class="media-body pt-25">
-                        <h4 class="media-heading"><span class="users-view-name">Visualizar Equipo de Trabajo </span></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                <a href="{{ url('ops/site/teams/' . $team->id . '/edit') }}" class="btn btn-block btn-primary glow">Editar Equipo</a>
-            </div>
-            <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Borrar Equipo</button>
-            </div>
-        </div>
         <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -32,9 +35,9 @@
                         <p style="text-align: center;">¿Estas seguro de que deseas borrar este equipo?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                        <form action="{{ url('ops/site/teams/' . $team->id . '/delete') }}" method="post">
+                        <form action="{{ route('dashboard.teams.delete', ['id' => $team->id]) }}" method="post">
                             @csrf
+                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-outline-danger">Borrar Equipo</button>
                         </form>
                     </div>
@@ -78,10 +81,10 @@
                                 <tbody>
                                     @foreach($team->staff as $staff)
                                         <tr>
-                                            <td><a href="{{ url('ops/site/staff') }}/{{ $staff->id }}">{{ $staff->id }}</a></td>
+                                            <td><a href="{{ route('dashboard.staff.show', ['id' => $staff->id]) }}">{{ $staff->id }}</a></td>
                                             <td>{{ $staff->position }}</td>
                                             <td>{{ $staff->shortcode }}</td>
-                                            <td><a href="{{ url('ops/site/teams/')}}/{{ $staff->id }}/unlink">desvincular</a></td>
+                                            <td><a href="{{ route('dashboard.teams.unlink', ['id' => $staff->id]) }}">desvincular</a></td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -90,7 +93,7 @@
                         <br>
                         <h5 class="mb-1"><i class="ft-link"></i>Agregar un Rol Staff a Equipo</h5>
                         <p>Usa el siguiente formulario para asignar una posición de staff a este equipo</p>
-                        <form action="{{ url('/ops/site/teams') }}/{{ $team->id }}/link" method="post">
+                        <form action="{{ route('dashboard.teams.link', ['id' => $team->id]) }}" method="post">
                             @csrf
                             <div class="form-group">
                                 <select class="single-input selectivity-input" name="role" id="role">

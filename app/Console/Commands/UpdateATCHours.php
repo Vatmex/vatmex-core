@@ -69,6 +69,10 @@ class UpdateATCHours extends Command
             $this->info($controller->user->name.' tiene '.$controller->current_month_hours.' horas este mes y '.$controller->last_month_hours.' horas el mes pasado!');
         }
 
+        activity()
+            ->causedByAnonymous()
+            ->log('Updated ATC hours for all controllers');
+
         return Command::SUCCESS;
     }
 }

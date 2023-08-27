@@ -82,7 +82,7 @@
                                     </span>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ url('/auth/logout') }}"><i class="ft-power"></i> Logout</a>
+                                    <a class="dropdown-item" href="{{ route('auth.logout') }}"><i class="ft-power"></i> Logout</a>
                                 </div>
                             </li>
                         </ul>
@@ -99,6 +99,15 @@
             <div class="content-overlay"></div>
             <div class="content-wrapper">
                 <div class="content-header row">
+                    <div class="content-header-left col-md-6 col-12 mb-2">
+                        <h3 class="content-header-title mb-0">@yield('title')</h3>
+                        <div class="row breadcrumbs-top">
+                            <div class="breadcrumb-wrapper col-12">
+                                @yield('breadcrumbs')
+                            </div>
+                        </div>
+                    </div>
+                    @yield('controls')
                 </div>
                 <div class="content-body">
                     @yield('content')

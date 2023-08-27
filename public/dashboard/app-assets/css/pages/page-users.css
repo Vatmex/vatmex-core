@@ -21,3 +21,5 @@
 .users-view .users-avatar-shadow,
 .users-edit .users-avatar-shadow {
   box-shadow: 2px 4px 14px 0 rgba(0, 0, 0, 0.4); }
+
+table { font-size: 14px; }

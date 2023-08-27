@@ -1,16 +1,18 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Editar Controlador');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.atcs.index') }}">Controladores</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.atcs.show', ['cid' => $atc->user->cid]) }}">{{ $atc->user->name }}</a></li>
+        <li class="breadcrumb-item active">Editar</li>
+    </ol>
+@endsection
+
 @section('content')
     <section class="users-view">
-        <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-9">
-                <div class="media mb-2">
-                    <div class="media-body pt-25">
-                        <h4 class="media-heading"><span class="users-view-name">Editar Controlador</span></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card">
             <div class="card-content">
                 <div class="card-body">
@@ -37,7 +39,7 @@
                                     </tr>
                                     <tr>
                                         <td>CTA Desde:</td>
-                                        <td class="users-view-email">{{ $atc->created_at->toDayDateTimeString() }}</td>
+                                        <td class="users-view-email">{{ $atc->created_at->isoFormat('LLLL') }}</td>
                                     </tr>
                                 </tbody>
                             </table>

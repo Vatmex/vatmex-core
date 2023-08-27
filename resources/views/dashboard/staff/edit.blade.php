@@ -1,22 +1,24 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Editar Posición Staff');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.staff.index') }}">Staff</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.staff.show', ['id' => $staff->id]) }}">{{ $staff->position }}</a></li>
+        <li class="breadcrumb-item active">Editar</li>
+    </ol>
+@endsection
+
 @section('content')
     <section class="users-view">
-        <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-9">
-                <div class="media mb-2">
-                    <div class="media-body pt-25">
-                        <h4 class="media-heading"><span class="users-view-name">Editar Posición Staff </span></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card">
             <div class="card-content">
                 <div class="card-body">
                     <div class="col-12">
                         <x-dashboard.alerts/>
-                        <form action="{{ url('/ops/site/staff/' . $staff->id . '/edit') }}" method="post" class="form form-horizontal">
+                        <form action="{{ route('dashboard.staff.update', ['id' => $staff->id ]) }}" method="post" class="form form-horizontal">
                             @csrf
                             <div class="form-body">
                                 <h4 class="form-section"><i class="ft-user"></i> Información General</h4>

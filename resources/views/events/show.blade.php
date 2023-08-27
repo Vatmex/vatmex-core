@@ -4,9 +4,9 @@
 
 @section('breadcrumbs')
 	<ul>
-        <li><a href="{{ url('/') }}">Inicio</a></li>
-        <li><a href="{{ url('/events') }}">Eventos</a></li>
-        <li class="active"><a href="{{ url('/events') }}/{{ $event->slug }}">{{ $event->name }}</a></li>
+        <li><a href="{{ route('home') }}">Inicio</a></li>
+        <li><a href="{{ route('events.index') }}">Eventos</a></li>
+        <li class="active"><a href="{{ route('events.show', ['slug' => $event->slug]) }}">{{ $event->name }}</a></li>
     </ul>
 @endsection
 
@@ -35,15 +35,15 @@
             </div>
             <div class="post-navigation">
                 @if ($previousEvent)
-                    <a href="{{ url('events') }}/{{ $previousEvent->slug }}" class="post-prev">
+                    <a href="{{ route('events.show', ['slug' => $previousEvent->slug]) }}" class="post-prev">
                         <div class="post-prev-title"><span>Previo Evento</span>{{ $previousEvent->name }}</div>
                     </a>
                 @endif
-                <a href="{{ url('events') }}" class="post-all">
+                <a href="{{ route('events.index') }}" class="post-all">
                     <i class="icon-grid"> </i>
                 </a>
                 @if ($nextEvent)
-                    <a href="{{ url('events') }}/{{ $nextEvent->slug }}" class="post-next">
+                    <a href="{{ route('events.show', ['slug' => $nextevent->slug]) }}" class="post-next">
                         <div class="post-next-title"><span>Siguiente</span>{{ $nextEvent->name }}</div>
                     </a>
                 @endif

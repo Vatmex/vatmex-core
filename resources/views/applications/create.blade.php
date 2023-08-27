@@ -4,9 +4,9 @@
 
 @section('breadcrumbs')
 	<ul>
-        <li><a href="{{ url('/') }}">Inicio</a></li>
+        <li><a href="{{ route('home') }}">Inicio</a></li>
         <li><a href="#">ATC</a></li>
-        <li class="active"><a href="{{ url('/atc/apply') }}">Solicitud CTA</a></li>
+        <li class="active"><a href="{{ route('atcs.apply') }}">Solicitud CTA</a></li>
     </ul>
 @endsection
 
@@ -31,7 +31,7 @@
                     	<li>Habilidad oral y escrita de los idiomas español e inglés</li>
                     	<li>Leer y aceptar el Reglamento de Entrenamiento</li>
                     </ul>
-                    <form id="form1" class="form-validate" action="{{ url('/atc/apply') }}" method="post">
+                    <form id="form1" class="form-validate" action="{{ route('atcs.apply.store') }}" method="post">
                         @csrf
                         <div class="h5 mb-4">Account details</div>
                         <div class="row">
@@ -63,12 +63,12 @@
                             </div>
                         </div>
                         <div class="form-group mb-1 mt-5">
-                            <input type="checkbox" name="reminders" id="reminders" class="form-check-input" value="1" required>
-                            <label class="custom-control-label" for="terms_conditions">He leído y aceptado la <a href="#">Política de Privacidad</a>.</label>
+                            <input type="checkbox" name="privacy" id="privacy" class="form-check-input" value="1" required>
+                            <label class="custom-control-label" for="privacy">He leído y aceptado la <a href="#">Política de Privacidad</a>.</label>
                         </div>
                         <div class="form-group">
-                            <input type="checkbox" name="terms_conditions" id="terms_conditions" class="form-check-input" value="1" required>
-                            <label class="custom-control-label" for="terms_conditions">He leído y aceptado el <a href="#">Regalamento de Entrenamiento</a>.</label>
+                            <input type="checkbox" name="terms" id="terms" class="form-check-input" value="1" required>
+                            <label class="custom-control-label" for="terms">He leído y aceptado el <a href="#">Regalamento de Entrenamiento</a>.</label>
                         </div>
                         <button type="submit" class="btn m-t-30 mt-3">Enviar Solicitud</button>
                     </form>

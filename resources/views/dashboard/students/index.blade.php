@@ -1,17 +1,16 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Roster Estudiantes');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item active">Estudiantes</li>
+    </ol>
+@endsection
+
 @section('content')
-    <!-- users list start -->
     <section class="users-list-wrapper">
-        <div class="users-list-filter px-1">
-            <form>
-                <div class="row py-2 mb-2">
-                    <div class="col-12 col-sm-12 col-lg-12">
-                        <h3>Roster Estudiantes</h3>
-                    </div>
-                </div>
-            </form>
-        </div>
         <div class="users-list-table">
             <div class="card">
                 <div class="card-content">
@@ -35,7 +34,7 @@
                                             <td>{{ $student->user->cid }}</td>
                                             <td><a href="{{ route('dashboard.students.show', ['cid' => $student->user->cid]) }}">{{ $student->user->name }}</a></td>
                                             <td><x-rank :rank="$student->rank" /></td>
-                                            <td><a href="{{ route('dashboard.instructors.show', ['id' => $student->instructor->id]) }}">{{ $student->instructor->user->name }}</a></td>
+                                            <td><a href="{{ route('dashboard.instructors.show', ['cid' => $student->instructor->user->cid]) }}">{{ $student->instructor->user->name }}</a></td>
                                             <td>TODO</td>
                                             <td>TODO</td>
                                         </tr>

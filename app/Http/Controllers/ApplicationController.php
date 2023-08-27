@@ -76,12 +76,25 @@ class ApplicationController extends Controller
             return dd('Someone went wrong with the query. Try again');
         }
 
+        activity()
+            ->performedOn($application)
+            ->log('Created new ATC application for himself');
+
         return redirect()->route('home')->with('success', 'Tu aplicación de CTA ha sido enviada con éxito. En cuanto haya un instructor disponible se pondra en contacto contigo.');
     }
 
     public function show($id)
     {
-        $application = Application::where('id', $id)->firstOrFail();
+        if (\Auth::user()->hasPermissionTo('view trashed')) {
+            $application = Application::withTrashed()->where('id', $id)->firstOrFail();
+
+            if ($application->trashed()) {
+                \Session::flash('error', 'Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+            }
+        } else {
+            $application = Application::where('id', $id)->firstOrFail();
+        }
+
         $instructors = Instructor::all();
 
         if (App::environment() == 'local') {
@@ -130,6 +143,10 @@ class ApplicationController extends Controller
         $studentUser->atc()->save($studentAtc);
         $instructorUser->instructor_profile->atcs()->save($studentUser->atc);
 
+        activity()
+            ->performedOn($application)
+            ->log('Accepted ATC application from user '.$studentUser->name.' - '.$studentUser->cid);
+
         try {
             Mail::to($application->email)->send(new InstructorAssignedMail($application));
 
@@ -162,8 +179,12 @@ class ApplicationController extends Controller
             return redirect('/');
         }
 
-        $application = $user->application();
+        $application = $user->application;
         $application->delete();
+
+        activity()
+            ->performedOn($application)
+            ->log('Deleted ATC application for himself');
 
         return redirect()->route('home')->with('success', 'Tu aplicación de CTA ha sido eliminada con éxito!');
     }
