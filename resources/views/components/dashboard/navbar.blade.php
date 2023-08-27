@@ -10,6 +10,9 @@
                         @can('view users')
                             <li><a class="menu-item" href="{{ route('dashboard.users.index') }}"><i data-i18n="Users" class="la la-user-friends"></i><span>Usuarios</span></a></li>
                         @endcan
+                        @can('view roles')
+                            <li><a class="menu-item" href="{{ route('dashboard.roles.index') }}"><i data-i18n="Roles" class="la la-user-tag"></i><span>Roles</span></a></li>
+                        @endcan
                         @can('view staff')
                             <li><a class="menu-item" href="#"><i class="la la-user-tie"></i><span data-i18n="Documents Menu">Staff</span></a>
                                 <ul class="menu-content">

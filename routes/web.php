@@ -97,6 +97,13 @@ Route::group(['prefix' => 'ops', 'middleware' => ['can:access dashboard']], func
             Route::get('/{cid}/remove/{role}', [RoleController::class, 'remove'])->name('dashboard.users.remove')->middleware('can:remove roles');
         });
 
+        Route::group(['prefix' => 'roles'], function () {
+            Route::get('/', [RoleController::class, 'index'])->name('dashboard.roles.index')->middleware('can:view roles');
+            Route::get('/{id}', [RoleController::class, 'show'])->name('dashboard.roles.show')->middleware('can:view roles');
+            Route::get('/{id}/edit', [RoleController::class, 'edit'])->name('dashboard.roles.edit')->middleware('can:edit roles');
+            Route::post('/{id}/edit', [RoleController::class, 'update'])->name('dashboard.roles.update')->middleware('can:edit roles');
+        });
+
         Route::group(['prefix' => 'teams'], function () {
             Route::get('/', [TeamController::class, 'index'])->name('dashboard.teams.index')->middleware('can:view staff');
             Route::get('new', [TeamController::class, 'create'])->name('dashboard.teams.create')->middleware('can:create staff');
