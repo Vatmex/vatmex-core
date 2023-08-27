@@ -456,7 +456,7 @@
                                     <tr>
                                         <td class="content-cell">
                                             <div class="f-fallback">
-                                                <h1>Hola {{ $session->student->instructor->user->first_name }}!</h1>
+                                                <h1>Hola {{ $session->student->user->first_name }}!</h1>
                                                 <p>Estas recibiendo este email para confirmar tu siguiente sesión de entrenamiento ATC. Los detalles de la sesión son:</p>
                                                 <table class="attributes" width="100%" cellpadding="0" cellspacing="0" role="presentation">
                                                     <tr>
