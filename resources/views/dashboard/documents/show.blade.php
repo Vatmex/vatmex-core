@@ -1,41 +1,44 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Detalle Recurso');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.documents.index') }}">Recursos</a></li>
+        <li class="breadcrumb-item active">{{ $document->name }}</li>
+    </ol>
+@endsection
+
+@section('controls')
+    <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center"></div>
+    <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center">
+        <a href="{{ route('dashboard.documents.edit', ['id' => $document->id]) }}" class="btn btn-block btn-primary glow">Editar Recurso</a>
+    </div>
+    <div class="col-0 col-sm-0 col-lg-2 d-flex align-items-center">
+        <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Borrar Recurso  </button>
+    </div>
+@endsection
+
 @section('content')
-    <!-- users view start -->
     <section class="users-view">
-        <!-- users view media object start -->
-        <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-6">
-                <div class="media mb-2">
-                    <div class="media-body pt-25">
-                        <h4 class="media-heading"><span class="users-view-name">Visualizar Documento</span></h4>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                <a href="{{ route('dashboard.documents.edit', ['id' => $document->id]) }}" class="btn btn-block btn-primary glow">Editar Documento</a>
-            </div>
-            <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Borrar Documento  </button>
-            </div>
-        </div>
         <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="myModalLabel1">Borrar Posición</h4>
+                        <h4 class="modal-title" id="myModalLabel1">Borrar Recurso</h4>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p style="text-align: center;">¿Estas seguro de que deseas borrar este documento?</p>
+                        <p style="text-align: center;">¿Estas seguro de que deseas borrar este recurso?</p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                         <form action="{{ route('dashboard.documents.delete', ['id' => $document->id]) }}" method="post">
                             @csrf
-                            <button type="submit" class="btn btn-outline-danger">Borrar Documento</button>
+                            <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-outline-danger">Borrar recurso</button>
                         </form>
                     </div>
                 </div>

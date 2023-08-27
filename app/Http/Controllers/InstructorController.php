@@ -15,9 +15,20 @@ class InstructorController extends Controller
         return view('dashboard.instructors.index', compact('instructors'));
     }
 
-    public function show($id)
+    public function show(int $cid)
     {
-        $instructor = Instructor::where('id', $id)->first();
+        $instructor = User::where('cid', $cid)->first()->instructor_profile;
+
+        return view('dashboard.instructors.show', compact('instructor'));
+    }
+
+    public function audit(int $id)
+    {
+        $instructor = Instructor::withTrashed()->where('id', $id)->first();
+
+        if ($instructor->trashed()) {
+            \Session::flash('error', 'Estas viendo un registro que fue borrado. Esta almacenado para motivos de auditoría y solo puede ser visto por administradores.');
+        }
 
         return view('dashboard.instructors.show', compact('instructor'));
     }
@@ -25,6 +36,10 @@ class InstructorController extends Controller
     public function store(int $cid)
     {
         $user = User::where('cid', $cid)->first();
+
+        if ($user->instructor_profile) {
+            return redirect()->route('dashboard.instructors.show', ['cid' => $user->cid])->with('error', 'Ya existe un perfil de instructor para este usuario');
+        }
 
         $instructor = new Instructor;
         $instructor->tower = true;
@@ -37,33 +52,49 @@ class InstructorController extends Controller
         $user->assignRole('instructor');
         $user->save();
 
-        return redirect()->route('dashboard.instructors.show', ['id' => $instructor->id])->with('success', 'Instructor creado con éxito');
+        activity()
+            ->performedOn($instructor)
+            ->log('Promoted '.$user->name.' - '.$user->cid.' to instructor');
+
+        return redirect()->route('dashboard.instructors.show', ['cid' => $user->cid])->with('success', 'Instructor creado con éxito');
     }
 
-    public function edit(int $id)
+    public function edit(int $cid)
     {
-        $instructor = Instructor::where('id', $id)->first();
+        $instructor = User::where('cid', $cid)->first()->instructor_profile;
 
         return view('dashboard.instructors.edit', compact('instructor'));
     }
 
-    public function update(Request $request, int $id)
+    public function update(Request $request, int $cid)
     {
-        $instructor = Instructor::where('id', $id)->first();
+        $instructor = User::where('cid', $cid)->first()->instructor_profile;
 
         $instructor->tower = $request->has('tower');
         $instructor->approach = $request->has('approach');
         $instructor->center = $request->has('center');
         $instructor->save();
 
-        return redirect()->route('dashboard.instructors.show', ['id' => $id])->with('success', 'Se editaron las habilitaciones del CTA con éxito!');
+        activity()
+            ->performedOn($instructor)
+            ->withProperties([
+                'tower' => $request->has('tower'),
+                'approach' => $request->has('approach'),
+                'center' => $request->has('center'),
+            ])->log('Updated instructor ratings for '.$instructor->user->name.' - '.$instructor->user->cid);
+
+        return redirect()->route('dashboard.instructors.show', ['cid' => $cid])->with('success', 'Se editaron las habilitaciones del CTA con éxito!');
     }
 
-    public function destroy(int $id)
+    public function destroy(int $cid)
     {
-        $instructor = Instructor::where('id', $id)->first();
+        $instructor = User::where('cid', $cid)->first()->instructor_profile;
         $instructor->user->removeRole('instructor');
         $instructor->delete();
+
+        activity()
+            ->performedOn($instructor)
+            ->log('Demoted '.$instructor->user->name.' - '.$instructor->user->cid.' from instructor');
 
         return redirect()->route('dashboard.instructors.index')->with('success', '¡Adios popó! Se borro el instructor con éxito!');
     }

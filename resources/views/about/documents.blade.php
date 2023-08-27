@@ -5,9 +5,9 @@
 
 @section('breadcrumbs')
     <ul>
-        <li><a href="{{ url('/') }}">Inicio</a></li>
-        <li><a href="#">Nosotros</a></li>
-        <li class="active"><a href="{{ url('/about/policies') }}">Políticas</a></li>
+        <li><a href="{{ route('home') }}">Inicio</a></li>
+        <li><a href="#">Controladores</a></li>
+        <li class="active"><a href="{{ route('atcs.documents') }}">Recursos</a></li>
     </ul>
 @endsection
 

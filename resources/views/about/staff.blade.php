@@ -5,9 +5,9 @@
 
 @section('breadcrumbs')
     <ul>
-        <li><a href="{{ url('/') }}">Inicio</a></li>
+        <li><a href="{{ route('home') }}">Inicio</a></li>
         <li><a href="#">Nosotros</a></li>
-        <li class="active"><a href="{{ url('/about/staff') }}">Staff</a></li>
+        <li class="active"><a href="{{ route('about.staff') }}">Staff</a></li>
     </ul>
 @endsection
 
@@ -22,7 +22,11 @@
                 <div class="col-lg-3">
                     <div class="team-member">
                         <div class="team-image">
-                            <img src="https://www.gravatar.com/avatar/205e460b479e2es5b48aec07710c08d50?s=525">
+                            @if ($staff->user)
+                                <img src="https://www.gravatar.com/avatar/{{ md5($staff->user->email) }}?s=525">
+                            @else
+                                <img src="https://www.gravatar.com/avatar/205e460b479e2es5b48aec07710c08d50?s=525">
+                            @endif
                         </div>
                         <div class="team-desc">
                             <h3>{{ ($staff->user) ? $staff->user->name : 'Vacante'; }}</h3>

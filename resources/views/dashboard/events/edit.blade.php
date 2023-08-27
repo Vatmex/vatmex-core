@@ -1,21 +1,28 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Editar Evento');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.events.index') }}">Evento</a></li>
+        <li class="breadcrumb-item"><a href="#">{{ $event->name }}</a></li>
+        <li class="breadcrumb-item active">Editar</li>
+    </ol>
+@endsection
+
 @section('content')
     <section id="horizontal-form-layouts">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title" id="horz-layout-basic">Editar Evento</h4>
-                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                    </div>
                     <div class="card-content collpase show">
                         <div class="card-body">
                             <x-dashboard.alerts/>
                             <div class="card-text">
                                 <p>Usa el sigiuente formulario para actualizar la información del evento. Si dejas el baner vació se conservara el banner anterior del evento. Adicionalmente puedes eliminar el evento.</p>
                             </div>
-                            <form action="{{ url('/ops/events/') }}/{{ $event->slug }}" method="post" class="form form-horizontal" enctype="multipart/form-data">
+                            <form action="{{ route('dashboard.events.update', ['slug' => $event->slug]) }}" method="post" class="form form-horizontal" enctype="multipart/form-data">
                                 @csrf
 
                                 <div class="form-body">
@@ -130,7 +137,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                    <form action="{{ url('/ops/events/') }}/{{ $event->id }}/delete" method="post">
+                    <form action="{{ route('dashboard.events.delete', ['id' => $event->id]) }}" method="post">
                         @csrf
                         <button type="submit" class="btn btn-outline-primary">Borrar Evento</button>
                     </form>

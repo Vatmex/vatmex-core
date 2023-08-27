@@ -5,9 +5,9 @@
 
 @section('breadcrumbs')
     <ul>
-        <li><a href="{{ url('/') }}">Inicio</a></li>
+        <li><a href="{{ route('home') }}">Inicio</a></li>
         <li><a href="#">Nosotros</a></li>
-        <li class="active"><a href="{{ url('/about/roster') }}">Roster</a></li>
+        <li class="active"><a href="{{ route('about.roster') }}">Roster</a></li>
     </ul>
 @endsection
 

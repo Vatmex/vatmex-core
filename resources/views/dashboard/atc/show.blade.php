@@ -1,96 +1,102 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Detalle Controlador');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.atcs.index')}}">Roster</a></li>
+        <li class="breadcrumb-item active">{{ $atc->user->name }}</li>
+    </ol>
+@endsection
+
+@section('controls')
+    @can('create instructors')
+        @if (!$atc->user->instructor_profile)
+            <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+                <a href="{{ route('dashboard.instructors.store', ['cid' => $atc->user->cid]) }}" class="btn btn-block btn-success glow">Promover a Instructor</a>
+            </div>
+        @else
+            <div class="col-12 col-sm-12 col-lg-2 align-items-center"></div>
+        @endif
+    @else
+        <div class="col-12 col-sm-12 col-lg-2 align-items-center"></div>
+    @endcan
+    @can ('edit atcs')
+        <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+            <a href="{{ route('dashboard.atcs.edit', ['cid' => $atc->user->cid]) }}" class="btn btn-block btn-primary glow">Editar Controlador</a>
+        </div>
+    @else
+        <div class="col-12 col-sm-12 col-lg-2 align-items-center"></div>
+    @endcan
+    @if ($atc->inactive)
+        @can('edit atcs')
+            <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+                <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Reactivar Controlador  </button>
+            </div>
+        @else
+            <div class="col-12 col-sm-12 col-lg-2 align-items-center"></div>
+        @endcan
+    @else
+        @can('edit atcs')
+            <div class="col-12 col-sm-12 col-lg-2 align-items-center">
+                <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Suspender Controlador  </button>
+            </div>
+        @else
+            <div class="col-12 col-sm-12 col-lg-2 align-items-center"></div>
+        @endcan
+    @endif
+@endsection
+
 @section('content')
-    <!-- users view start -->
     <section class="users-view">
-        <!-- users view media object start -->
-        <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-3">
-                <div class="media mb-2">
-                    <div class="media-body pt-25">
-                        <h4 class="media-heading"><span class="users-view-name">Visualizar Controlador</span></h4>
+        @if ($atc->inactive)
+            <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel1">Activar Controlador</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p style="text-align: center;">¿Estas seguro de que deseas reactivar este controlador?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{{ route('dashboard.atcs.activate', ['cid' => $atc->user->cid])}}" method="post">
+                                @csrf
+                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
+                                <button type="submit" class="btn btn-outline-danger">Activar Controlador</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
-            @can('create instructors')
-                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                    <a href="{{ route('dashboard.instructors.store', ['cid' => $atc->user->cid]) }}" class="btn btn-block btn-success glow">Promover a Instructor</a>
-                </div>
-            @else
-                <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
-            @endcan
-            @can ('edit atcs')
-                <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                    <a href="{{ route('dashboard.atcs.edit', ['cid' => $atc->user->cid]) }}" class="btn btn-block btn-primary glow">Editar Controlador</a>
-                </div>
-            @else
-                <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
-            @endcan
-            @if ($atc->inactive)
-                @can('edit atcs')
-                    <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                        <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Reactivar Controlador  </button>
-                    </div>
-                @else
-                    <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
-                @endcan
-                <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel1">Activar Controlador</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p style="text-align: center;">¿Estas seguro de que deseas reactivar este controlador?</p>
-                            </div>
-                            <div class="modal-footer">
+        @else
+            <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel1">Desactivar Controlador</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <p style="text-align: center;">¿Estas seguro de que deseas desactivar este controlador?</p>
+                        </div>
+                        <div class="modal-footer">
+                            <form action="{{ route('dashboard.atcs.deactivate', ['cid' => $atc->user->cid])}}" method="post">
+                                @csrf
                                 <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                                <form action="{{ route('dashboard.atcs.activate', ['cid' => $atc->user->cid])}}" method="post">
-                                    @csrf
-                                    <button type="submit" class="btn btn-outline-danger">Activar Controlador</button>
-                                </form>
-                            </div>
+                                <button type="submit" class="btn btn-outline-danger">Desactivar Controlador</button>
+                            </form>
                         </div>
                     </div>
                 </div>
-            @else
-                @can('edit atcs')
-                    <div class="col-12 col-sm-12 col-lg-3 align-items-center">
-                        <button class="btn btn-block btn-danger glow" id="modal-button" data-toggle="modal" data-target="#default">Suspender Controlador  </button>
-                    </div>
-                @else
-                    <div class="col-12 col-sm-12 col-lg-3 align-items-center"></div>
-                @endcan                
-                <div class="modal fade text-left" id="default" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel1">Desactivar Controlador</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                            <div class="modal-body">
-                                <p style="text-align: center;">¿Estas seguro de que deseas desactivar este controlador?</p>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
-                                <form action="{{ route('dashboard.atcs.deactivate', ['cid' => $atc->user->cid])}}" method="post">
-                                    @csrf
-                                    <button type="submit" class="btn btn-outline-danger">Desactivar Controlador</button>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif
-        </div>
-
-        <!-- users view media object ends -->
-        <!-- users view card details start -->
+            </div>
+        @endif
         <div class="card">
             <div class="card-content">
                 <div class="card-body">

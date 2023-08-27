@@ -1,14 +1,21 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Editar Recurso');
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.documents.index') }}">Recursos</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.documents.show', ['id' => $document->id]) }}">{{ $document->name }}</a></li>
+        <li class="breadcrumb-item active">Editar</li>
+    </ol>
+@endsection
+
 @section('content')
     <section id="horizontal-form-layouts">
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title" id="horz-layout-basic">Editar Documento</h4>
-                        <a class="heading-elements-toggle"><i class="la la-ellipsis-v font-medium-3"></i></a>
-                    </div>
                     <div class="card-content collpase show">
                         <div class="card-body">
                             <x-dashboard.alerts/>
@@ -64,7 +71,7 @@
 
                                 <div class="form-actions">
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="la la-check-square-o"></i> Editar Documento
+                                        <i class="la la-check-square-o"></i> Editar Recurso
                                     </button>
                                 </div>
                             </form>

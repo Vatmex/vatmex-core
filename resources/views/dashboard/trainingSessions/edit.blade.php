@@ -1,16 +1,19 @@
 @extends('dashboard.templates.main')
 
+@section('title', 'Editar Sesión de Entrenamiento')
+
+@section('breadcrumbs')
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.students.index') }}">Estudiantes</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.students.show', ['cid' => $session->student->user->cid]) }}">{{ $session->student->user->name }}</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('dashboard.trainingSessions.show', ['id' => $session->id]) }}">Sesión</a></li>
+        <li class="breadcrumb-item active">Editar</li>
+    </ol>
+@endsection
+
 @section('content')
     <section class="users-view">
-        <div class="row py-2">
-            <div class="col-12 col-sm-12 col-lg-9">
-                <div class="media mb-2">
-                    <div class="media-body pt-25">
-                        <h4 class="media-heading"><span class="users-view-name">Editar Sessión</span></h4>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="card">
             <div class="card-content">
                 <div class="card-body">

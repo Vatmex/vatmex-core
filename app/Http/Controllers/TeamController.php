@@ -41,6 +41,13 @@ class TeamController extends Controller
 
         try {
             $team->save();
+
+            activity()
+                ->performedOn($team)
+                ->withProperties([
+                    'name' => $request->input('name'),
+                    'description' => $request->input('description'),
+                ])->log('Created staff team '.$team->name);
         } catch (Exception $e) {
             return redirect('/ops/site/teams/new')->with('error', 'No se pudo crear el equipo. Error desconocido');
         }
@@ -69,6 +76,13 @@ class TeamController extends Controller
 
         $team->save();
 
+        activity()
+            ->performedOn($team)
+            ->withProperties([
+                'name' => $request->input('name'),
+                'description' => $request->input('description'),
+            ])->log('Updated staff team '.$team->name);
+
         return redirect('/ops/site/teams/'.$team->id)->with('success', 'Equipo actualizado con éxito');
     }
 
@@ -94,6 +108,10 @@ class TeamController extends Controller
         $staff->team()->associate($team);
         $staff->save();
 
+        activity()
+            ->performedOn($staff)
+            ->log('Assigned staff '.$staff->position.' to team '.$team->name);
+
         return redirect('/ops/site/teams/'.$id)->with('success', 'Posición de staff asignada con éxito!');
     }
 
@@ -101,9 +119,14 @@ class TeamController extends Controller
     {
         $staff = Staff::where('id', $id)->firstOrFail();
         $teamID = $staff->team->id;
+        $teamName = $staff->team->name;
 
         $staff->team()->dissociate();
         $staff->save();
+
+        activity()
+            ->performedOn($staff)
+            ->log('Removed staff '.$staff->position.' from team '.$teamName);
 
         return redirect('/ops/site/teams/'.$teamID)->with('success', 'Posición de staff asignada con éxito!');
     }
@@ -114,6 +137,10 @@ class TeamController extends Controller
 
         if ($team) {
             $team->delete();
+
+            activity()
+                ->performedOn($team)
+                ->log('Deleted staff team '.$team->name);
 
             return redirect('ops/site/teams')->with('success', 'Se elimino el equipo '.$team->name);
         }
