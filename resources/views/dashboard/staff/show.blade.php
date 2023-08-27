@@ -36,7 +36,7 @@
                         <p style="text-align: center;">¿Estas seguro de que deseas borrar esta posición?</p>
                     </div>
                     <div class="modal-footer">
-                        <form action="{{ route('dashboard.staff.delete', ['id' => $staff->id])) }}" method="post">
+                        <form action="{{ route('dashboard.staff.delete', ['id' => $staff->id]) }}" method="post">
                             @csrf
                             <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-outline-danger">Borrar Posición</button>

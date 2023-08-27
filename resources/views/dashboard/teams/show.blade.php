@@ -35,7 +35,7 @@
                         <p style="text-align: center;">¿Estas seguro de que deseas borrar este equipo?</p>
                     </div>
                     <div class="modal-footer">
-                        <form action="{{ route('dashboard.teams.delete'. ['id' => $team->id]) }}" method="post">
+                        <form action="{{ route('dashboard.teams.delete', ['id' => $team->id]) }}" method="post">
                             @csrf
                             <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                             <button type="submit" class="btn btn-outline-danger">Borrar Equipo</button>
