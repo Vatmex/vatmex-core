@@ -114,11 +114,11 @@
                                 <tbody>
                                     @foreach($student->sessions as $session)
                                         <tr>
-                                            <td>{{ $session->id }}</th>
+                                            <td>{{ $note }}</th>
                                             <!-- TODO: Allow for user selected timezones  -->
                                             <td>{{ Carbon\Carbon::parse($session->scheduled_time, 'UTC')->setTimezone('America/Mexico_City')->isoFormat('LLLL') }}</th>
                                             <td>{{ $session->title }}</th>
-                                            <td><a href="{{ route('dashboard.instructors.show', ['cid' => \App\Models\User::where('cid', $note->created_by)->first()->cid]) }}">{{ \App\Models\User::where('cid', $session->created_by)->first()->name }}</a></th>
+                                            <td><a href="{{ route('dashboard.instructors.show', ['cid' => \App\Models\User::where('cid', $session->created_by)->first()->cid]) }}">{{ \App\Models\User::where('cid', $session->created_by)->first()->name }}</a></th>
                                             <td>{!! ($session->canceled) ? '<span class="badge badge-danger">cancelada</span>' : '<span class="badge badge-success">normal</span>'; !!}</td>
                                             <td><a href="{{ route('dashboard.trainingSessions.show', ['id' => $session->id]) }}">ver</a> @if(\Auth::user()->cid == $session->created_by && $session->canceled != true) |  <a href="{{ route('dashboard.trainingSessions.edit', ['id' => $session->id]) }}">editar</a> @endif</th>
                                         </tr>
