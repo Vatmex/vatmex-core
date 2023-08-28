@@ -114,7 +114,7 @@
                                 <tbody>
                                     @foreach($student->sessions as $session)
                                         <tr>
-                                            <td>{{ $note }}</th>
+                                            <td>{{ $session->id }}</th>
                                             <!-- TODO: Allow for user selected timezones  -->
                                             <td>{{ Carbon\Carbon::parse($session->scheduled_time, 'UTC')->setTimezone('America/Mexico_City')->isoFormat('LLLL') }}</th>
                                             <td>{{ $session->title }}</th>
