@@ -40,7 +40,7 @@
                                                 @if($activity->causer)
                                                     <a href="{{ route('dashboard.users.show', ['cid' => $activity->causer->cid ]) }}">
                                                         <span class="avatar">
-                                                            <img style="margin-right: 10px;" src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar" data-toggle="tooltip" data-placement="right" title="John Doe">
+                                                            <img style="margin-right: 10px;" src="https://www.gravatar.com/avatar/{{ md5($activity->causer->email) }}" alt="avatar" data-toggle="tooltip" data-placement="right" title="John Doe">
                                                         </span>
                                                         {{ $activity->causer->name }}
                                                     </a>
