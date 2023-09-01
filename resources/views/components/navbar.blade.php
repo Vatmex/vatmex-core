@@ -48,6 +48,9 @@
                             @if (Auth::check())
                                 <li class="dropdown"><a href="#"><i class="icon-users"></i> {{ Auth::user()->first_name }}</a>
                                     <ul class="dropdown-menu">
+                                        @if(Auth::user()->atc)
+                                            <li><a href="{{ route('my.index') }}">Mi VATMEX</a></li>
+                                        @endif() 
                                         @can('access dashboard')
                                             <li><a href="{{ route('dashboard.index') }}">Dashboard</a></li>
                                         @endcan

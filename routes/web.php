@@ -10,6 +10,7 @@ use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\InstructorController;
+use App\Http\Controllers\MyController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\StaffController;
@@ -78,6 +79,15 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('redirect', [AuthController::class, 'redirect'])->name('auth.login');
     Route::get('callback', [AuthController::class, 'callback']);
     Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
+});
+
+/*
+|--------------------------------------------------------------------------
+| My Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'my'], function () {
+    Route::get('/', [MyController::class, 'index'])->name('my.index')->middleware('auth');
 });
 
 /*
