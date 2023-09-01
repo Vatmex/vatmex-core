@@ -49,10 +49,6 @@ class UpdateATCRanks extends Command
             }
         }
 
-        activity()
-            ->causedByAnonymous()
-            ->log('Updated ATC ranks for all controllers');
-
         return Command::SUCCESS;
     }
 }
