@@ -11,7 +11,7 @@ class PageController extends Controller
 {
     public function home()
     {
-        $events = Event::latest()->take(3)->get()->reverse();
+        $events = Event::latest()->take(3)->get();
         $team = Team::where('name', 'Dirección')->first();
 
         return view('pages.home', compact('events', 'team'));
