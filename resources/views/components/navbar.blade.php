@@ -40,6 +40,7 @@
                                     @else
                                         <li><a href="{{ route('atcs.apply') }}">¡Quiero ser ATC!</a></li>
                                     @endif
+                                    <li><a href="https://training.vatmex.com.mx" target="_blank">Cursos</a></li>
                                     <li><a href="{{ route('atcs.documents') }}">Documentos</a></li>
                                 </ul>
                             </li>
