@@ -25,7 +25,7 @@ class EventController extends Controller
     public function siteShow($slug)
     {
         $event = Event::where('slug', $slug)->firstOrFail();
-        $previousEvent = Event::where('start', '<', $event->start)->last();
+        $previousEvent = Event::where('start', '<', $event->start)->latest->first();
         $nextEvent = Event::where('start', '>', $event->start)->first();
 
         return view('events.show', compact('event', 'previousEvent', 'nextEvent'));
