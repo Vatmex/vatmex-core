@@ -43,7 +43,7 @@
                     <i class="icon-grid"> </i>
                 </a>
                 @if ($nextEvent)
-                    <a href="{{ route('events.show', ['slug' => $nextevent->slug]) }}" class="post-next">
+                    <a href="{{ route('events.show', ['slug' => $nextEvent->slug]) }}" class="post-next">
                         <div class="post-next-title"><span>Siguiente</span>{{ $nextEvent->name }}</div>
                     </a>
                 @endif
