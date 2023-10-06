@@ -8,6 +8,7 @@ use App\Models\Application;
 use App\Models\ATC;
 use App\Models\Instructor;
 use App\Models\User;
+use App\Http\Resources\ApplicationResource;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -79,6 +80,16 @@ class ApplicationController extends Controller
         activity()
             ->performedOn($application)
             ->log('Created new ATC application for himself');
+
+        // Notify the Bot
+        try {
+            Http::withHeaders([
+                'Token' => env('BOT_API_KEY')
+            ])->post(env('BOT_API_URL').'/application', new ApplicationResource($application));
+        }
+        catch (\Illuminate\Http\Client\ConnectionException $e) {
+            Log::debug('Vatmex bot could not be contacted');
+        }
 
         return redirect()->route('home')->with('success', 'Tu aplicación de CTA ha sido enviada con éxito. En cuanto haya un instructor disponible se pondra en contacto contigo.');
     }
