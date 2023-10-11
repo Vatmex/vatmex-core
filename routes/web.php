@@ -6,6 +6,7 @@ use App\Http\Controllers\AuditController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\DiscordController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EventController;
 use App\Http\Controllers\FeedbackController;
@@ -79,6 +80,17 @@ Route::group(['prefix' => 'auth'], function () {
     Route::get('redirect', [AuthController::class, 'redirect'])->name('auth.login');
     Route::get('callback', [AuthController::class, 'callback']);
     Route::get('logout', [AuthController::class, 'logout'])->name('auth.logout');
+});
+
+/*
+|--------------------------------------------------------------------------
+| Discord Routes
+|--------------------------------------------------------------------------
+*/
+Route::group(['prefix' => 'discord'], function () {
+    Route::get('redirect', [DiscordController::class, 'redirect'])->name('discord.login');
+    Route::get('callback', [DiscordController::class, 'callback']);
+    Route::get('unlink', [DiscordController::class, 'unlink'])->name('discord.unlink');
 });
 
 /*
