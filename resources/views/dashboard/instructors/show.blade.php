@@ -123,7 +123,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($instructor->atcs as $atc)
+                                    @foreach($instructor->atcs->where('is_training', true) as $atc)
                                         <tr>
                                             <td>{{ $atc->user->cid }}</td>
                                             <td><a href="#">{{ $atc->user->name }}</a></td>
