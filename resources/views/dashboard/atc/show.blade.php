@@ -172,6 +172,27 @@
                                 </tr>
                             </tbody>
                         </table>
+                        @if(!$atc->is_training)
+                            @can ('assign students')
+                                <h5 class="mb-1"><i class="ft-link"></i>Asignar insturctor</h5>
+                                <p>Usa el siguiente formulario para asignar un instructor</p>
+                                <form action="{{ route('dashboard.students.assign', ['cid' => $atc->user->cid]) }}" method="post">
+                                    @csrf
+                                    <div class="form-group">
+                                        <select class="single-input selectivity-input" name="instructor" id="instructor">
+                                            <option hidden disabled selected value=" "> </option>
+                                            @foreach ($instructors as $instructor)
+                                                <option value="">{{ $instructor->user->cid }} - {{ $instructor->user->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="submit" class="btn btn-success btn-min-width mr-1 mb-1" value="Asignar Instructor"></input>
+                                        <button type="button" class="btn btn-primary btn-min-width mr-1 mb-1">Enviar E-Mail</button>
+                                    </div>
+                                </form>
+                            @endcan
+                        @endif
                         <h5 class="mb-1"><i class="ft-link"></i>Feedback</h5>
                         @can('view feedback')
                             <div class="table-responsive">
@@ -213,6 +234,80 @@
 
 @section('page-js')
     <script>
+        (function (window, document, $) {
+          'use strict';
+
+          /* global $ */
+
+          function escape(string) {
+            return string ? String(string).replace(/[&<>"']/g, function (match) {
+              return {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                '\'': '&#39;'
+              }[match];
+            }) : '';
+          }
+
+          // Get all the cities from single-select-box
+          var cities = $('#instructor').find('option').map(function () {
+            return this.textContent;
+          }).get();
+
+          var transformText = $.fn.selectivity.transformText;
+
+          // example query function that returns at most 10 cities matching the given text
+          function queryFunction(query) {
+            var selectivity = query.selectivity;
+            var term = query.term;
+            var offset = query.offset || 0;
+            var results;
+            if (selectivity.$el.attr('id') === 'single-input-with-submenus') {
+              if (selectivity.dropdown) {
+                var timezone = selectivity.dropdown.highlightedResult.id;
+                results = citiesWithTimezone.filter(function (city) {
+                  return transformText(city.id).indexOf(transformText(term)) > -1 &&
+                    city.timezone === timezone;
+                }).map(function (city) { return city.id; });
+              } else {
+                query.callback({ more: false, results: [] });
+                return;
+              }
+            } else {
+              results = cities.filter(function (city) {
+                return transformText(city).indexOf(transformText(term)) > -1;
+              });
+            }
+            results.sort(function (a, b) {
+              a = transformText(a);
+              b = transformText(b);
+              var startA = (a.slice(0, term.length) === term),
+                startB = (b.slice(0, term.length) === term);
+              if (startA) {
+                return (startB ? (a > b ? 1 : -1) : -1);
+              } else {
+                return (startB ? 1 : (a > b ? 1 : -1));
+              }
+            });
+            setTimeout(function () {
+              query.callback({
+                more: results.length > offset + 10,
+                results: results.slice(offset, offset + 10)
+              });
+            }, 500);
+          }
+
+          // default select
+          $('.single-input').selectivity({
+            allowClear: true,
+            placeholder: 'Selecciona un instructor',
+            query: queryFunction,
+            searchInputPlaceholder: 'Escribe para buscar un instructor'
+          });
+        })(window, document, jQuery);
+        
         $(document).ready(function () {
             $('#users-list-datatable').DataTable({
                 language: {
