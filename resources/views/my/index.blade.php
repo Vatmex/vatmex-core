@@ -99,21 +99,17 @@
                                     </div>
                                 </form>
                                 <hr>
-                                <h3>Mi Próxima Sesión</h3>
-                                <hr>
                                 <h3>Notas de Entrenamiento</h3>
                                 <div class="col-12">
                                     <div id="accordionWrap1" role="tablist" aria-multiselectable="true">
                                         <div class="card accordion collapse-icon accordion-icon-rotate">
                                             @forelse ($student->notes as $index => $note)
-                                                <a id="heading1{{$index + 1}}" class="card-header info" data-toggle="collapse" href="#accordion1{{ $index + 1 }}" aria-expanded="{{ ($index == 0) ? 'true' : 'false' }}" aria-controls="accordion1{{ $index + 1 }}">
-                                                    <div class="card-title lead">Nota #{{ $note->id }} - {{ $note->created_at->isoFormat('LLLL') }}UTC</div>
+                                                <a id="heading1{{ $index + 1 }}" class="card-header info" data-toggle="collapse" href="#accordion1{{ $index + 1 }}" aria-expanded="{{ ($index == 0) ? 'true' : 'false' }}" aria-controls="accordion1{{ $index + 1 }}">
+                                                    <div class="card-title lead{{ ($index != 0) ? ' collapsed' : '' }}">Nota #{{ $note->id }} - {{ $note->created_at->isoFormat('LLLL') }}</div>
                                                 </a>
-                                                <div id="accordion1{{ $index + 1 }}" role="tabpanel" data-parent="#accordionWrap{{ $index + 1 }}" aria-labelledby="heading1{{ $index + 1 }}" class="collapse show">
+                                                <div id="accordion1{{ $index + 1}}" role="tabpanel" data-parent="#accordionWrap1" aria-labelledby="heading1{{ $index + 1 }}" class="collapse {{ ($index == 0) ? 'show' : '' }}" {!! ($index != 0) ? 'aria-expanded="false"' : '' !!}>
                                                     <div class="card-content">
-                                                        <div class="card-body">
-                                                            {!! $note->message !!}
-                                                        </div>
+                                                        <div class="card-body">{!! $note->message !!}</div>
                                                     </div>
                                                 </div>
                                             @empty
