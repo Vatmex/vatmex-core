@@ -37,4 +37,10 @@ return [
         'redirect' => env('VATSIM_REDIRECT_URI'),
         'test' => env('VATSIM_TEST'),
     ],
+
+    'discord' => [
+        'client_id' => env('DISCORD_CLIENT_ID'),
+        'client_secret' => env('DISCORD_CLIENT_SECRET'),
+        'redirect' => '/discord/callback',
+    ]
 ];

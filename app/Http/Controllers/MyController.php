@@ -8,6 +8,9 @@ class MyController extends Controller
 {
     public function index()
     {
-        return view('my.index');
+        $student = \Auth::user()->atc;
+        $instructor = \Auth::user()->atc->instructor;
+
+        return view('my.index', compact('student', 'instructor'));
     }
 }

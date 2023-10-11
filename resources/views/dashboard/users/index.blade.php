@@ -23,6 +23,7 @@
                                         <th>cid</th>
                                         <th>nombre</th>
                                         <th>email</th>
+                                        <th>discord</th>
                                         <th>roles</th>
                                     </tr>
                                 </thead>
@@ -32,7 +33,12 @@
                                             <td>{{ $user->cid }}</td>
                                             <td><a href="{{ route('dashboard.users.show', ['cid' => $user->cid]) }}">{{ $user->name }}</a></td>
                                             <td><a href="mailto:{{ $user->email }}">{{ $user->email }}</a></td>
-                                            <td>
+                                            @if($user->discord_id)
+                                                <td><a href="discord://discordapp.com/users/{{ $user->discord_id }}">&#64;{{ $user->discord_name }}</a></td>
+                                            @else
+                                                <td>No Disponible</td>
+                                            @endif
+                                                <td>
                                                 @foreach ($user->roles as $role)
                                                     <a class="badge badge-info" href="#">{{ $role->name; }}</a>
                                                 @endforeach

@@ -55,6 +55,21 @@
                                 </tr>
                             </tbody>
                         </table>
+                        @if ($user->discord_name)
+                            <h5 class="mb-1"><i class="ft-link"></i>Información Discord</h5>
+                            <table class="table table-borderless">
+                                <tbody>
+                                    <tr>
+                                        <td>ID:</td>
+                                        <td>{{ $user->discord_id }}</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Usuario</td>
+                                        <td><a href="discord://discordapp.com/users/{{ $user->discord_id }}">&#64;{{ $user->discord_name }}</a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        @endif
                         <h5 class="mb-1"><i class="ft-link"></i>Información Vatsim</h5>
                         <table class="table table-borderless">
                             <tbody>

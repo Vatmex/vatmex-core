@@ -7,8 +7,14 @@
             <ul class="nav nav-pills flex-column mt-md-0 mt-1">
                 <li class="nav-item">
                     <a class="nav-link d-flex active" id="account-pill-general" data-toggle="pill" href="#account-vertical-general" aria-expanded="true">
-                        <i class="ft-globe mr-50"></i>
-                        Cuenta
+                        <i class="la la-globe mr-50"></i>
+                        General
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link d-flex" id="account-pill-training" data-toggle="pill" href="#account-vertical-training" aria-expanded="false">
+                        <i class="la la-school mr-50"></i>
+                        Training
                     </a>
                 </li>
             </ul>
@@ -60,42 +66,84 @@
                                         </div>
                                     </div>
                                 </form>
+                                <hr>
+                                <h3>Discord</h3>
+                                @if (Auth::user()->discord_id == null)
+                                    <p>No tienes una cuenta de Discord vinculada a tu perfil Vatmex. ¡Vincula una ahora para aprovechar al máximo tu experiencia y recibir notificaciones automáticas!</p>
+                                    <a href="{{ route('discord.login') }}" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">¡Vincular Discord!</a>
+                                @else
+                                    <form novalidate="">
+                                        <div class="row">
+                                            <div class="col-10">
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <input type="text" class="form-control" id="account-name" value="&#64;{{ Auth::user()->discord_name }}" readonly>
+                                                    <div class="help-block"></div></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <a href="{{ route('discord.unlink') }}" type="submit" class="btn btn-primary" style="width: 100%">Desvincular</a>
+                                                    <div class="help-block"></div></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                @endif
                             </div>
                             <div class="tab-pane fade " id="account-vertical-training" role="tabpanel" aria-labelledby="account-pill-training" aria-expanded="false">
+                                <h3>Mi Instructor</h3>
+                                <br>
                                 <form novalidate="">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="form-group">
                                                 <div class="controls">
-                                                    <label for="account-old-password">Old Password</label>
-                                                    <input type="password" class="form-control" id="account-old-password" required="" placeholder="Old Password" data-validation-required-message="This old password field is required">
+                                                    <label for="account-name">Nombre - CID</label>
+                                                    <input type="text" class="form-control" id="account-name" value="{{ $instructor->user->name }} - {{ $instructor->user->cid }}" readonly>
                                                 <div class="help-block"></div></div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-8">
                                             <div class="form-group">
                                                 <div class="controls">
-                                                    <label for="account-new-password">New Password</label>
-                                                    <input type="password" name="password" id="account-new-password" class="form-control" placeholder="New Password" required="" data-validation-required-message="The password field is required" minlength="6">
+                                                    <label for="account-username">Email</label>
+                                                    <input type="text" class="form-control" id="account-username" value="{{ ($instructor->user->staff) ? $instructor->user->staff->email : $instructor->user->email }}" readonly>
                                                 <div class="help-block"></div></div>
                                             </div>
                                         </div>
-                                        <div class="col-12">
+                                        <div class="col-4">
                                             <div class="form-group">
                                                 <div class="controls">
-                                                    <label for="account-retype-new-password">Retype New
-                                                        Password</label>
-                                                    <input type="password" name="con-password" class="form-control" required="" id="account-retype-new-password" data-validation-match-match="password" placeholder="New Password" data-validation-required-message="The Confirm password field is required" minlength="6">
+                                                    <label for="account-username">Accion</label>
+                                                    <a href="mailto:{{ ($instructor->user->staff) ? $instructor->user->staff->email : $instructor->user->email }}" class="form-control btn btn-primary mr-sm-1 mb-1 mb-sm-0" style="color: white;">Enviar Correo</a>
                                                 <div class="help-block"></div></div>
                                             </div>
-                                        </div>
-                                        <div class="col-12 d-flex flex-sm-row flex-column justify-content-end">
-                                            <button type="submit" class="btn btn-primary mr-sm-1 mb-1 mb-sm-0">Save
-                                                changes</button>
-                                            <button type="reset" class="btn btn-light">Cancel</button>
                                         </div>
                                     </div>
                                 </form>
+                                <hr>
+                                <h3>Notas de Entrenamiento</h3>
+                                <div class="col-12">
+                                    <div id="accordionWrap1" role="tablist" aria-multiselectable="true">
+                                        <div class="card accordion collapse-icon accordion-icon-rotate">
+                                            @forelse ($student->notes as $index => $note)
+                                                <a id="heading1{{ $index + 1 }}" class="card-header info" data-toggle="collapse" href="#accordion1{{ $index + 1 }}" aria-expanded="{{ ($index == 0) ? 'true' : 'false' }}" aria-controls="accordion1{{ $index + 1 }}">
+                                                    <div class="card-title lead{{ ($index != 0) ? ' collapsed' : '' }}">Nota #{{ $note->id }} - {{ $note->created_at->isoFormat('LLLL') }}</div>
+                                                </a>
+                                                <div id="accordion1{{ $index + 1}}" role="tabpanel" data-parent="#accordionWrap1" aria-labelledby="heading1{{ $index + 1 }}" class="collapse {{ ($index == 0) ? 'show' : '' }}" {!! ($index != 0) ? 'aria-expanded="false"' : '' !!}>
+                                                    <div class="card-content">
+                                                        <div class="card-body">{!! $note->message !!}</div>
+                                                    </div>
+                                                </div>
+                                            @empty
+                                                <br>
+                                                <p>Aun no tienes ninguna nota de entrenamiento en tu expediente. Sigue avanzando en tu entrenamiento y seguramente veras notas aquí pronto.</p>
+                                            @endforelse
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="tab-pane fade" id="account-vertical-notifications" role="tabpanel" aria-labelledby="account-pill-notifications" aria-expanded="false">
                                 <div class="row">
