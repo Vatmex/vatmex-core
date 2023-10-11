@@ -23,8 +23,6 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->registerPolicies();
-
         // Allow the super admin to access eveything
         Gate::before(function ($user, $ability) {
             if ($user->hasRole('Super-Admin')) {
