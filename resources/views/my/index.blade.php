@@ -105,7 +105,7 @@
                                                 <div class="help-block"></div></div>
                                             </div>
                                         </div>
-                                        <div class="col-8">
+                                        <div class="col-9">
                                             <div class="form-group">
                                                 <div class="controls">
                                                     <label for="account-username">Email</label>
@@ -113,7 +113,7 @@
                                                 <div class="help-block"></div></div>
                                             </div>
                                         </div>
-                                        <div class="col-4">
+                                        <div class="col-3">
                                             <div class="form-group">
                                                 <div class="controls">
                                                     <label for="account-username">Accion</label>
@@ -121,6 +121,24 @@
                                                 <div class="help-block"></div></div>
                                             </div>
                                         </div>
+                                        @if ($instructor->user->discord_id)
+                                            <div class="col-9">
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label for="account-username">Discord</label>
+                                                        <input type="text" class="form-control" id="account-username" value="&#64;{{ $instructor->user->discord_name }}" readonly>
+                                                    <div class="help-block"></div></div>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <div class="controls">
+                                                        <label for="account-username">Accion</label>
+                                                        <a href="discord://discordapp.com/users/{{ $instructor->user->discord_id }}" class="form-control btn btn-primary mr-sm-1 mb-1 mb-sm-0" style="color: white;">Enviar Mensaje</a>
+                                                    <div class="help-block"></div></div>
+                                                </div>
+                                            </div>
+                                        @endif
                                     </div>
                                 </form>
                                 <hr>
