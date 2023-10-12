@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\ATC;
 use App\Models\User;
+use App\Models\Instructor;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -18,12 +19,13 @@ class StudentController extends Controller
     public function show(int $cid)
     {
         $student = User::where('cid', $cid)->first()->atc;
+        $instructors = Instructor::all();
 
         if (! $student->is_training) {
             return redirect()->route('dashboard.students.index')->with('error', 'El controlador no es un estudiante activo');
         }
 
-        return view('dashboard.students.show', compact('student'));
+        return view('dashboard.students.show', compact('student', 'instructors'));
     }
 
     public function assign(Request $request, int $cid)
