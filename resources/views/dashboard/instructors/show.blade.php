@@ -126,7 +126,7 @@
                                     @foreach($instructor->atcs->where('is_training', true) as $atc)
                                         <tr>
                                             <td>{{ $atc->user->cid }}</td>
-                                            <td><a href="#">{{ $atc->user->name }}</a></td>
+                                            <td><a href="{{ route('dashboard.students.show', ['cid' => $atc->user->cid]) }}">{{ $atc->user->name }}</a></td>
                                             <td><x-rank :rank="$atc->rank"/></td>
                                             <td>TODO</td>
                                             <td><a href="#">TODO</a></td>
