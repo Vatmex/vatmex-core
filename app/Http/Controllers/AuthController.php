@@ -47,7 +47,12 @@ class AuthController extends Controller
         $intendedUrl = session('url.intended');
         session()->forget('url.intended');
 
-        $vatsimUser = Socialite::driver('vatsim')->user();
+        try { 
+            $vatsimUser = Socialite::driver('vatsim')->user();
+        } catch (Laravel\Socialite\Two\InvalidStateException $e) {
+            return redirect()->route('home')->with('error', 'El inicio de sesión ha expirado. Por favor intenta de nuevo');
+        }
+
         $user = User::where('cid', $vatsimUser->id)->first();
 
         if ($user) {
