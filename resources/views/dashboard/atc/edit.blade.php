@@ -89,6 +89,11 @@
                                         <input type="checkbox" id="center" name="center" {{ ($atc->center) ? 'checked' : ''; }} >
                                     </div>
 
+                                    <label class="col-md-3 label-control" for="supercenter">Supercentro</label>
+                                    <div class="col-md-1 mx-auto">
+                                        <input type="checkbox" id="supercenter" name="supercenter" {{ ($atc->supercenter) ? 'checked' : ''; }} >
+                                    </div>
+
                                     <label class="col-md-3 label-control" for=""></label>
                                     <div class="col-md-1 mx-auto">
                                     </div>
