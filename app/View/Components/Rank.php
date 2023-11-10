@@ -6,7 +6,7 @@ use Illuminate\View\Component;
 
 class Rank extends Component
 {
-    protected $dictionary = ['OBS', 'S1', 'S2', 'S3', 'C1', 'C2', 'C3', 'I1', 'I2', 'I3', 'SUP'];
+    protected $dictionary = ['SUS', 'OBS', 'S1', 'S2', 'S3', 'C1', 'C2', 'C3', 'I1', 'I2', 'I3', 'SUP'];
 
     public $translation;
 
@@ -17,7 +17,7 @@ class Rank extends Component
      */
     public function __construct(int $rank)
     {
-        $this->translation = $this->dictionary[$rank - 1];
+        $this->translation = $this->dictionary[$rank];
     }
 
     /**
