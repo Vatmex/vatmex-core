@@ -50,6 +50,7 @@ class ATCController extends Controller
         $atc->tower = $request->has('tower');
         $atc->approach = $request->has('approach');
         $atc->center = $request->has('center');
+        $atc->supercenter = $request->has('supercenter');
         $atc->user->save();
         $atc->save();
 
@@ -63,6 +64,7 @@ class ATCController extends Controller
                 'tower' => $request->has('tower'),
                 'approach' => $request->has('approach'),
                 'center' => $request->has('center'),
+                'supercenter' => $request->has('supercenter'),
             ])->log('Updated ATC profile for '.$atc->user->name.' - '.$atc->user->cid);
 
         return redirect()->route('dashboard.atcs.show', ['cid' => $cid])->with('success', 'Se editaron las habilitaciones del CTA con éxito!');

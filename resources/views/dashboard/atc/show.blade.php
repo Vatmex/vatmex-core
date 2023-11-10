@@ -170,6 +170,10 @@
                                     <td>Centro</td>
                                     <td class="users-view-email">{{ ($atc->center) ? 'Autorizado' : 'No Autorizado'; }}</td>
                                 </tr>
+                                <tr>
+                                    <td>Supercentro</td>
+                                    <td class="users-view-email">{{ ($atc->supercenter) ? 'Autorizado' : 'No Autorizado'; }}</td>
+                                </tr>
                             </tbody>
                         </table>
                         @if(!$atc->is_training)
