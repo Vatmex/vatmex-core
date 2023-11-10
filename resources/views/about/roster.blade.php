@@ -22,11 +22,12 @@
                         <th>Iniciales</th>
                         <th>Estado</th>
                         <th>Rango</th>
-                        <th>Autorizaciones</th>
-                        <th>Terrestre</th>
-                        <th>Torre</th>
-                        <th>Aproximación</th>
-                        <th>Centro</th>
+                        <th>DEL</th>
+                        <th>GND</th>
+                        <th>TWR</th>
+                        <th>APP</th>
+                        <th>CTR</th>
+                        <th>FIR</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,11 +38,12 @@
                             <td>{{ $atc->initials}}</td>
                             <td>{!! ($atc->inactive) ? '<span class="badge badge-pill bg-danger">Inactivo</span>' : '<span class="badge badge-pill bg-success">Activo</span>';!!}</td>
                             <td><x-rank :rank="$atc->rank"/></td>
-                            <td>{!! ($atc->delivery) ? '<span class="badge badge-pill bg-success">Autorizado</span>' : '<span class="badge badge-pill bg-danger">No Autorizado</span>';!!}</td>
-                            <td>{!! ($atc->ground) ? '<span class="badge badge-pill bg-success">Autorizado</span>' : '<span class="badge badge-pill bg-danger">No Autorizado</span>';!!}</td>
-                            <td>{!! ($atc->tower) ? '<span class="badge badge-pill bg-success">Autorizado</span>' : '<span class="badge badge-pill bg-danger">No Autorizado</span>';!!}</td>
-                            <td>{!! ($atc->approach) ? '<span class="badge badge-pill bg-success">Autorizado</span>' : '<span class="badge badge-pill bg-danger">No Autorizado</span>';!!}</td>
-                            <td>{!! ($atc->center) ? '<span class="badge badge-pill bg-success">Autorizado</span>' : '<span class="badge badge-pill bg-danger">No Autorizado</span>';!!}</td>
+                            <td>{!! ($atc->delivery) ? '<span class="badge badge-pill bg-success"><i class="icon-thumbs-up"> </i></span>' : '<span class="badge badge-pill bg-danger"><i class="icon-thumbs-down"> </i></span>';!!}</td>
+                            <td>{!! ($atc->ground) ? '<span class="badge badge-pill bg-success"><i class="icon-thumbs-up"> </i></span>' : '<span class="badge badge-pill bg-danger"><i class="icon-thumbs-down"> </i></span>';!!}</td>
+                            <td>{!! ($atc->tower) ? '<span class="badge badge-pill bg-success"><i class="icon-thumbs-up"> </i></span>' : '<span class="badge badge-pill bg-danger"><i class="icon-thumbs-down"> </i></span>';!!}</td>
+                            <td>{!! ($atc->approach) ? '<span class="badge badge-pill bg-success"><i class="icon-thumbs-up"> </i></span>' : '<span class="badge badge-pill bg-danger"><i class="icon-thumbs-down"> </i></span>';!!}</td>
+                            <td>{!! ($atc->center) ? '<span class="badge badge-pill bg-success"><i class="icon-thumbs-up"> </i></span>' : '<span class="badge badge-pill bg-danger"><i class="icon-thumbs-down"> </i></span>';!!}</td>
+                            <td>{!! ($atc->supercenter) ? '<span class="badge badge-pill bg-success"><i class="icon-thumbs-up"> </i></span>' : '<span class="badge badge-pill bg-danger"><i class="icon-thumbs-down"> </i></span>';!!}</td>
                         </tr>
                     @endforeach
                 </tbody>
