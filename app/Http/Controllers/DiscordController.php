@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -30,7 +28,7 @@ class DiscordController extends Controller
     public function unlink()
     {
         $user = Auth::user();
-        
+
         $user->discord_id = null;
         $user->discord_name = null;
         $user->discord_avatar = null;

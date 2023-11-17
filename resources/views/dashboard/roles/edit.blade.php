@@ -31,6 +31,22 @@
                                     </tbody>
                                 </table>
 
+                                <h4 class="form-section"><i class="ft-user"></i> Permisos Generales</h4>
+                                <div class="form-group row">
+                                    <label class="col-md-3 label-control" for="access dashboard">Ver Dashboard</label>
+                                    <div class="col-md-1 mx-auto">
+                                        <input type="checkbox" id="access dashboard" name="access dashboard" {{ ($role->hasPermissionTo('access dashboard')) ? 'checked' : '' }} >
+                                    </div>
+
+                                    <label class="col-md-3 label-control" for=""></label>
+                                    <div class="col-md-1 mx-auto">
+                                    </div>
+
+                                    <label class="col-md-3 label-control" for=""></label>
+                                    <div class="col-md-1 mx-auto">
+                                    </div>
+                                </div>
+
                                 <h4 class="form-section"><i class="ft-user"></i> Permisos Usuarios</h4>
                                 <div class="form-group row">
                                     <label class="col-md-3 label-control" for="view users">Ver Usuarios</label>
