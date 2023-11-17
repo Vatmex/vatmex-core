@@ -35,6 +35,10 @@ class RoleController extends Controller
 
         $permissions = [];
 
+        if ($request->has('access_dashboard')) {
+            array_push($permissions, 'access dashboard');
+        }
+
         if ($request->has('view_users')) {
             array_push($permissions, 'view users');
         }

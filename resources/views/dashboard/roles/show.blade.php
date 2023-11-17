@@ -26,6 +26,15 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <h5 class="mb-1"><i class="ft-link"></i>Permisos Generales</h5>
+                        <table class="table table-borderless">
+                            <tbody>
+                                <tr>
+                                    <td>Acessar Dashboard:</td>
+                                    <td class="users-view-username">{{ ($role->hasPermissionTo('access dashboard')) ? 'Permitido' : 'No Permitido' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                         <h5 class="mb-1"><i class="ft-link"></i>Permisios Sitio</h5>
                         <table class="table table-borderless">
                             <tbody>
