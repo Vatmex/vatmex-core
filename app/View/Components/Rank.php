@@ -17,6 +17,12 @@ class Rank extends Component
      */
     public function __construct(int $rank)
     {
+        // Handle the -1 oddball
+        if ($rank = -1) {
+            $this->translation = 'INV';
+            return;
+        }
+
         $this->translation = $this->dictionary[$rank];
     }
 
